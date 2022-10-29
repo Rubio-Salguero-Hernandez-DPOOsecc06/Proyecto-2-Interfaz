@@ -27,4 +27,14 @@ public class CreadorObjetos {
         TemporadaReal nuevaTemporadaReal = new TemporadaReal();
         return nuevaTemporadaReal;
     }
+
+    /**
+     * Crea un equipo real
+     * @param pNombreEquipo
+     * @return
+     */
+    public EquipoReal crearEquipoReal(String pNombreEquipo){
+        EquipoReal nuevoEquipoReal = new EquipoReal(pNombreEquipo);
+        return nuevoEquipoReal;
+    }
 }

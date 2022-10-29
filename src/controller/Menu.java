@@ -131,7 +131,8 @@ public class Menu{
                 TemporadaReal nuevaTemporadaReal = CREADOR.crearTemporadaReal();
                 System.out.println("\nAhora debes ingresar el archivo de los equipos que jugaran esta temporada\n");
                 String nombreArchivoEquipos = preguntarPalabra();
-                LECTOR.leerArchivoEquiposReales(nombreArchivoEquipos);
+                LECTOR.leerArchivoEquiposReales(nombreArchivoEquipos, nuevaTemporadaReal, CREADOR);
+
                 break;
         
             default:
