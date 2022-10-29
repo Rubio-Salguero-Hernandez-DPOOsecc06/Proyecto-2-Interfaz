@@ -1,14 +1,13 @@
 package controller;
 
-import java.beans.PersistenceDelegate;
 import java.util.Scanner;
-
 import model.*;
 
 
 public class Menu{
     public final static Scanner ENTRADA = new Scanner(System.in);
     public final static CreadorObjetos CREADOR = new CreadorObjetos();
+    public final static LectorArchivos LECTOR = new LectorArchivos();
     public Menu(){
     }
 
@@ -73,13 +72,35 @@ public class Menu{
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 1:
-                System.out.println("\n Has elegido iniciar sesion como participante\n");
+                System.out.println("\nHas elegido iniciar sesion como participante\n");
+                System.out.println("Ingresa tu nombre de usuario");
+                String nombreUsuario = preguntarPalabra();
+                System.out.println("\ningresa tu clave");
+                String clave = preguntarPalabra();
+                Participante participanteRecuperado = Persistencia.iniciarSesion(nombreUsuario, clave);
+                if(participanteRecuperado != null){
+                    mostrarMenuParticipante(participanteRecuperado);
+                }
                 break;
             case 2:
-                System.out.println("\n Has elegido iniciar sesion como administrador\n");
+                System.out.println("\nHas elegido iniciar sesion como administrador\n");
+                Administrador administrador= App.getAdministrador();
+                System.out.println("Ingresa tu nombre de usuario");
+                String nombreAdmin = preguntarPalabra();
+                System.out.println("\ningresa tu clave");
+                String claveAdmin = preguntarPalabra();
+                boolean condicion1 = administrador.getNombreUsuario().equals(nombreAdmin);
+                boolean condicion2 = administrador.getClave().equals(claveAdmin);
+                if(condicion1 && condicion2){
+                    mostrarMenuAdministrador(administrador);
+                }
+                else{
+                    System.out.println("\nNo se te ha concedido acceso de administrador\n");
+                    mostrarMenuPrincipal();
+                }
                 break;
             case 3:
-                System.out.println("\n Volviendo...\n");
+                System.out.println("\nVolviendo...\n");
                 mostrarMenuPrincipal();
                 break;
             default:
@@ -89,13 +110,44 @@ public class Menu{
         }
     }
 
+    /**
+     * Muestra el menu de un participante luego de iniciar sesion
+     * @param pParticipanteActivo
+     */
+    public void mostrarMenuParticipante(Participante pParticipanteActivo){
+        System.out.println("\nBIENVENID@: " + pParticipanteActivo.getNombreUsuario());
+        System.out.println("\nQue deseas hacer?\n");
+        System.out.println("1. Crear tu equipo de fantasia");
+        System.out.println("2. Ver tu equipo de fantasia");
+    }
+
+    public void mostrarMenuAdministrador(Administrador pAdministrador){
+        System.out.println("\nBienvenido");
+        System.out.println("\nQue deseas hacer?\n");
+        System.out.println("1. crear una nueva temporada");
+        int opcion = preguntarOpcion();
+        switch (opcion) {
+            case 1:
+                TemporadaReal nuevaTemporadaReal = CREADOR.crearTemporadaReal();
+                System.out.println("\nAhora debes ingresar el archivo de los equipos que jugaran esta temporada\n");
+                String nombreArchivoEquipos = preguntarPalabra();
+                LECTOR.leerArchivoEquiposReales(nombreArchivoEquipos);
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    /**
+     * permite al usuario ingresar su nombre y clave para el registro
+     */
     public void mostrarMenuRegistro(){
         System.out.print("\nIngresa tu nuevo nombre de usuario\n");
         String nombreUsuario = preguntarPalabra();
         System.out.print("\nIngresa tu nueva clave\n");
         String clave = preguntarPalabra();
         Participante nuevoParticipante = CREADOR.crearParticipante(nombreUsuario, clave);
+        mostrarMenuParticipante(nuevoParticipante);
     }
-
-
 }

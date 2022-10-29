@@ -3,25 +3,10 @@ package controller;
 import model.*;
 
 public class App {
-    private Participante ParticipanteActivo;
+    private static Administrador administrador = new Administrador("admin", "admin");
     private Menu menuApp = new Menu();
 
     public App(){
-    }
-    /**
-     * asigna un participante a la aplicacion
-     * @param pParticipanteActivo
-     */
-    public void setParticipanteActivo(Participante pParticipanteActivo) {
-        ParticipanteActivo = pParticipanteActivo;
-    }
-
-    /**
-     * retorna el participante activo de la aplicacion
-     * @return
-     */
-    public Participante getParticipanteActivo() {
-        return ParticipanteActivo;
     }
 
     /**
@@ -32,8 +17,16 @@ public class App {
         return menuApp;
     }
 
-    public static void main(String[] args) throws Exception {
+    /**
+     * retorna el administrador de la aplicacion
+     * @return
+     */
+    public static Administrador getAdministrador() {
+        return administrador;
+    }
+    
 
+    public static void main(String[] args) throws Exception {
         App aplicacion = new App();
         Menu menuApp = aplicacion.getMenuApp();
         menuApp.mostrarMenuPrincipal();

@@ -18,4 +18,13 @@ public class CreadorObjetos {
         Persistencia.guardarParticipante(nuevoParticipante);
         return nuevoParticipante;
     }
+
+    /**
+     * crea una temporada real
+     * @return
+     */
+    public TemporadaReal crearTemporadaReal(){
+        TemporadaReal nuevaTemporadaReal = new TemporadaReal();
+        return nuevaTemporadaReal;
+    }
 }
