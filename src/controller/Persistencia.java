@@ -88,13 +88,16 @@ public class Persistencia {
         try{
             String rutaTemporadas = "persistencia/temporadas reales";
             File ficheroTemporadas = crearFichero(rutaTemporadas);
-            String nombreTxt = ficheroTemporadas+"/"+pTemporada+".txt";
+            String[]temporadas = ficheroTemporadas.list();
+            int cantidadTemporadas = temporadas.length;
+            pTemporada.setNumeroTemporada((cantidadTemporadas+1));
+            String nombreTxt = ficheroTemporadas+"/"+pTemporada.getNumeroTemporada()+ ".obj";
             File nuevoArchivo = crearArchivo(nombreTxt);
             if(!nuevoArchivo.exists()){
                 ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
+                System.out.println("\nSe guardo la temporada\n");
                 escritor.writeObject(pTemporada);
                 escritor.close();
-                System.out.println("\nSe guardo la temporada\n");
             } else{
             System.out.println("\nLa temporada ya existe\n");
             }
@@ -102,7 +105,27 @@ public class Persistencia {
         }
     }
 
-    public void recuperarTemporadasReales(){
-        
+    public static void recuperarTemporadaReal(App pAplicacion){
+        try{
+            String rutaTemporadas = "persistencia/temporadas reales";
+            File ficheroTemporadas = crearFichero(rutaTemporadas);
+            String[]temporadas = ficheroTemporadas.list();
+            if(temporadas.length >  0){
+                for(String temporada: temporadas){
+                    String rutaTemporada = rutaTemporadas+"/"+temporada;
+                    File nuevoArchivo = crearArchivo(rutaTemporada);
+                    if(nuevoArchivo.exists()){
+                        ObjectInputStream lector = new ObjectInputStream(new FileInputStream(rutaTemporada));
+                        TemporadaReal temporadaRecuperada = (TemporadaReal) lector.readObject();
+                        pAplicacion.agregarTemporada(temporadaRecuperada);
+                        System.out.println(temporadaRecuperada.getNumeroTemporada());
+                        lector.close();                   
+                    }                    
+                }  
+            }
+        }catch(Exception e){
+
+        }
+
     }
 }

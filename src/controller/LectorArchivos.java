@@ -26,11 +26,13 @@ public class LectorArchivos {
                 BufferedReader lector = new BufferedReader(new FileReader(rutaEquipos));
                 String linea;
                 linea = lector.readLine();
+                linea = lector.readLine();
                 while(linea != null){
                     EquipoReal nuevoEquipo = pCreador.crearEquipoReal(linea);
                     pTemporada.agregarEquipo(nuevoEquipo);
                     linea = lector.readLine();
                 }
+                lector.close();
                 Persistencia.guardarTemporadaReal(pTemporada);
 
             } catch (IOException e) {

@@ -125,6 +125,7 @@ public class Menu{
         System.out.println("\nBienvenido");
         System.out.println("\nQue deseas hacer?\n");
         System.out.println("1. crear una nueva temporada");
+        System.out.println("2. salir de la aplicacion");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 1:
@@ -132,7 +133,10 @@ public class Menu{
                 System.out.println("\nAhora debes ingresar el archivo de los equipos que jugaran esta temporada\n");
                 String nombreArchivoEquipos = preguntarPalabra();
                 LECTOR.leerArchivoEquiposReales(nombreArchivoEquipos, nuevaTemporadaReal, CREADOR);
-
+                mostrarMenuAdministrador(pAdministrador);
+                break;
+            case 2:
+                System.exit(0);
                 break;
         
             default:

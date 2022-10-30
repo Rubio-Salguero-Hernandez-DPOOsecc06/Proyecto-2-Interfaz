@@ -1,6 +1,8 @@
 package model;
 
-public class EquipoReal {
+import java.io.Serializable;
+
+public class EquipoReal implements Serializable {
     String nombre;
 
     public EquipoReal(String pNombreEquipo){
