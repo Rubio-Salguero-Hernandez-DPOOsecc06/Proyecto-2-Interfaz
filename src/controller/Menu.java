@@ -140,7 +140,7 @@ public class Menu{
                 System.out.println("\nIngresa el nombre de tu nuevo equipo...");
                 String nombreEquipo = preguntarPalabra();
                 EquipoFantasia equipoAsociado = CREADOR.crearEquipoFantasia(nombreEquipo);
-                crearEquipoFantasia(pParticipanteActivo, equipoAsociado);
+                configurarEquipoInicial(this, pParticipanteActivo, equipoAsociado);
                 break;
             case 2:
                 System.exit(0);
@@ -325,7 +325,7 @@ public class Menu{
             System.out.println((i+1)+". "+delantero.getNombre());
             System.out.println("precio de compra: " + delantero.getPrecioCompra()+"\n");
         }
-        System.out.println("\n que medio campista deseas escoger");
+        System.out.println("\nque delantero deseas escoger");
         System.out.println("\nPara regresas ingresa 0");
         int opcion = preguntarOpcion();
         switch (opcion) {
@@ -358,18 +358,20 @@ public class Menu{
         return equipoSeleccionado;
     }
 
-    public void crearEquipoFantasia(Participante pParticipante, EquipoFantasia pEquipo){
-    }
+    public void configurarEquipoInicial(Menu pMenu, Participante pParticipante, EquipoFantasia pEquipo){
+        pParticipante.setEquipoAsociado(pEquipo);
+        System.out.println("\nCompra un arquero titular\n");
+        JugadorFantasiaArquero nuevoArquerotitular = pParticipante.comprarArquero(pMenu);
+        pEquipo.setArqueroTitular(nuevoArquerotitular);
+        pEquipo.agregarJugador(nuevoArquerotitular);
+        System.out.println(pParticipante.getEquipoAsociado().getArqueroTitular().getNombre() + " agregado");
 
-
-    public boolean confirmarCompraJugador(Participante pParticipante, JugadorFantasia pJugador, EquipoFantasia pEquipo){
-        if(pParticipante.verificarCompra(pJugador) && pEquipo.verificarDisponibilidad(pJugador)){
-            pParticipante.restarCompra(pJugador.getPrecioCompra());
-
-            return true;
-        }
-        else{
-            return false;
+        System.out.println("\nCompra 2 delanteros titulares");
+        for(int i = 0; i < 2; i++){
+            JugadorFantasia nuevoDelantero = pParticipante.comprarDelantero(pMenu);
+            pEquipo.agregarDelanteroTitular(nuevoDelantero);
+            pEquipo.agregarJugador(nuevoDelantero);
+            System.out.println(nuevoDelantero.getNombre()+" agregado");
         }
     }
 }

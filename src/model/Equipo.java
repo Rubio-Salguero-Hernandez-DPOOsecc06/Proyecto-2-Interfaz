@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public abstract class Equipo implements Serializable {
     String nombreEquipo;

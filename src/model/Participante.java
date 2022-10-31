@@ -1,8 +1,10 @@
 package model;
 
+import controller.Menu;
+
 public class Participante extends Usuario{
     private EquipoFantasia equipoAsociado = null;
-    private Double presupuestoDisponible = 150.00;
+    private Double presupuestoDisponible = 1500.00;
 
     /**
      * Constructor
@@ -63,7 +65,59 @@ public class Participante extends Usuario{
         }
         return verificado;
     }
+    public JugadorFantasiaArquero comprarArquero(Menu pMenu){
+        JugadorFantasiaArquero arqueroComprado = null;
+        EquipoReal equipoSeleccionado = pMenu.imprimirEquiposTemporada();
+        JugadorFantasiaArquero ArqueroSeleccionado = pMenu.mostrarMenuCompraArquero(equipoSeleccionado);
+        boolean condicion1 = verificarCompra(ArqueroSeleccionado);
+        boolean condicion2 = equipoAsociado.verificarDisponibilidad(ArqueroSeleccionado);
+        if(condicion1 && condicion2){
+            arqueroComprado = ArqueroSeleccionado;
+        }else{
+            comprarArquero(pMenu);
+        }
+        return arqueroComprado;
+    }
 
+    public JugadorFantasiaDefensivo comprarDefensa(Menu pMenu){
+        JugadorFantasiaDefensivo defensaComprado = null;
+        EquipoReal equipoSeleccionado = pMenu.imprimirEquiposTemporada();
+        JugadorFantasiaDefensivo defensaSeleccionado = pMenu.mostrarMenuCompraDefensa(equipoSeleccionado);
+        boolean condicion1 = verificarCompra(defensaSeleccionado);
+        boolean condicion2 = equipoAsociado.verificarDisponibilidad(defensaSeleccionado);
+        if(condicion1 && condicion2){
+            defensaComprado = defensaSeleccionado;
+        } else{
+            comprarDefensa(pMenu);
+        }
+        return defensaComprado;
+    }
 
+    public JugadorFantasia comprarDelantero(Menu pMenu){
+        JugadorFantasia delanteroComprado = null;
+        EquipoReal equipoSeleccionado = pMenu.imprimirEquiposTemporada();
+        JugadorFantasia delanteroSeleccionado = pMenu.mostrarMenuCompraDelantero(equipoSeleccionado);
+        boolean condicion1 = verificarCompra(delanteroSeleccionado);
+        boolean condicion2 = equipoAsociado.verificarDisponibilidad(delanteroSeleccionado);
+        if(condicion1 && condicion2){
+            delanteroComprado = delanteroSeleccionado;
+        }else{
+            comprarDelantero(pMenu);
+        }
+        return delanteroComprado;
+    }
 
+    public JugadorFantasia comprarMedio(Menu pMenu){
+        JugadorFantasia medioComprado = null;
+        EquipoReal equipoSeleccionado = pMenu.imprimirEquiposTemporada();
+        JugadorFantasia medioSeleccionado = pMenu.mostrarMenuCompraDelantero(equipoSeleccionado);
+        boolean condicion1 = verificarCompra(medioSeleccionado);
+        boolean condicion2 = equipoAsociado.verificarDisponibilidad(medioSeleccionado);
+        if(condicion1 && condicion2){
+            medioComprado = medioSeleccionado;
+        }else{
+            comprarMedio(pMenu);
+        }
+        return medioComprado;
+    }
 }

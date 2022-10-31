@@ -69,10 +69,13 @@ public class LectorArchivos {
                             break;
                         case "delantero":
                             posicionJugador = Posicion.DELANTERO;
+                            break;
                         case "medio":
                             posicionJugador = Posicion.MEDIO;
+                            break;
                         case "defensa":
                             posicionJugador = Posicion.DEFENSA;
+                            break;
                         default:
                             break;
                     }

@@ -6,7 +6,7 @@ public class EquipoFantasia extends Equipo{
 
     JugadorFantasiaArquero arqueroTitular, arqueroSustituto;
     ArrayList<JugadorFantasiaDefensivo> defensasTitulares = new ArrayList<>();
-    ArrayList<JugadorFantasia> delanterosTitulares, mediosTitulares = new ArrayList<>();
+    ArrayList<JugadorFantasia> delanterosTitulares = new ArrayList<>(), mediosTitulares = new ArrayList<>();
     JugadorFantasiaDefensivo defensaSustituto;
     JugadorFantasia delanteroSustituto, medioSustituto;
     ArrayList<JugadorFantasia> jugadores = new ArrayList<>();
@@ -139,6 +139,14 @@ public class EquipoFantasia extends Equipo{
         else{
             return true;
         }
+    }
+
+    public ArrayList<JugadorFantasia> getJugadores() {
+        return jugadores;
+    }
+
+    public void agregarJugador(JugadorFantasia pJugador){
+        this.jugadores.add(pJugador);
     }
     
 
