@@ -4,7 +4,7 @@ import controller.Menu;
 
 public class Participante extends Usuario{
     private EquipoFantasia equipoAsociado = null;
-    private Double presupuestoDisponible = 1500.00;
+    private Double presupuestoDisponible = 20000.00;
 
     /**
      * Constructor
@@ -73,8 +73,9 @@ public class Participante extends Usuario{
         boolean condicion2 = equipoAsociado.verificarDisponibilidad(ArqueroSeleccionado);
         if(condicion1 && condicion2){
             arqueroComprado = ArqueroSeleccionado;
+            restarCompra(ArqueroSeleccionado.getPrecioCompra());
         }else{
-            comprarArquero(pMenu);
+            System.out.println("\nNo te alcanzo para este jugador o ya lo tienes en tu equipo\n");
         }
         return arqueroComprado;
     }
@@ -87,8 +88,9 @@ public class Participante extends Usuario{
         boolean condicion2 = equipoAsociado.verificarDisponibilidad(defensaSeleccionado);
         if(condicion1 && condicion2){
             defensaComprado = defensaSeleccionado;
+            restarCompra(defensaSeleccionado.getPrecioCompra());
         } else{
-            comprarDefensa(pMenu);
+            System.out.println("\nNo te alcanzo para este jugador o ya lo tienes en tu equipo\n");
         }
         return defensaComprado;
     }
@@ -101,8 +103,9 @@ public class Participante extends Usuario{
         boolean condicion2 = equipoAsociado.verificarDisponibilidad(delanteroSeleccionado);
         if(condicion1 && condicion2){
             delanteroComprado = delanteroSeleccionado;
+            restarCompra(delanteroSeleccionado.getPrecioCompra());
         }else{
-            comprarDelantero(pMenu);
+            System.out.println("\nNo te alcanzo para este jugador o ya lo tienes en tu equipo\n");
         }
         return delanteroComprado;
     }
@@ -110,13 +113,14 @@ public class Participante extends Usuario{
     public JugadorFantasia comprarMedio(Menu pMenu){
         JugadorFantasia medioComprado = null;
         EquipoReal equipoSeleccionado = pMenu.imprimirEquiposTemporada();
-        JugadorFantasia medioSeleccionado = pMenu.mostrarMenuCompraDelantero(equipoSeleccionado);
+        JugadorFantasia medioSeleccionado = pMenu.mostrarMenuCompraMedio(equipoSeleccionado);
         boolean condicion1 = verificarCompra(medioSeleccionado);
         boolean condicion2 = equipoAsociado.verificarDisponibilidad(medioSeleccionado);
         if(condicion1 && condicion2){
             medioComprado = medioSeleccionado;
+            restarCompra(medioSeleccionado.getPrecioCompra());
         }else{
-            comprarMedio(pMenu);
+            System.out.println("\nNo te alcanzo para este jugador o ya lo tienes en tu equipo\n");
         }
         return medioComprado;
     }

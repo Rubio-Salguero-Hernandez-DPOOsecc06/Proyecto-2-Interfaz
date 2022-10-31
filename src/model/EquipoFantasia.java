@@ -133,12 +133,13 @@ public class EquipoFantasia extends Equipo{
     }
 
     public boolean verificarDisponibilidad(JugadorFantasia pJugador){
-        if(jugadores.contains(pJugador)){
-            return false;
+        boolean disponible = true;
+        for(JugadorFantasia jugador: this.jugadores){
+            if(jugador.getNombre().equals(pJugador.getNombre())){
+                return false;
+            }
         }
-        else{
-            return true;
-        }
+        return disponible;
     }
 
     public ArrayList<JugadorFantasia> getJugadores() {
