@@ -137,6 +137,9 @@ public class Menu{
                 System.out.println("\n Ahora debes ingresar el archivo de los jugadores de los equipos");
                 String nombreArchivoJugadores = preguntarPalabra();
                 LECTOR.leerArchivoJugadoresReales(nombreArchivoJugadores, nuevaTemporadaReal, CREADOR);
+                System.out.println("\n Ahora debes ingresar el archivo de las fechas de esta temporada");
+                String nombreArchivoFechas = preguntarPalabra();
+                LECTOR.leerArchivoFechasReales(nombreArchivoFechas, nuevaTemporadaReal, CREADOR);
                 mostrarMenuAdministrador(pAdministrador);
                 break;
             case 2:

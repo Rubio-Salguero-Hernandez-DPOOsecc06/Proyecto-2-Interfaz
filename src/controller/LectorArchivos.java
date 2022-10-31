@@ -5,9 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import model.EquipoReal;
-import model.JugadorReal;
-import model.TemporadaReal;
+import model.*;
+
 
 public class LectorArchivos {
 
@@ -65,6 +64,42 @@ public class LectorArchivos {
                     EquipoReal equipoJugador = pTemoprada.buscarEquipo(datosJugador[1]);
                     JugadorReal nuevoJugadorReal = pCreador.crearJugadorReal(nombreJugador, posicionJugador, precioCompra, equipoJugador);
                     equipoJugador.agregarJugador(nuevoJugadorReal);
+                    linea = lector.readLine();
+                }
+                lector.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    /**
+     * Lee el archivo de los partidos programados en una temporada
+     * @param pNombreArchivo
+     * @param pTemoprada
+     * @param pCreador
+     */
+    public void leerArchivoFechasReales(String pNombreArchivo, TemporadaReal pTemoprada, CreadorObjetos pCreador){
+        File rutaFechas = Persistencia.crearArchivo("data/"+pNombreArchivo);
+        if(rutaFechas.exists()){
+            try {
+                BufferedReader lector = new BufferedReader(new FileReader(rutaFechas));
+                String linea;
+                linea = lector.readLine();
+                linea = lector.readLine();
+                while(linea != null){
+                    String[] datosPartido = linea.split(";");
+                    int fecha = Integer.parseInt(datosPartido[0]);
+                    String diaPartido = datosPartido[1];
+                    String horaPartido = datosPartido[2];
+                    EquipoReal equipoLocal = pTemoprada.buscarEquipo(datosPartido[3]);
+                    EquipoReal equipoVisitante = pTemoprada.buscarEquipo(datosPartido[4]);
+                    Fecha fechaPartido = pTemoprada.buscarFecha(fecha);
+                    if(fechaPartido == null){
+                        fechaPartido = pCreador.crearFecha(fecha);
+                        pTemoprada.agregarFecha(fechaPartido);
+                    }
+                    PartidoReal nuevoPartidoReal = pCreador.crearPartidoReal(equipoLocal, equipoVisitante, diaPartido, horaPartido);
+                    fechaPartido.agregarPartido(nuevoPartidoReal);
                     linea = lector.readLine();
                 }
                 lector.close();

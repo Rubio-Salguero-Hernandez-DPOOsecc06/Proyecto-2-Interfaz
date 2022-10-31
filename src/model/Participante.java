@@ -1,7 +1,11 @@
 package model;
 
 public class Participante extends Usuario{
-    
+    /**
+     * Constructor
+     * @param pNombreUsuario
+     * @param pClave
+     */
     public Participante(String pNombreUsuario, String pClave){
         super(pNombreUsuario, pClave);
     }

@@ -50,4 +50,27 @@ public class CreadorObjetos {
         JugadorReal nuevoJugadorReal = new JugadorReal(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
         return nuevoJugadorReal;
     }
+
+    /**
+     * Crea una fecha
+     * @param pNumeroFecha
+     * @return
+     */
+    public Fecha crearFecha(int pNumeroFecha){
+        Fecha nuevaFecha = new Fecha(pNumeroFecha);
+        return nuevaFecha;
+    }
+
+    /**
+     * Crea un partido real
+     * @param pLocal
+     * @param pVisitante
+     * @param pDia
+     * @param pHora
+     * @return
+     */
+    public PartidoReal crearPartidoReal(EquipoReal pLocal, EquipoReal pVisitante, String pDia, String pHora){
+        PartidoReal nuevoPartidoReal = new PartidoReal(pLocal, pVisitante, pDia, pHora);
+        return nuevoPartidoReal;
+    }
 }

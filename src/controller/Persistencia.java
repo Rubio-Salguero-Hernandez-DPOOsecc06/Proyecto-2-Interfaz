@@ -13,7 +13,11 @@ public class Persistencia {
     
     public Persistencia(){
     }
-
+    /**
+     * Crea un fichero en la direccion indicada
+     * @param pNombreFichero
+     * @return
+     */
     public static File crearFichero(String pNombreFichero){
         File fichero = new File(pNombreFichero);
         if(!fichero.exists()){
@@ -22,6 +26,11 @@ public class Persistencia {
         return fichero;
     }
 
+    /**
+     * crea un archivo de tipo File
+     * @param pNombreArchivo
+     * @return
+     */
     public static File crearArchivo(String pNombreArchivo){
         File archivo = new File(pNombreArchivo);
         return archivo;
@@ -126,6 +135,5 @@ public class Persistencia {
         }catch(Exception e){
 
         }
-
     }
 }

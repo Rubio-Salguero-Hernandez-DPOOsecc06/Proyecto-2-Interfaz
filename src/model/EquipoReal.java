@@ -5,7 +5,10 @@ import java.util.ArrayList;
 public class EquipoReal extends Equipo{
     private ArrayList<JugadorReal> jugadoresEquipo = new ArrayList<>();
     
-
+    /**
+     * Constructor 
+     * @param pNombreEquipo
+     */
     public EquipoReal(String pNombreEquipo){
         super(pNombreEquipo);
     }

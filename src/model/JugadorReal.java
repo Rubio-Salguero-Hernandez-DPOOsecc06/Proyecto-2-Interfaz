@@ -1,7 +1,13 @@
 package model;
 
 public class JugadorReal extends Jugador {
-    
+    /**
+     * Constructor
+     * @param pNombre
+     * @param pPosicion
+     * @param pPrecioCompra
+     * @param pEquipoJugador
+     */
     public JugadorReal(String pNombre, String pPosicion, double pPrecioCompra, Equipo pEquipoJugador){
         super(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
     }
