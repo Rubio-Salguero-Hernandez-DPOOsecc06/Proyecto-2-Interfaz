@@ -37,4 +37,17 @@ public class CreadorObjetos {
         EquipoReal nuevoEquipoReal = new EquipoReal(pNombreEquipo);
         return nuevoEquipoReal;
     }
+
+    /**
+     * Crea un jugador real
+     * @param pNombre
+     * @param pPosicion
+     * @param pPrecioCompra
+     * @param pEquipoJugador
+     * @return
+     */
+    public JugadorReal crearJugadorReal(String pNombre, String pPosicion, double pPrecioCompra, Equipo pEquipoJugador){
+        JugadorReal nuevoJugadorReal = new JugadorReal(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
+        return nuevoJugadorReal;
+    }
 }

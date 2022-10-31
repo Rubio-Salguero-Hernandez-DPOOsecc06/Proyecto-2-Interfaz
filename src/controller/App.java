@@ -39,7 +39,6 @@ public class App {
         this.temporadas.add(pTemporada);
     }
     
-
     public static void main(String[] args) throws Exception {
         App aplicacion = new App();
         Menu menuApp = aplicacion.getMenuApp();

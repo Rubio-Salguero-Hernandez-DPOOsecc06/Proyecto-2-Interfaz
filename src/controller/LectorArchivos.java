@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import model.EquipoReal;
+import model.JugadorReal;
 import model.TemporadaReal;
 
 public class LectorArchivos {
@@ -33,7 +34,6 @@ public class LectorArchivos {
                     linea = lector.readLine();
                 }
                 lector.close();
-                Persistencia.guardarTemporadaReal(pTemporada);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -42,4 +42,37 @@ public class LectorArchivos {
             System.out.println("No se encontro el archivo");
         }
     }
+
+    /**
+     * Lee el archivo de jugadores reales 
+     * @param pNombreArchivo
+     * @param pTemoprada
+     * @param pCreador
+     */
+    public void leerArchivoJugadoresReales(String pNombreArchivo, TemporadaReal pTemoprada, CreadorObjetos pCreador){
+        File rutaJugadores = Persistencia.crearArchivo("data/"+pNombreArchivo);
+        if(rutaJugadores.exists()){
+            try {
+                BufferedReader lector = new BufferedReader(new FileReader(rutaJugadores));
+                String linea;
+                linea = lector.readLine();
+                linea = lector.readLine();
+                while(linea != null){
+                    String[] datosJugador = linea.split(";");
+                    String nombreJugador = datosJugador[0];
+                    String posicionJugador = datosJugador[2];
+                    Double precioCompra = Double.parseDouble(datosJugador[3]);
+                    EquipoReal equipoJugador = pTemoprada.buscarEquipo(datosJugador[1]);
+                    JugadorReal nuevoJugadorReal = pCreador.crearJugadorReal(nombreJugador, posicionJugador, precioCompra, equipoJugador);
+                    equipoJugador.agregarJugador(nuevoJugadorReal);
+                    linea = lector.readLine();
+                }
+                lector.close();
+                Persistencia.guardarTemporadaReal(pTemoprada);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+
 }

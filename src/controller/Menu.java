@@ -81,6 +81,7 @@ public class Menu{
                 if(participanteRecuperado != null){
                     mostrarMenuParticipante(participanteRecuperado);
                 }
+                mostrarMenuPrincipal();
                 break;
             case 2:
                 System.out.println("\nHas elegido iniciar sesion como administrador\n");
@@ -130,9 +131,12 @@ public class Menu{
         switch (opcion) {
             case 1:
                 TemporadaReal nuevaTemporadaReal = CREADOR.crearTemporadaReal();
-                System.out.println("\nAhora debes ingresar el archivo de los equipos que jugaran esta temporada\n");
+                System.out.println("\nAhora debes ingresar el archivo de los equipos que jugaran esta temporada");
                 String nombreArchivoEquipos = preguntarPalabra();
                 LECTOR.leerArchivoEquiposReales(nombreArchivoEquipos, nuevaTemporadaReal, CREADOR);
+                System.out.println("\n Ahora debes ingresar el archivo de los jugadores de los equipos");
+                String nombreArchivoJugadores = preguntarPalabra();
+                LECTOR.leerArchivoJugadoresReales(nombreArchivoJugadores, nuevaTemporadaReal, CREADOR);
                 mostrarMenuAdministrador(pAdministrador);
                 break;
             case 2:

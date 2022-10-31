@@ -3,35 +3,37 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TemporadaReal implements Serializable {
+public class TemporadaReal implements Serializable, Temporada {
     private int numeroTemporada;
-    ArrayList<EquipoReal> equiposDeTemporada = new ArrayList<>(); 
+    private ArrayList<EquipoReal> equiposDeTemporada = new ArrayList<>(); 
 
     public TemporadaReal(){
     }
 
-    /**
-     * Agrega un equipo a la lista de equipos de la temporada
-     * @param pNuevoEquipo
-     */
-    public void agregarEquipo(EquipoReal pNuevoEquipo){
-        equiposDeTemporada.add(pNuevoEquipo);
-    }
-    /**
-     * retorna el numero de la temporada
-     * @return
-     */
+    @Override
     public int getNumeroTemporada() {
         return numeroTemporada;
     }
 
-    /**
-     * agrega un numero de temporada
-     * @param numeroTemporada
-     */
-    public void setNumeroTemporada(int numeroTemporada) {
-        this.numeroTemporada = numeroTemporada;
+    @Override
+    public void setNumeroTemporada(int pNumeroTemporada) {
+        this.numeroTemporada = pNumeroTemporada;
     }
+
+    public void agregarEquipo(EquipoReal pNuevoEquipo){
+        this.equiposDeTemporada.add(pNuevoEquipo);
+    }
+
+    public EquipoReal buscarEquipo(String pNombreEquipo){
+        EquipoReal equipoBuscado = null;
+        for(EquipoReal equipo: equiposDeTemporada){
+            if(equipo.getNombreEquipo().equals(pNombreEquipo)){
+                equipoBuscado = equipo;
+            }
+        }
+        return equipoBuscado;
+    }
+
     
 }
 
