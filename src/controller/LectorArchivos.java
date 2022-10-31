@@ -59,9 +59,23 @@ public class LectorArchivos {
                 while(linea != null){
                     String[] datosJugador = linea.split(";");
                     String nombreJugador = datosJugador[0];
-                    String posicionJugador = datosJugador[2];
+                    String posicionJugador1 = datosJugador[2];
                     Double precioCompra = Double.parseDouble(datosJugador[3]);
                     EquipoReal equipoJugador = pTemoprada.buscarEquipo(datosJugador[1]);
+                    Posicion posicionJugador = null;
+                    switch (posicionJugador1) {
+                        case "arquero":
+                            posicionJugador = Posicion.ARQUERO;
+                            break;
+                        case "delantero":
+                            posicionJugador = Posicion.DELANTERO;
+                        case "medio":
+                            posicionJugador = Posicion.MEDIO;
+                        case "defensa":
+                            posicionJugador = Posicion.DEFENSA;
+                        default:
+                            break;
+                    }
                     JugadorReal nuevoJugadorReal = pCreador.crearJugadorReal(nombreJugador, posicionJugador, precioCompra, equipoJugador);
                     equipoJugador.agregarJugador(nuevoJugadorReal);
                     linea = lector.readLine();

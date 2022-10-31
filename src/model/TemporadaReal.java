@@ -65,5 +65,9 @@ public class TemporadaReal implements Serializable, Temporada {
         }
         return fechaBuscada;
     } 
+
+    public ArrayList<EquipoReal> getEquiposDeTemporada() {
+        return equiposDeTemporada;
+    }
 }
 

@@ -8,7 +8,7 @@ public class JugadorReal extends Jugador {
      * @param pPrecioCompra
      * @param pEquipoJugador
      */
-    public JugadorReal(String pNombre, String pPosicion, double pPrecioCompra, Equipo pEquipoJugador){
+    public JugadorReal(String pNombre, Posicion pPosicion, double pPrecioCompra, Equipo pEquipoJugador){
         super(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
     }
 

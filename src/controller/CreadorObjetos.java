@@ -46,7 +46,7 @@ public class CreadorObjetos {
      * @param pEquipoJugador
      * @return
      */
-    public JugadorReal crearJugadorReal(String pNombre, String pPosicion, double pPrecioCompra, Equipo pEquipoJugador){
+    public JugadorReal crearJugadorReal(String pNombre, Posicion pPosicion, double pPrecioCompra, Equipo pEquipoJugador){
         JugadorReal nuevoJugadorReal = new JugadorReal(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
         return nuevoJugadorReal;
     }
@@ -72,5 +72,29 @@ public class CreadorObjetos {
     public PartidoReal crearPartidoReal(EquipoReal pLocal, EquipoReal pVisitante, String pDia, String pHora){
         PartidoReal nuevoPartidoReal = new PartidoReal(pLocal, pVisitante, pDia, pHora);
         return nuevoPartidoReal;
+    }
+
+    /**
+     * Crea un equipo de fantasia
+     * @param pNombre
+     * @return
+     */
+    public EquipoFantasia crearEquipoFantasia(String pNombre){
+        EquipoFantasia nuevoEquipoFantasia = new EquipoFantasia(pNombre);
+        return nuevoEquipoFantasia;
+    }
+    public JugadorFantasiaArquero crearArquero(String pNombre, Posicion pPosicion, double pPrecioCompra, EquipoReal pEquipoJugador){
+        JugadorFantasiaArquero nuevoArquero = new JugadorFantasiaArquero(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
+        return nuevoArquero;
+    }
+
+    JugadorFantasiaDefensivo crearDefensa(String pNombre, Posicion pPosicion, double pPrecioCompra, EquipoReal pEquipoJugador){
+        JugadorFantasiaDefensivo nuevoDefensa = new JugadorFantasiaDefensivo(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
+        return nuevoDefensa;
+    }
+
+    JugadorFantasia crearJugadorFantasia(String pNombre, Posicion pPosicion, double pPrecioCompra, EquipoReal pEquipoJugador){
+        JugadorFantasia nuevoJugador = new JugadorFantasia(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
+        return nuevoJugador;
     }
 }

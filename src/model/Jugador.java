@@ -14,24 +14,12 @@ public abstract class Jugador implements Serializable {
      * @param pPrecioCompra
      * @param pEquipoJugador
      */
-    public Jugador(String pNombre, String pPosicion, double pPrecioCompra, Equipo pEquipoJugador){
+    public Jugador(String pNombre, Posicion pPosicion, double pPrecioCompra, Equipo pEquipoJugador){
         this.nombre = pNombre;
         this.precioCompra = pPrecioCompra;
         this.precioVenta = pPrecioCompra * 0.97;
         this.equipoJugador = pEquipoJugador;
-        switch (pPosicion) {
-            case "arquero":
-                this.posicionJugador = Posicion.ARQUERO;
-                break;
-            case "delantero":
-                this.posicionJugador = Posicion.DELANTERO;
-            case "medio":
-                this.posicionJugador = Posicion.MEDIO;
-            case "defensa":
-                this.posicionJugador = Posicion.DEFENSA;
-            default:
-                break;
-        }
+        this.posicionJugador = pPosicion;
     }
     /**
      * retorna el nombre del jugador

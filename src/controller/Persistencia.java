@@ -44,7 +44,7 @@ public class Persistencia {
         try{
             String rutaParticipantes = "persistencia/participantes";
             File ficheroParticipantes = crearFichero(rutaParticipantes);
-            String nombreTxt = ficheroParticipantes+"/"+pParticipanteNuevo.getNombreUsuario()+".txt";
+            String nombreTxt = ficheroParticipantes+"/"+pParticipanteNuevo.getNombreUsuario()+".obj";
             File nuevoArchivo = crearArchivo(nombreTxt);
             if(!nuevoArchivo.exists()){
                 ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
@@ -69,7 +69,7 @@ public class Persistencia {
         try{
             String rutaParticipantes = "persistencia/participantes";
             File ficheroParticipantes = crearFichero(rutaParticipantes);
-            String nombreTxt = ficheroParticipantes+"/"+pNombreUsuario+".txt";
+            String nombreTxt = ficheroParticipantes+"/"+pNombreUsuario+".obj";
             File nuevoArchivo = crearArchivo(nombreTxt);
             if(nuevoArchivo.exists()){
                 ObjectInputStream lector = new ObjectInputStream(new FileInputStream(nuevoArchivo));

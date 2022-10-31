@@ -7,7 +7,6 @@ import model.*;
 public class App {
     private static Administrador administrador = new Administrador("admin", "admin");
     private ArrayList<TemporadaReal> temporadas = new ArrayList<>();
-    private Menu menuApp = new Menu();
 
     /**
      * Crea una instancia de aplicacion
@@ -15,13 +14,6 @@ public class App {
     public App(){
     }
 
-    /**
-     * retorna el menu de la app 
-     * @return
-     */
-    public Menu getMenuApp() {
-        return menuApp;
-    }
 
     /**
      * retorna el administrador de la aplicacion
@@ -38,11 +30,28 @@ public class App {
     public void agregarTemporada(TemporadaReal pTemporada){
         this.temporadas.add(pTemporada);
     }
+    /**
+     * Retorna la lista de temporadas
+     * @return
+     */
+    public ArrayList<TemporadaReal> getTemporadas() {
+        return temporadas;
+    }
+
+    public TemporadaReal temporadaActiva(){
+        TemporadaReal temporadaActiva = null;
+        for(TemporadaReal temporada: getTemporadas()){
+            if(temporada.getNumeroTemporada() == (getTemporadas().size())){
+                temporadaActiva = temporada;
+            }
+        }
+        return temporadaActiva;
+    }
     
     public static void main(String[] args) throws Exception {
         App aplicacion = new App();
-        Menu menuApp = aplicacion.getMenuApp();
         Persistencia.recuperarTemporadaReal(aplicacion);
+        Menu menuApp = new Menu(aplicacion);
         menuApp.mostrarMenuPrincipal();
     }
 }

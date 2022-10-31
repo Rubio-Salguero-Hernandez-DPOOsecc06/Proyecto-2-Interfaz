@@ -25,4 +25,14 @@ public class EquipoReal extends Equipo{
     public String getNombreEquipo() {
         return super.getNombreEquipo();
     }
+
+    public ArrayList<Jugador> getJugadoresPorPosicion(Posicion pPosicion) {
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        for(JugadorReal jugador: this.jugadoresEquipo){
+            if(jugador.getPosicionJugador().equals(pPosicion)){
+                jugadores.add(jugador);
+            }
+        }
+        return jugadores;
+    }
 }
