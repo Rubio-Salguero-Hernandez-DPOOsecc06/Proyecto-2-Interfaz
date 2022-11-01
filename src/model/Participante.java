@@ -19,10 +19,12 @@ public class Participante extends Usuario{
     public String getNombreUsuario() {
         return super.getNombreUsuario();
     }
+    
     @Override
     public String getClave() {
         return super.getClave();
     }
+    
     /**
      * Retorna el equipos asociado del participante
      * @return
@@ -30,6 +32,7 @@ public class Participante extends Usuario{
     public EquipoFantasia getEquipoAsociado() {
         return equipoAsociado;
     }
+    
     /**
      * Asocia un equipo de fantasia al participante
      * @param pEquipoAsociado
@@ -37,6 +40,7 @@ public class Participante extends Usuario{
     public void setEquipoAsociado(EquipoFantasia pEquipoAsociado) {
         this.equipoAsociado = pEquipoAsociado;
     }
+    
     /**
      * Retorna el presupuesto disponible del participante
      * @return
@@ -44,6 +48,7 @@ public class Participante extends Usuario{
     public Double getPresupuestoDisponible() {
         return presupuestoDisponible;
     }
+    
     /**
      * Resta una cantidad pagada al presupuesto disponible
      * @param pCantidadPagada
@@ -51,6 +56,7 @@ public class Participante extends Usuario{
     public void restarCompra(Double pCantidadPagada){
         this.presupuestoDisponible -= pCantidadPagada;
     }
+    
     /**
      * Agrega una cantidad recibida al presupuesto disponible
      * @param pCantidadRecibida
@@ -58,6 +64,7 @@ public class Participante extends Usuario{
     public void sumarVenta(Double pCantidadRecibida){
         this.presupuestoDisponible += pCantidadRecibida;
     }
+    
     public boolean verificarCompra(JugadorFantasia pJugador){
         Boolean verificado = false;
         if(this.presupuestoDisponible >= pJugador.getPrecioCompra()){
@@ -65,6 +72,12 @@ public class Participante extends Usuario{
         }
         return verificado;
     }
+
+    /**
+     * Realiza el proceso de compra de un arquero
+     * @param pMenu
+     * @return
+     */
     public JugadorFantasiaArquero comprarArquero(Menu pMenu){
         JugadorFantasiaArquero arqueroComprado = null;
         EquipoReal equipoSeleccionado = pMenu.imprimirEquiposTemporada();
@@ -80,6 +93,11 @@ public class Participante extends Usuario{
         return arqueroComprado;
     }
 
+    /**
+     * Realiza el proceso de compra de un defensa
+     * @param pMenu
+     * @return
+     */
     public JugadorFantasiaDefensivo comprarDefensa(Menu pMenu){
         JugadorFantasiaDefensivo defensaComprado = null;
         EquipoReal equipoSeleccionado = pMenu.imprimirEquiposTemporada();
@@ -95,6 +113,11 @@ public class Participante extends Usuario{
         return defensaComprado;
     }
 
+    /**
+     * Realiza el proceso de compra de un delantero
+     * @param pMenu
+     * @return
+     */
     public JugadorFantasia comprarDelantero(Menu pMenu){
         JugadorFantasia delanteroComprado = null;
         EquipoReal equipoSeleccionado = pMenu.imprimirEquiposTemporada();
@@ -110,6 +133,11 @@ public class Participante extends Usuario{
         return delanteroComprado;
     }
 
+    /**
+     * Realiza el proceso de compra de un medio campista
+     * @param pMenu
+     * @return
+     */
     public JugadorFantasia comprarMedio(Menu pMenu){
         JugadorFantasia medioComprado = null;
         EquipoReal equipoSeleccionado = pMenu.imprimirEquiposTemporada();

@@ -83,16 +83,40 @@ public class CreadorObjetos {
         EquipoFantasia nuevoEquipoFantasia = new EquipoFantasia(pNombre);
         return nuevoEquipoFantasia;
     }
+    /**
+     * crea un arquero de fantasia
+     * @param pNombre
+     * @param pPosicion
+     * @param pPrecioCompra
+     * @param pEquipoJugador
+     * @return
+     */
     public JugadorFantasiaArquero crearArquero(String pNombre, Posicion pPosicion, double pPrecioCompra, EquipoReal pEquipoJugador){
         JugadorFantasiaArquero nuevoArquero = new JugadorFantasiaArquero(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
         return nuevoArquero;
     }
 
+    /**
+     * Crea un defensa de fantasia
+     * @param pNombre
+     * @param pPosicion
+     * @param pPrecioCompra
+     * @param pEquipoJugador
+     * @return
+     */
     JugadorFantasiaDefensivo crearDefensa(String pNombre, Posicion pPosicion, double pPrecioCompra, EquipoReal pEquipoJugador){
         JugadorFantasiaDefensivo nuevoDefensa = new JugadorFantasiaDefensivo(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
         return nuevoDefensa;
     }
-
+    /**
+     * Crea un jugador de fantasia
+     * puede ser un delantero o un medio campista
+     * @param pNombre
+     * @param pPosicion
+     * @param pPrecioCompra
+     * @param pEquipoJugador
+     * @return
+     */
     JugadorFantasia crearJugadorFantasia(String pNombre, Posicion pPosicion, double pPrecioCompra, EquipoReal pEquipoJugador){
         JugadorFantasia nuevoJugador = new JugadorFantasia(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
         return nuevoJugador;

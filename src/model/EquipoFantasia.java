@@ -19,6 +19,7 @@ public class EquipoFantasia extends Equipo{
     public String getNombreEquipo() {
         return super.getNombreEquipo();
     }
+    
     /**
      * Retorna al arquero titular
      * @return
@@ -26,6 +27,7 @@ public class EquipoFantasia extends Equipo{
     public JugadorFantasiaArquero getArqueroTitular() {
         return arqueroTitular;
     }
+    
     /**
      * Retorna al arquero sustituto
      * @return
@@ -33,6 +35,7 @@ public class EquipoFantasia extends Equipo{
     public JugadorFantasiaArquero getArqueroSustituto() {
         return arqueroSustituto;
     }
+    
     /**
      * Retorna al defensa sustituto
      * @return
@@ -40,6 +43,7 @@ public class EquipoFantasia extends Equipo{
     public JugadorFantasiaDefensivo getDefensaSustituto() {
         return defensaSustituto;
     }
+    
     /**
      * Retorna al delantero sustituto
      * @return
@@ -47,6 +51,7 @@ public class EquipoFantasia extends Equipo{
     public JugadorFantasia getDelanteroSustituto() {
         return delanteroSustituto;
     }
+    
     /**
      * Retorna al medio campista sustituto
      * @return
@@ -54,6 +59,7 @@ public class EquipoFantasia extends Equipo{
     public JugadorFantasia getMedioSustituto() {
         return medioSustituto;
     }
+    
     /**
      * Retorna la lista de los defensas titutlares
      * @return
@@ -61,6 +67,7 @@ public class EquipoFantasia extends Equipo{
     public ArrayList<JugadorFantasiaDefensivo> getDefensasTitutlares() {
         return defensasTitulares;
     }
+    
     /**
      * Retorna la lista de los delanteros titulares
      * @return
@@ -68,6 +75,7 @@ public class EquipoFantasia extends Equipo{
     public ArrayList<JugadorFantasia> getDelanterosTitutlares() {
         return delanterosTitulares;
     }
+    
     /**
      * Retorna la lista de los medio campistas titutlares
      * @return
@@ -75,6 +83,7 @@ public class EquipoFantasia extends Equipo{
     public ArrayList<JugadorFantasia> getMediosTitulares() {
         return mediosTitulares;
     }
+    
     /**
      * Agrega un delantero a los delanteros titulares
      * @param pDelantero
@@ -82,6 +91,7 @@ public class EquipoFantasia extends Equipo{
     public void agregarDelanteroTitular(JugadorFantasia pDelantero){
         this.delanterosTitulares.add(pDelantero);
     }
+    
     /**
      * Agrega un medio campista a los medio campistas titulares
      * @param pMedio
@@ -89,6 +99,7 @@ public class EquipoFantasia extends Equipo{
     public void agregarMedioTitular(JugadorFantasia pMedio){
         this.mediosTitulares.add(pMedio);
     }
+    
     /**
      * Agrega un defensa a los defensas titulares
      * @param pDefensa
@@ -96,6 +107,7 @@ public class EquipoFantasia extends Equipo{
     public void agregarDefensaTitular(JugadorFantasiaDefensivo pDefensa){
         this.defensasTitulares.add(pDefensa);
     }
+    
     /**
      * Asigna un arquero como titular
      * @param pArqueroTitular
@@ -103,6 +115,7 @@ public class EquipoFantasia extends Equipo{
     public void setArqueroTitular(JugadorFantasiaArquero pArqueroTitular) {
         this.arqueroTitular = pArqueroTitular;
     }
+    
     /**
      * Asigna un arquero como sustituto
      * @param pArqueroSustituto
@@ -110,6 +123,7 @@ public class EquipoFantasia extends Equipo{
     public void setArqueroSustituto(JugadorFantasiaArquero pArqueroSustituto) {
         this.arqueroSustituto = pArqueroSustituto;
     }
+    
     /**
      * Asigna un defensa como sustituto
      * @param pDefensaSustituto
@@ -117,6 +131,7 @@ public class EquipoFantasia extends Equipo{
     public void setDefensaSustituto(JugadorFantasiaDefensivo pDefensaSustituto) {
         this.defensaSustituto = pDefensaSustituto;
     }
+    
     /**
      * Asigna un medio campista como sustituto
      * @param pMedioSustituto
@@ -124,6 +139,7 @@ public class EquipoFantasia extends Equipo{
     public void setMedioSustituto(JugadorFantasia pMedioSustituto) {
         this.medioSustituto = pMedioSustituto;
     }
+    
     /**
      * Asigna un delantero como sustituto
      * @param pDelanteroSustituto
@@ -131,7 +147,12 @@ public class EquipoFantasia extends Equipo{
     public void setDelanteroSustituto(JugadorFantasia pDelanteroSustituto) {
         this.delanteroSustituto = pDelanteroSustituto;
     }
-
+    
+    /**
+     * Verifica si el jugador ingresado por parametro ya existe en el equipo
+     * @param pJugador
+     * @return
+     */
     public boolean verificarDisponibilidad(JugadorFantasia pJugador){
         boolean disponible = true;
         for(JugadorFantasia jugador: this.jugadores){
@@ -141,15 +162,26 @@ public class EquipoFantasia extends Equipo{
         }
         return disponible;
     }
-
+    
+    /**
+     * Retorna la lista de los 15 jugadores del equipo
+     * @return
+     */
     public ArrayList<JugadorFantasia> getJugadores() {
         return jugadores;
     }
-
+    
+    /**
+     * Agrega un jugador a la lista de jugadores del equipo
+     * @param pJugador
+     */
     public void agregarJugador(JugadorFantasia pJugador){
         this.jugadores.add(pJugador);
     }
-
+    
+    /**
+     * Imprime como se ve la alineacion actual del equipo
+     */
     public void verEquipoFantasia(){
         System.out.println("============================================");
         System.out.println("Nombre del equipo: " + getNombreEquipo());
@@ -169,6 +201,4 @@ public class EquipoFantasia extends Equipo{
         System.out.println("\nMedio Campista Sustituto: " + getMedioSustituto().getNombre());
         System.out.println("\nDefensa Sustituto: " + getDefensaSustituto().getNombre() + "\n");
     }
-    
-
 }

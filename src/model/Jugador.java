@@ -21,6 +21,7 @@ public abstract class Jugador implements Serializable {
         this.equipoJugador = pEquipoJugador;
         this.posicionJugador = pPosicion;
     }
+    
     /**
      * retorna el nombre del jugador
      * @return
@@ -28,6 +29,7 @@ public abstract class Jugador implements Serializable {
     public String getNombre() {
         return nombre;
     }
+
     /**
      * retorna la posicion del jugador
      * @return
@@ -35,6 +37,7 @@ public abstract class Jugador implements Serializable {
     public Posicion getPosicionJugador() {
         return posicionJugador;
     }
+
     /**
      * retorna el precio de compra del jugador
      * @return
@@ -42,6 +45,7 @@ public abstract class Jugador implements Serializable {
     public Double getPrecioCompra() {
         return precioCompra;
     }
+
     /**
      * retorna el precio de la venta del jugador
      * es el 97% del precio de compra

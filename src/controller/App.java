@@ -38,6 +38,10 @@ public class App {
         return temporadas;
     }
 
+    /**
+     * Retorna la ultima temporada creada
+     * @return
+     */
     public TemporadaReal temporadaActiva(){
         TemporadaReal temporadaActiva = null;
         for(TemporadaReal temporada: getTemporadas()){

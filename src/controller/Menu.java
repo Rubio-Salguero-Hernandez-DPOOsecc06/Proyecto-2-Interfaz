@@ -224,6 +224,11 @@ public class Menu{
         }
     }
 
+    /**
+     * Muestra el menu asociado a un equipo de fantasia para manipularlo
+     * @param pParticipante
+     * @param pEquipoAsociado
+     */
     public void mostrarMenuEquipoFantasia(Participante pParticipante, EquipoFantasia pEquipoAsociado){
         System.out.println("\nEstas viendo a tu equipo: " + pEquipoAsociado.getNombreEquipo());
         System.out.println("\nQue deseas hacer?...\n");

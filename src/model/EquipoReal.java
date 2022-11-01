@@ -12,20 +12,19 @@ public class EquipoReal extends Equipo{
     public EquipoReal(String pNombreEquipo){
         super(pNombreEquipo);
     }
-
     /**
      * Agrega un jugador a la lista de jugadores del equipo
      * @param pNuevoJugador
      */
     public void agregarJugador(JugadorReal pNuevoJugador){
         this.jugadoresEquipo.add(pNuevoJugador);
-    }    
+    }  
 
-    @Override
-    public String getNombreEquipo() {
-        return super.getNombreEquipo();
-    }
-
+    /**
+     * Crea una lista con los jugadores que tiene la posicion buscada
+     * @param pPosicion
+     * @return
+     */
     public ArrayList<Jugador> getJugadoresPorPosicion(Posicion pPosicion) {
         ArrayList<Jugador> jugadores = new ArrayList<>();
         for(JugadorReal jugador: this.jugadoresEquipo){
@@ -34,5 +33,10 @@ public class EquipoReal extends Equipo{
             }
         }
         return jugadores;
+    }
+
+    @Override
+    public String getNombreEquipo() {
+        return super.getNombreEquipo();
     }
 }
