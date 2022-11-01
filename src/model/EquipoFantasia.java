@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class EquipoFantasia extends Equipo{
 
@@ -177,6 +178,118 @@ public class EquipoFantasia extends Equipo{
      */
     public void agregarJugador(JugadorFantasia pJugador){
         this.jugadores.add(pJugador);
+    }
+
+    /**
+     * Cambia al arquero titular por el sustituto
+     * @param pArquero
+     */
+    public void cambiarArquero(JugadorFantasiaArquero pArquero){
+        JugadorFantasiaArquero sustituo = getArqueroSustituto();
+        if(sustituo.getNombre().equals(pArquero.getNombre())){
+            System.out.println("Escoge a tu arquero titular");
+        }
+        else{
+            setArqueroSustituto(pArquero);
+            setArqueroTitular(sustituo);
+        }
+    }
+
+    /**
+     * Cambia a un defensa titular por el defensa sustituto
+     * @param pDefensa
+     */
+    public void cambiarDefensa(JugadorFantasiaDefensivo pDefensa){
+        JugadorFantasiaDefensivo sustituto = getDefensaSustituto();
+        int indiceJugador = -1;
+        if(pDefensa.getNombre().equals(sustituto.getNombre())){
+            System.out.println("Tienes que escoger un titular");
+        }
+        else{
+            for (int i = 0; i < this.defensasTitulares.size(); i++) {
+                JugadorFantasiaDefensivo defensa = this.defensasTitulares.get(i);
+                if(defensa.getNombre().equals(pDefensa.getNombre())){
+                    indiceJugador = i;
+                }
+            }
+            setDefensaSustituto(this.defensasTitulares.get(indiceJugador));
+            this.defensasTitulares.remove(indiceJugador);
+            this.defensasTitulares.add(sustituto);
+        }
+    }
+
+    /**
+     * Cambia a un delantero titular por el delantero sustituto
+     * @param pDelantero
+     */
+    public void cambiarDelantero(JugadorFantasia pDelantero){
+        JugadorFantasia sustituto = getDelanteroSustituto();
+        int indiceJugador = -1;
+        if(pDelantero.getNombre().equals(sustituto.getNombre())){
+            System.out.println("Tienes que esocoger un titular");
+        }
+        else{
+            for (int i = 0; i < this.delanterosTitulares.size(); i++) {
+                JugadorFantasia delantero = this.delanterosTitulares.get(i);
+                if(delantero.getNombre().equals(pDelantero.getNombre())){
+                    indiceJugador = i;
+                }
+            }
+            setDelanteroSustituto(this.delanterosTitulares.get(indiceJugador));
+            this.delanterosTitulares.remove(indiceJugador);
+            this.delanterosTitulares.add(sustituto);
+        }
+    }
+
+    /**
+     * Cambia a un medio campista titular por el medio campista sustituto
+     * @param pMedio
+     */
+    public void cambiarMedio(JugadorFantasia pMedio){
+        JugadorFantasia sustituto = getMedioSustituto();
+        int indiceJugador = -1;
+        if(pMedio.getNombre().equals(sustituto.getNombre())){
+            System.out.println("Tienes que esocoger un titular");
+        }
+        else{
+            for (int i = 0; i < this.mediosTitulares.size(); i++) {
+                JugadorFantasia medio = this.mediosTitulares.get(i);
+                if(medio.getNombre().equals(pMedio.getNombre())){
+                    indiceJugador = i;
+                }
+            }
+            setMedioSustituto(this.mediosTitulares.get(indiceJugador));
+            this.mediosTitulares.remove(indiceJugador);
+            this.mediosTitulares.add(sustituto);
+        }
+    }
+
+    /**
+     * Permite al participante escoger un jugador especifico entre sus jugadores con la misma posicion
+     * @param pJugadores
+     * @param pEntrada
+     * @return
+     */
+    public JugadorFantasia elegirJugadorPosicion(ArrayList<JugadorFantasia> pJugadores, Scanner pEntrada){
+        JugadorFantasia jugadorBuscado = null;
+        for (int i = 0; i < pJugadores.size(); i++) {
+
+            System.out.println((i+1) + ". " + pJugadores.get(i).getNombre());
+        }
+        System.out.println("\nQue jugador deseas reemplzar?");
+        int opcion = Integer.parseInt(pEntrada.nextLine());
+        jugadorBuscado = pJugadores.get((opcion-1));
+        return jugadorBuscado;
+        }
+
+    public ArrayList<JugadorFantasia> buscarJugador(Posicion pPosicion){
+        ArrayList<JugadorFantasia> jugadoresPosicion = new ArrayList<>();
+        for(JugadorFantasia jugador: this.jugadores){
+            if(jugador.getPosicionJugador().equals(pPosicion)){
+                jugadoresPosicion.add(jugador);
+            }
+        }
+        return jugadoresPosicion;
     }
     
     /**

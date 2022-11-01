@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import model.*;
 
@@ -39,6 +40,34 @@ public class Menu{
         System.out.print("\n-> ");
         String cadena = ENTRADA.nextLine();
         return cadena;
+    }
+
+    public Posicion preguntarPosicion(){
+        Posicion posicion = Posicion.ARQUERO;
+        System.out.println("\nQue posicion deseas?\n");
+        System.out.println("Que posicion deseas cambiar?\n");
+                System.out.println("1. Arquero");
+                System.out.println("2. Delantero");
+                System.out.println("3. Medio campista");
+                System.out.println("4. Defensa");
+                int opcionPosicion = preguntarOpcion();
+                switch (opcionPosicion) {
+                    case 1:
+                        break;
+                    case 2:
+                        posicion = Posicion.DELANTERO;
+                        break;
+                    case 3:
+                        posicion = Posicion.MEDIO;
+                        break;
+                    case 4:
+                        posicion = Posicion.DEFENSA;
+                        break;
+                    default:
+                        System.out.println("Ingresa una opcion valida");
+                        break;
+                }
+        return posicion;
     }
 
     /**
@@ -233,7 +262,8 @@ public class Menu{
         System.out.println("\nEstas viendo a tu equipo: " + pEquipoAsociado.getNombreEquipo());
         System.out.println("\nQue deseas hacer?...\n");
         System.out.println("1. Ver tu equipo de fantasia");
-        System.out.println("2. Volver atras");
+        System.out.println("2. Reemplazar un jugador titular por un sustituto");
+        System.out.println("3. Volver atras");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 1:
@@ -241,6 +271,28 @@ public class Menu{
                 mostrarMenuEquipoFantasia(pParticipante, pEquipoAsociado);
                 break;
             case 2:
+                System.out.println("\nHas elegido cambiar a un titular por un sustituto\n");
+                pEquipoAsociado.verEquipoFantasia();
+                Posicion posicion = preguntarPosicion();
+                ArrayList<JugadorFantasia> jugadores = pEquipoAsociado.buscarJugador(posicion);
+                JugadorFantasia jugadorCambiado = pEquipoAsociado.elegirJugadorPosicion(jugadores, ENTRADA);
+                if(jugadorCambiado.getPosicionJugador().equals(Posicion.ARQUERO)){
+                    pEquipoAsociado.cambiarArquero((JugadorFantasiaArquero)jugadorCambiado);
+                }
+                else if(jugadorCambiado.getPosicionJugador().equals(Posicion.DELANTERO)){
+                    pEquipoAsociado.cambiarDelantero(jugadorCambiado);
+                }
+                else if(jugadorCambiado.getPosicionJugador().equals(Posicion.MEDIO)){
+                    pEquipoAsociado.cambiarMedio(jugadorCambiado);
+                }
+                else if(jugadorCambiado.getPosicionJugador().equals(Posicion.DEFENSA)){
+                    pEquipoAsociado.cambiarDefensa((JugadorFantasiaDefensivo)jugadorCambiado);
+                }
+                pEquipoAsociado.verEquipoFantasia();
+                mostrarMenuEquipoFantasia(pParticipante, pEquipoAsociado);
+                break;
+            case 3:
+                Persistencia.guardarParticipante(pParticipante);
                 mostrarMenuParticipante(pParticipante, pEquipoAsociado);
                 break;
             default:
