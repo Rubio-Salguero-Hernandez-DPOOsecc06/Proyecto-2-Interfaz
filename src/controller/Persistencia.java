@@ -51,9 +51,16 @@ public class Persistencia {
                 escritor.writeObject(pParticipanteNuevo);
                 escritor.close();
                 System.out.println("\nTe registraste correctamente\n");
-            } else{
+            } 
+            else if(nuevoArchivo.exists() && pParticipanteNuevo.getEquipoAsociado() != null){
+                ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
+                escritor.writeObject(pParticipanteNuevo);
+                escritor.close();
+                System.out.println("\nSe reescribio tu informacion\n");
+            }else{
             System.out.println("\nEste nombre de usuario no esta disponible\n");
             }
+
         } catch(Exception e){
         }
     }
@@ -74,11 +81,12 @@ public class Persistencia {
             if(nuevoArchivo.exists()){
                 ObjectInputStream lector = new ObjectInputStream(new FileInputStream(nuevoArchivo));
                 Participante participanteRecuperado = (Participante)lector.readObject();
-                lector.close();
                 if(participanteRecuperado.getClave().equals(pClave)){
                     participanteConfirmado = participanteRecuperado;
+                    lector.close();
                 }else{
                     System.out.println("\nClave incorrecta, intenta de nuevo\n");
+                    lector.close();
                 }
             }else{
                 System.out.println("\nEste participante no existe, intenta registrarte primero\n");

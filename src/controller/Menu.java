@@ -167,10 +167,10 @@ public class Menu{
                 System.out.println("\nAhora debes ingresar el archivo de los equipos que jugaran esta temporada");
                 String nombreArchivoEquipos = preguntarPalabra();
                 LECTOR.leerArchivoEquiposReales(nombreArchivoEquipos, nuevaTemporadaReal, CREADOR);
-                System.out.println("\n Ahora debes ingresar el archivo de los jugadores de los equipos");
+                System.out.println("\nAhora debes ingresar el archivo de los jugadores de los equipos");
                 String nombreArchivoJugadores = preguntarPalabra();
                 LECTOR.leerArchivoJugadoresReales(nombreArchivoJugadores, nuevaTemporadaReal, CREADOR);
-                System.out.println("\n Ahora debes ingresar el archivo de las fechas de esta temporada");
+                System.out.println("\nAhora debes ingresar el archivo de las fechas de esta temporada");
                 String nombreArchivoFechas = preguntarPalabra();
                 LECTOR.leerArchivoFechasReales(nombreArchivoFechas, nuevaTemporadaReal, CREADOR);
                 mostrarMenuAdministrador(pAdministrador);
@@ -206,7 +206,7 @@ public class Menu{
     public void mostrarMenuParticipante(Participante pParticipanteActivo, EquipoFantasia pEquipoAsociado){
         System.out.println("\nBIENVENID@: " + pParticipanteActivo.getNombreUsuario());
         System.out.println("\nQue deseas hacer?\n");
-        System.out.println("1. Ver tu equipo de fantasia");
+        System.out.println("1. Ver menu de tu equipo de fantasia");
         System.out.println("2. Salir de la aplicacion");
         int opcion = preguntarOpcion();
         switch (opcion) {
@@ -225,7 +225,24 @@ public class Menu{
     }
 
     public void mostrarMenuEquipoFantasia(Participante pParticipante, EquipoFantasia pEquipoAsociado){
-        System.out.println("Aqui va tu equipo :)");
+        System.out.println("\nEstas viendo a tu equipo: " + pEquipoAsociado.getNombreEquipo());
+        System.out.println("\nQue deseas hacer?...\n");
+        System.out.println("1. Ver tu equipo de fantasia");
+        System.out.println("2. Volver atras");
+        int opcion = preguntarOpcion();
+        switch (opcion) {
+            case 1:
+                pEquipoAsociado.verEquipoFantasia();
+                mostrarMenuEquipoFantasia(pParticipante, pEquipoAsociado);
+                break;
+            case 2:
+                mostrarMenuParticipante(pParticipante, pEquipoAsociado);
+                break;
+            default:
+                System.out.println("\nATENCION: Debes ingresar una opcion valida\n");
+                mostrarMenuEquipoFantasia(pParticipante, pEquipoAsociado);
+                break;
+        }
     }
 
     /**

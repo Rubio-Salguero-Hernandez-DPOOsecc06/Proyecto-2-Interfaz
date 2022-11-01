@@ -149,6 +149,26 @@ public class EquipoFantasia extends Equipo{
     public void agregarJugador(JugadorFantasia pJugador){
         this.jugadores.add(pJugador);
     }
+
+    public void verEquipoFantasia(){
+        System.out.println("============================================");
+        System.out.println("Nombre del equipo: " + getNombreEquipo());
+        System.out.println("============================================");
+        System.out.println("\nArquero Titular: " + getArqueroTitular().getNombre());
+        for(JugadorFantasia delantero:delanterosTitulares){
+            System.out.println("\nDelantero Titular: " + delantero.getNombre());
+        }
+        for(JugadorFantasia medio: getMediosTitulares()){
+            System.out.println("\nMedio Campista Titular: " + medio.getNombre());
+        }
+        for(JugadorFantasiaDefensivo defensa: getDefensasTitutlares()){
+            System.out.println("\nDefensa Titular: " + defensa.getNombre());
+        }
+        System.out.println("\nArquero Sustituto: " + getArqueroSustituto().getNombre());
+        System.out.println("\nDelantero Sustituto: " + getDelanteroSustituto().getNombre());
+        System.out.println("\nMedio Campista Sustituto: " + getMedioSustituto().getNombre());
+        System.out.println("\nDefensa Sustituto: " + getDefensaSustituto().getNombre() + "\n");
+    }
     
 
 }
