@@ -14,7 +14,6 @@ public class App {
     public App(){
     }
 
-
     /**
      * retorna el administrador de la aplicacion
      * @return

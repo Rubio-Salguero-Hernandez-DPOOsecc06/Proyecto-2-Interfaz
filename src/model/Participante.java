@@ -1,6 +1,7 @@
 package model;
 
 import controller.Menu;
+import controller.Persistencia;
 
 public class Participante extends Usuario{
     private EquipoFantasia equipoAsociado = null;
@@ -151,5 +152,172 @@ public class Participante extends Usuario{
             System.out.println("\nNo te alcanzo para este jugador o ya lo tienes en tu equipo\n");
         }
         return medioComprado;
+    }
+
+    /**
+     * Permite al participante vender un arquero
+     * @param pMenu
+     * @param pParticipante
+     * @param pEquipo
+     * @param pArquero
+     * @return
+     */
+    public JugadorFantasia venderArquero(Menu pMenu, Participante pParticipante, EquipoFantasia pEquipo, JugadorFantasiaArquero pArquero){
+        JugadorFantasia arqueroNuevo = null;
+        String nombreArqueroVender = pArquero.getNombre();
+        JugadorFantasiaArquero arqueroTitular = pEquipo.getArqueroTitular();
+        JugadorFantasiaArquero arqueroSustituto = pEquipo.getArqueroSustituto();
+        String nombreArqueroTitular = pEquipo.getArqueroTitular().getNombre();
+        String nombreArqueroSustituto = pEquipo.getArqueroSustituto().getNombre();
+        double precioVentaArquero = pArquero.getPrecioVenta();
+
+        if(nombreArqueroVender.equals(nombreArqueroTitular)){
+            sumarVenta(precioVentaArquero);
+            while(arqueroNuevo == null){
+                arqueroNuevo = comprarArquero(pMenu);
+            }
+            pEquipo.getJugadores().remove(arqueroTitular);
+            pEquipo.getJugadores().add(arqueroNuevo);
+            pEquipo.setArqueroTitular((JugadorFantasiaArquero)arqueroNuevo);
+        }
+        else if(nombreArqueroVender.equals(nombreArqueroSustituto)){
+            sumarVenta(precioVentaArquero);
+            while(arqueroNuevo == null){
+                arqueroNuevo = comprarArquero(pMenu);
+            }
+            pEquipo.getJugadores().remove(arqueroSustituto);
+            pEquipo.getJugadores().add(arqueroNuevo);
+            pEquipo.setArqueroSustituto((JugadorFantasiaArquero)arqueroNuevo);
+        }
+        return arqueroNuevo;
+    }
+
+    /**
+     * Permite al participante vender un delantero
+     * @param pMenu
+     * @param pParticipante
+     * @param pEquipo
+     * @param pDelantero
+     * @return
+     */
+    public JugadorFantasia venderDelantero(Menu pMenu, Participante pParticipante, EquipoFantasia pEquipo, JugadorFantasia pDelantero){
+        JugadorFantasia delanteroComprado = null;
+        JugadorFantasia delanteroRetirar = null;
+        JugadorFantasia delanteroSustituto = pEquipo.getDelanteroSustituto();
+        String nombreDelanteroSustituto = pEquipo.getArqueroTitular().getNombre();
+        String nombreDelanteroVendido = pDelantero.getNombre();
+        double precioVentaDelanteroVendido = pDelantero.getPrecioVenta();
+
+        if (nombreDelanteroVendido.equals(nombreDelanteroSustituto)) {
+            sumarVenta(precioVentaDelanteroVendido);
+            while(delanteroComprado == null){
+                delanteroComprado = comprarDelantero(pMenu);
+                delanteroRetirar = delanteroSustituto;
+            }
+            pEquipo.getJugadores().remove(delanteroSustituto);
+            pEquipo.getJugadores().add(delanteroComprado);
+            pEquipo.setDelanteroSustituto(delanteroComprado);
+        } else {
+            for(JugadorFantasia delantero: pEquipo.getDelanterosTitulares()){
+                if(delantero.getNombre().equals(nombreDelanteroVendido)){
+                    sumarVenta(precioVentaDelanteroVendido);
+                    while(delanteroComprado == null){
+                        delanteroComprado = comprarDelantero(pMenu);
+                        delanteroRetirar = delantero;
+                    }
+                }
+            }
+            pEquipo.getDelanterosTitulares().remove(delanteroRetirar);
+            pEquipo.agregarDelanteroTitular(delanteroComprado);
+            pEquipo.getJugadores().remove(delanteroRetirar);
+            pEquipo.getJugadores().add(delanteroComprado);
+        }
+        return delanteroComprado;
+    }
+
+    /**
+     * Permite al participante vender un medio campista
+     * @param pMenu
+     * @param pParticipante
+     * @param pEquipo
+     * @param pMedio
+     * @return
+     */
+    public JugadorFantasia venderMedio(Menu pMenu, Participante pParticipante, EquipoFantasia pEquipo, JugadorFantasia pMedio){
+        JugadorFantasia medioComprado = null;
+        JugadorFantasia medioRetirar = null;
+        JugadorFantasia medioSustituto = pEquipo.getMedioSustituto();
+        String nombreMedioSustituto = pEquipo.getMedioSustituto().getNombre();
+        String nombreMedioVendido = pMedio.getNombre();
+        double precioVentaMedioVendido = pMedio.getPrecioVenta();
+
+        if(nombreMedioVendido.equals(nombreMedioSustituto)){
+            sumarVenta(precioVentaMedioVendido);
+            while(medioComprado == null){
+                medioComprado = comprarMedio(pMenu);
+                medioRetirar = medioSustituto;
+            }
+            pEquipo.getJugadores().remove(medioRetirar);
+            pEquipo.getJugadores().add(medioComprado);
+            pEquipo.setMedioSustituto(pMedio);
+        }else{
+            for(JugadorFantasia medio: pEquipo.getMediosTitulares()){
+                if(medio.getNombre().equals(nombreMedioVendido)){
+                    sumarVenta(precioVentaMedioVendido);
+                    while(medioComprado == null){
+                        medioComprado = comprarMedio(pMenu);
+                        medioRetirar = medio;
+                    }
+                }
+            }
+            pEquipo.getMediosTitulares().remove(medioRetirar);
+            pEquipo.agregarMedioTitular(medioComprado);
+            pEquipo.getJugadores().remove(medioRetirar);
+            pEquipo.getJugadores().add(medioComprado);
+        }
+        return medioComprado;
+    }
+
+    /**
+     * Permite al participante vender un defensa
+     * @param pMenu
+     * @param pParticipante
+     * @param pEquipo
+     * @param pDefensa
+     * @return
+     */
+    public JugadorFantasiaDefensivo venderDefensa(Menu pMenu, Participante pParticipante, EquipoFantasia pEquipo, JugadorFantasiaDefensivo pDefensa){
+        JugadorFantasiaDefensivo defensaComprado = null;
+        JugadorFantasia defensaRetirar = null;
+        JugadorFantasia defensaSustituto = pEquipo.getDefensaSustituto();
+        String nombreDefensaVendido = pDefensa.getNombre();
+        String nombreDefensaSustituto = pEquipo.getDefensaSustituto().getNombre();
+        double precioVentaDefensaVendido = pDefensa.getPrecioVenta();
+
+        if (nombreDefensaSustituto.equals(nombreDefensaVendido)) {
+            sumarVenta(precioVentaDefensaVendido);
+            while (defensaComprado == null) {
+                defensaComprado = comprarDefensa(pMenu);
+                defensaRetirar = defensaSustituto;
+            }
+            pEquipo.getJugadores().remove(defensaRetirar);
+            pEquipo.getJugadores().add(defensaComprado);
+            pEquipo.setDefensaSustituto(pDefensa);
+        } else {
+            for(JugadorFantasia defensa: pEquipo.getDefensasTitulares()){
+                if(defensa.getNombre().equals(nombreDefensaVendido)){
+                    sumarVenta(precioVentaDefensaVendido);
+                    while(defensaComprado == null){
+                        defensaComprado = comprarDefensa(pMenu);
+                        defensaRetirar = defensa; 
+                    }
+                }
+            } 
+            pEquipo.getDefensasTitulares().remove(defensaRetirar);
+            pEquipo.agregarDefensaTitular(defensaComprado);
+            pEquipo.getJugadores().remove(defensaRetirar);
+            pEquipo.getJugadores().add(defensaComprado);
+        }
+        return defensaComprado;
     }
 }

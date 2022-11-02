@@ -65,7 +65,7 @@ public class EquipoFantasia extends Equipo{
      * Retorna la lista de los defensas titutlares
      * @return
      */
-    public ArrayList<JugadorFantasiaDefensivo> getDefensasTitutlares() {
+    public ArrayList<JugadorFantasiaDefensivo> getDefensasTitulares() {
         return defensasTitulares;
     }
     
@@ -73,7 +73,7 @@ public class EquipoFantasia extends Equipo{
      * Retorna la lista de los delanteros titulares
      * @return
      */
-    public ArrayList<JugadorFantasia> getDelanterosTitutlares() {
+    public ArrayList<JugadorFantasia> getDelanterosTitulares() {
         return delanterosTitulares;
     }
     
@@ -270,15 +270,16 @@ public class EquipoFantasia extends Equipo{
      * @param pEntrada
      * @return
      */
-    public JugadorFantasia elegirJugadorPosicion(ArrayList<JugadorFantasia> pJugadores, Scanner pEntrada){
+    public JugadorFantasia elegirJugadorPosicion(Posicion posicion, Scanner pEntrada){
+        ArrayList<JugadorFantasia> jugadores = buscarJugador(posicion);
         JugadorFantasia jugadorBuscado = null;
-        for (int i = 0; i < pJugadores.size(); i++) {
+        for (int i = 0; i < jugadores.size(); i++) {
 
-            System.out.println((i+1) + ". " + pJugadores.get(i).getNombre());
+            System.out.println((i+1) + ". " + jugadores.get(i).getNombre());
         }
         System.out.println("\nQue jugador deseas reemplzar?");
         int opcion = Integer.parseInt(pEntrada.nextLine());
-        jugadorBuscado = pJugadores.get((opcion-1));
+        jugadorBuscado = jugadores.get((opcion-1));
         return jugadorBuscado;
         }
 
@@ -306,7 +307,7 @@ public class EquipoFantasia extends Equipo{
         for(JugadorFantasia medio: getMediosTitulares()){
             System.out.println("\nMedio Campista Titular: " + medio.getNombre());
         }
-        for(JugadorFantasiaDefensivo defensa: getDefensasTitutlares()){
+        for(JugadorFantasiaDefensivo defensa: getDefensasTitulares()){
             System.out.println("\nDefensa Titular: " + defensa.getNombre());
         }
         System.out.println("\nArquero Sustituto: " + getArqueroSustituto().getNombre());

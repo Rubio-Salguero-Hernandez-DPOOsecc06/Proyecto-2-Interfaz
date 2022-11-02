@@ -169,7 +169,8 @@ public class Menu{
                 System.out.println("\nIngresa el nombre de tu nuevo equipo...");
                 String nombreEquipo = preguntarPalabra();
                 EquipoFantasia equipoAsociado = CREADOR.crearEquipoFantasia(nombreEquipo);
-                configurarEquipoInicial(this, pParticipanteActivo, equipoAsociado);
+                crearEquipofantasia(this, pParticipanteActivo, equipoAsociado);
+                mostrarMenuParticipante(pParticipanteActivo, pParticipanteActivo.getEquipoAsociado());
                 break;
             case 2:
                 System.exit(0);
@@ -263,7 +264,8 @@ public class Menu{
         System.out.println("\nQue deseas hacer?...\n");
         System.out.println("1. Ver tu equipo de fantasia");
         System.out.println("2. Reemplazar un jugador titular por un sustituto");
-        System.out.println("3. Volver atras");
+        System.out.println("3. vender/comprar jugador <- (Siempre debes vender antes de poder comprar)");
+        System.out.println("4. Volver atras");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 1:
@@ -274,8 +276,7 @@ public class Menu{
                 System.out.println("\nHas elegido cambiar a un titular por un sustituto\n");
                 pEquipoAsociado.verEquipoFantasia();
                 Posicion posicion = preguntarPosicion();
-                ArrayList<JugadorFantasia> jugadores = pEquipoAsociado.buscarJugador(posicion);
-                JugadorFantasia jugadorCambiado = pEquipoAsociado.elegirJugadorPosicion(jugadores, ENTRADA);
+                JugadorFantasia jugadorCambiado = pEquipoAsociado.elegirJugadorPosicion(posicion, ENTRADA);
                 if(jugadorCambiado.getPosicionJugador().equals(Posicion.ARQUERO)){
                     pEquipoAsociado.cambiarArquero((JugadorFantasiaArquero)jugadorCambiado);
                 }
@@ -289,9 +290,49 @@ public class Menu{
                     pEquipoAsociado.cambiarDefensa((JugadorFantasiaDefensivo)jugadorCambiado);
                 }
                 pEquipoAsociado.verEquipoFantasia();
+                System.out.println("\nRegresa guardar tus cambios\n");
                 mostrarMenuEquipoFantasia(pParticipante, pEquipoAsociado);
                 break;
             case 3:
+                System.out.println("\nHas escogido vender un jugador\n");
+                pEquipoAsociado.verEquipoFantasia();
+                Posicion posicionBuscada = preguntarPosicion();
+                if(posicionBuscada.equals(Posicion.ARQUERO)){
+                    JugadorFantasia jugadorVendido = pEquipoAsociado.elegirJugadorPosicion(posicionBuscada, ENTRADA);               
+                    pParticipante.venderArquero(this, pParticipante, pEquipoAsociado, (JugadorFantasiaArquero)jugadorVendido);
+                    Persistencia.guardarParticipante(pParticipante);
+                    pEquipoAsociado.verEquipoFantasia();
+                    System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+                }
+                else if(posicionBuscada.equals(Posicion.DELANTERO)){
+                    
+                    JugadorFantasia jugadorVendido = pEquipoAsociado.elegirJugadorPosicion(posicionBuscada, ENTRADA);
+                    pParticipante.venderDelantero(this, pParticipante, pEquipoAsociado, jugadorVendido);
+                    pEquipoAsociado.verEquipoFantasia();
+                    System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+                    System.out.println("\nRegresa al menu anterior para guardar tus cambios\n");
+                    
+                }
+                else if(posicionBuscada.equals(Posicion.MEDIO)){
+                    
+                    JugadorFantasia jugadorVendido = pEquipoAsociado.elegirJugadorPosicion(posicionBuscada, ENTRADA);
+                    pParticipante.venderMedio(this, pParticipante, pEquipoAsociado, jugadorVendido);
+                    pEquipoAsociado.verEquipoFantasia();
+                    System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+                    System.out.println("\nRegresa al menu anterior para guardar tus cambios\n");
+                    
+                }
+                else if(posicionBuscada.equals(Posicion.DEFENSA)){
+                    JugadorFantasia jugadorVendido = pEquipoAsociado.elegirJugadorPosicion(posicionBuscada, ENTRADA);                   
+                    pParticipante.venderDefensa(this, pParticipante, pEquipoAsociado, (JugadorFantasiaDefensivo)jugadorVendido);
+                    pEquipoAsociado.verEquipoFantasia();
+                    System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+                    System.out.println("\nRegresa al menu anterior para guardar tus cambios\n");
+                    
+                }
+                mostrarMenuEquipoFantasia(pParticipante, pEquipoAsociado);
+                break;
+            case 4:
                 Persistencia.guardarParticipante(pParticipante);
                 mostrarMenuParticipante(pParticipante, pEquipoAsociado);
                 break;
@@ -316,17 +357,24 @@ public class Menu{
             System.out.println("precio de compra: " + arquero.getPrecioCompra()+"\n");
         }
         System.out.println("\nQue arquero deseas escoger");
-        System.out.println("\nPara regresas ingresa 0");
+        System.out.println("\nPara regresar ingresa 0");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 0:
                 EquipoReal equipo = imprimirEquiposTemporada();
-                mostrarMenuCompraArquero(equipo);
+                nuevoArquero = mostrarMenuCompraArquero(equipo);
                 break;
         
             default:
-                JugadorReal arqueroSeleccionado = (JugadorReal) pEquipo.getJugadoresPorPosicion(Posicion.ARQUERO).get(opcion-1);
+                try {
+                    JugadorReal arqueroSeleccionado = (JugadorReal) pEquipo.getJugadoresPorPosicion(Posicion.ARQUERO).get(opcion-1);
                 nuevoArquero = CREADOR.crearArquero(arqueroSeleccionado.getNombre(), arqueroSeleccionado.getPosicionJugador(), arqueroSeleccionado.getPrecioCompra(), pEquipo);
+                } catch (Exception e) {
+                    System.out.println("ERROR -> INGRESASTE UN NUMERO EQUIVOCADO");
+                    EquipoReal equipo1 = imprimirEquiposTemporada();
+                    nuevoArquero = mostrarMenuCompraArquero(equipo1);
+                }
+                
         }
         return nuevoArquero;
     }
@@ -344,17 +392,24 @@ public class Menu{
             System.out.println("precio de compra: " + defensa.getPrecioCompra()+"\n");
         }
         System.out.println("\nQue defensa deseas escoger");
-        System.out.println("\nPara regresas ingresa 0");
+        System.out.println("\nPara regresar ingresa 0");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 0:
                 EquipoReal equipo = imprimirEquiposTemporada();
-                mostrarMenuCompraDefensa(equipo);
+                nuevoDefensa = mostrarMenuCompraDefensa(equipo);
                 break;
         
             default:
+            try {
                 JugadorReal defensaSeleccionado = (JugadorReal) pEquipo.getJugadoresPorPosicion(Posicion.DEFENSA).get(opcion-1);
                 nuevoDefensa = CREADOR.crearDefensa(defensaSeleccionado.getNombre(), defensaSeleccionado.getPosicionJugador(), defensaSeleccionado.getPrecioCompra(), pEquipo);
+                
+            } catch (Exception e) {
+                System.out.println("ERROR -> INGRESASTE UN NUMERO EQUIVOCADO");
+                EquipoReal equipo1 = imprimirEquiposTemporada();
+                nuevoDefensa = mostrarMenuCompraDefensa(equipo1);
+            }
         }
         return nuevoDefensa;
     }
@@ -372,17 +427,24 @@ public class Menu{
             System.out.println("precio de compra: " + medio.getPrecioCompra()+"\n");
         }
         System.out.println("\nQue medio campista deseas escoger");
-        System.out.println("\nPara regresas ingresa 0");
+        System.out.println("\nPara regresar ingresa 0");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 0:
                 EquipoReal equipo = imprimirEquiposTemporada();
-                mostrarMenuCompraMedio(equipo);
+                nuevoMedio = mostrarMenuCompraMedio(equipo);
                 break;
         
             default:
+            try {
                 JugadorReal medioSeleccionado = (JugadorReal) pEquipo.getJugadoresPorPosicion(Posicion.MEDIO).get(opcion-1);
                 nuevoMedio = CREADOR.crearJugadorFantasia(medioSeleccionado.getNombre(), medioSeleccionado.getPosicionJugador(), medioSeleccionado.getPrecioCompra(), pEquipo);
+            } catch (Exception e) {
+                System.out.println("ERROR -> INGRESASTE UN NUMERO EQUIVOCADO");
+                EquipoReal equipo1 = imprimirEquiposTemporada();
+                nuevoMedio = mostrarMenuCompraMedio(equipo1);
+            }
+                
         }
         return nuevoMedio;
     }
@@ -400,17 +462,24 @@ public class Menu{
             System.out.println("precio de compra: " + delantero.getPrecioCompra()+"\n");
         }
         System.out.println("\nque delantero deseas escoger");
-        System.out.println("\nPara regresas ingresa 0");
+        System.out.println("\nPara regresar ingresa 0");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 0:
                 EquipoReal equipo = imprimirEquiposTemporada();
-                mostrarMenuCompraMedio(equipo);
+                nuevoDelantero = mostrarMenuCompraDelantero(equipo);
                 break;
         
             default:
+            try {
                 JugadorReal delanteroSeleccionado = (JugadorReal) pEquipo.getJugadoresPorPosicion(Posicion.DELANTERO).get(opcion-1);
                 nuevoDelantero = CREADOR.crearJugadorFantasia(delanteroSeleccionado.getNombre(), delanteroSeleccionado.getPosicionJugador(), delanteroSeleccionado.getPrecioCompra(), pEquipo);
+            } catch (Exception e) {
+                System.out.println("ERROR -> INGRESASTE UN NUMERO EQUIVOCADO");
+                EquipoReal equipo1 = imprimirEquiposTemporada();
+                nuevoDelantero = mostrarMenuCompraDelantero(equipo1);
+            }
+                
         }
         return nuevoDelantero;
     }
@@ -420,6 +489,7 @@ public class Menu{
      * @return
      */
     public EquipoReal imprimirEquiposTemporada(){
+        EquipoReal equipoSeleccionado = null;
         TemporadaReal temporadaActiva =  aplicacion.temporadaActiva();
         System.out.println("\n");
         for(int i = 0; i < temporadaActiva.getEquiposDeTemporada().size(); i++){
@@ -428,8 +498,15 @@ public class Menu{
         }
         System.out.println("\nQue equipos deseas ver?");
         int opcion = preguntarOpcion();
-        EquipoReal equipoSeleccionado = temporadaActiva.getEquiposDeTemporada().get(opcion-1);
+        try {
+            equipoSeleccionado = temporadaActiva.getEquiposDeTemporada().get(opcion-1);
+            return equipoSeleccionado;
+        } catch (Exception e) {
+            System.out.println("ERROR -> INGRESASTE UN NUMERO EQUIVOCADO");
+            equipoSeleccionado = imprimirEquiposTemporada();
+        }
         return equipoSeleccionado;
+
     }
     /**
      * Configura la alineacion inicial del equipo de fantasia recien creado
@@ -437,85 +514,175 @@ public class Menu{
      * @param pParticipante
      * @param pEquipo
      */
-    public void configurarEquipoInicial(Menu pMenu, Participante pParticipante, EquipoFantasia pEquipo){
-        pParticipante.setEquipoAsociado(pEquipo);
-        System.out.println("\nCompra un arquero titular\n");
-        JugadorFantasiaArquero nuevoArquerotitular = pParticipante.comprarArquero(pMenu);
-        pEquipo.setArqueroTitular(nuevoArquerotitular);
-        pEquipo.agregarJugador(nuevoArquerotitular);
-        System.out.println(nuevoArquerotitular.getNombre() + " agregado");
+    public void crearEquipofantasia(Menu pMenu, Participante pParticipante, EquipoFantasia pEquipo){
+        pParticipante.setEquipoAsociado(pEquipo); //asocia el equipo al participante
 
-
-        System.out.println("\nCompra 2 delanteros titulares");
-        for(int i = 0; i < 2; i++){
-            JugadorFantasia nuevoDelantero = pParticipante.comprarDelantero(pMenu);
-            while(nuevoDelantero == null){
-                nuevoDelantero = pParticipante.comprarDelantero(pMenu);
-            }
-            pEquipo.agregarDelanteroTitular(nuevoDelantero);
-            pEquipo.agregarJugador(nuevoDelantero);
-            System.out.println(nuevoDelantero.getNombre()+" agregado");
+        //proceso de compra del arquero titular
+        System.out.println("Ahora debes escoger tu arquero titutlar");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible()); 
+        JugadorFantasiaArquero arqueroTitutlar = pParticipante.comprarArquero(pMenu);
+        while(arqueroTitutlar == null){
+            System.out.println("Ahora debes escoger tu arquero titutlar");
+            arqueroTitutlar = pParticipante.comprarArquero(pMenu);
         }
+        pEquipo.setArqueroTitular(arqueroTitutlar);
+        pEquipo.agregarJugador(arqueroTitutlar);
 
-
-        System.out.println("\nCompra 4 medio campistas");
-        for(int i = 0; i < 4;i++){
-            JugadorFantasia nuevoMedioCampista = pParticipante.comprarMedio(pMenu);
-            while(nuevoMedioCampista == null){
-                nuevoMedioCampista = pParticipante.comprarMedio(pMenu);
-            }
-            pEquipo.agregarMedioTitular(nuevoMedioCampista);
-            pEquipo.agregarJugador(nuevoMedioCampista);
-            System.out.println(nuevoMedioCampista.getNombre()+" agregado");
+        //proceso de compra de delantero titular 1
+        System.out.println("Ahora debes escoger a tu primer delantero titular");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasia delanteroTitular1 = pParticipante.comprarDelantero(pMenu);
+        while(delanteroTitular1 == null){
+            System.out.println("Ahora debes escoger a tu primer delantero titular");
+            delanteroTitular1 = pParticipante.comprarDelantero(pMenu);
         }
-
-        System.out.println("\nCompra 4 defensas");
-        for (int i = 0; i < 4; i++) {
-            JugadorFantasiaDefensivo nuevoDefensa = pParticipante.comprarDefensa(pMenu);
-            while(nuevoDefensa == null){
-                nuevoDefensa = pParticipante.comprarDefensa(pMenu);
-            }
-            pEquipo.agregarDefensaTitular(nuevoDefensa);
-            pEquipo.agregarJugador(nuevoDefensa);
-            System.out.println(nuevoDefensa.getNombre()+" agregado");
+        pEquipo.agregarDelanteroTitular(delanteroTitular1);
+        pEquipo.agregarJugador(delanteroTitular1);
+        
+        //proceso de compra de delantero titular 2
+        System.out.println("Ahora debes escoger a tu segundo delantero titular");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasia delanteroTitular2 = pParticipante.comprarDelantero(pMenu);
+        while(delanteroTitular2 == null){
+            System.out.println("Ahora debes escoger a tu segundo delantero titular");
+            delanteroTitular2 = pParticipante.comprarDelantero(pMenu);
         }
+        pEquipo.agregarDelanteroTitular(delanteroTitular2);
+        pEquipo.agregarJugador(delanteroTitular2);
 
-
-        System.out.println("\nAhora debes comprar un arquero sustituto");
-        JugadorFantasiaArquero nuevoArqueroSustituto = pParticipante.comprarArquero(pMenu);
-        while(nuevoArqueroSustituto == null){
-            nuevoArqueroSustituto = pParticipante.comprarArquero(pMenu);
+        //proceso comprar medio campista 1
+        System.out.println("Ahora debes comprar a tu primer medio campista titular");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasia medio1 = pParticipante. comprarMedio(pMenu);
+        while(medio1 == null){
+            System.out.println("Ahora debes comprar a tu primer medio campista titular");
+            medio1 = pParticipante.comprarMedio(pMenu);
         }
-        pEquipo.setArqueroSustituto(nuevoArqueroSustituto);
-        pEquipo.agregarJugador(nuevoArqueroSustituto);
+        pEquipo.agregarMedioTitular(medio1);
+        pEquipo.agregarJugador(medio1);
 
-
-        System.out.println("\nAhora un delantero sutituto");
-        JugadorFantasia nuevoDelanteroSustituto = pParticipante.comprarDelantero(pMenu);
-        while(nuevoDelanteroSustituto == null){
-            nuevoDelanteroSustituto = pParticipante.comprarDelantero(pMenu);
+        //proceso comprar medio campista 2
+        System.out.println("Ahora debes comprar a tu segundo medio campista titular");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasia medio2 = pParticipante. comprarMedio(pMenu);
+        while(medio2 == null){
+            System.out.println("Ahora debes comprar a tu segundo medio campista titular");
+            medio2 = pParticipante.comprarMedio(pMenu);
         }
-        pEquipo.setDelanteroSustituto(nuevoDelanteroSustituto);
-        pEquipo.agregarJugador(nuevoDelanteroSustituto);
+        pEquipo.agregarMedioTitular(medio2);
+        pEquipo.agregarJugador(medio2);
 
-
-        System.out.println("\nAhora un medio campista sustituto");
-        JugadorFantasia nuevoMedioSustituto = pParticipante.comprarMedio(pMenu);
-        while(nuevoMedioSustituto ==  null){
-            nuevoMedioSustituto = pParticipante.comprarMedio(pMenu);
+        //proceso comprar medio campista 3
+        System.out.println("Ahora debes comprar a tu tercer medio campista titular");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasia medio3 = pParticipante. comprarMedio(pMenu);
+        while(medio3 == null){
+            System.out.println("Ahora debes comprar a tu tercer medio campista titular");
+            medio3 = pParticipante.comprarMedio(pMenu);
         }
-        pEquipo.setMedioSustituto(nuevoMedioSustituto);
-        pEquipo.agregarJugador(nuevoMedioSustituto);
+        pEquipo.agregarMedioTitular(medio3);
+        pEquipo.agregarJugador(medio3);
 
-
-        System.out.println("\nPor ultimo un defensa sustituto");
-        JugadorFantasiaDefensivo nuevoDefensaSustituto = pParticipante.comprarDefensa(pMenu);
-        while(nuevoDefensaSustituto == null){
-            nuevoDefensaSustituto = pParticipante.comprarDefensa(pMenu);
+        //proceso comprar medio campista 4
+        System.out.println("Ahora debes comprar a tu cuarto medio campista titular");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasia medio4 = pParticipante.comprarMedio(pMenu);
+        while(medio4 == null){
+            System.out.println("Ahora debes comprar a tu cuarto medio campista titular");
+            medio4 = pParticipante.comprarMedio(pMenu);
         }
-        pEquipo.setDefensaSustituto(nuevoDefensaSustituto);
-        pEquipo.agregarJugador(nuevoDefensaSustituto);
+        pEquipo.agregarMedioTitular(medio4);
+        pEquipo.agregarJugador(medio4);
+
+        //proceso compra defensa 1
+        System.out.println("Ahora debes comprar a tu primer defensa titular");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasiaDefensivo defensa1 = pParticipante.comprarDefensa(pMenu);
+        while(defensa1 == null){
+            System.out.println("Ahora debes comprar a tu primer defensa titular");
+            defensa1 = pParticipante.comprarDefensa(pMenu);
+        }
+        pEquipo.agregarDefensaTitular(defensa1);
+        pEquipo.agregarJugador(defensa1);
+
+        //proceso compra defensa 2
+        System.out.println("Ahora debes comprar a tu segundo defensa titular");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasiaDefensivo defensa2 = pParticipante.comprarDefensa(pMenu);
+        while(defensa2 == null){
+            System.out.println("Ahora debes comprar a tu segundo defensa titular");
+            defensa2 = pParticipante.comprarDefensa(pMenu);
+        }
+        pEquipo.agregarDefensaTitular(defensa2);
+        pEquipo.agregarJugador(defensa2);
+        
+        //proceso compra defensa 3
+        System.out.println("Ahora debes comprar a tu tercer defensa titular");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasiaDefensivo defensa3 = pParticipante.comprarDefensa(pMenu);
+        while(defensa3 == null){
+            System.out.println("Ahora debes comprar a tu tercer defensa titular");
+            defensa3 = pParticipante.comprarDefensa(pMenu);
+        }
+        pEquipo.agregarDefensaTitular(defensa3);
+        pEquipo.agregarJugador(defensa3);
+        
+        //proceso compra defensa 4
+        System.out.println("Ahora debes comprar a tu cuarto defensa titular");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasiaDefensivo defensa4 = pParticipante.comprarDefensa(pMenu);
+        while(defensa4 == null){
+            System.out.println("Ahora debes comprar a tu cuarto defensa titular");
+            defensa4 = pParticipante.comprarDefensa(pMenu);
+        }
+        pEquipo.agregarDefensaTitular(defensa4);
+        pEquipo.agregarJugador(defensa4);
+
+        //proceso compra arquero sustituto
+        System.out.println("Ahora debes escoger tu arquero sustituto");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible()); 
+        JugadorFantasiaArquero arqueroSustituto = pParticipante.comprarArquero(pMenu);
+        while (arqueroSustituto == null) {
+            System.out.println("Ahora debes escoger tu arquero sustituto");
+            arqueroSustituto = pParticipante.comprarArquero(pMenu);
+        }
+        pEquipo.setArqueroSustituto(arqueroSustituto);
+        pEquipo.agregarJugador(arqueroSustituto);
+
+        //proceso de compra de delantero sustituto
+        System.out.println("Ahora debes escoger a tu delantero sustituto");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasia delanteroSustituto = pParticipante.comprarDelantero(pMenu);
+        while (delanteroSustituto == null){
+            System.out.println("Ahora debes escoger a tu delantero sustituto");
+            delanteroSustituto = pParticipante.comprarDelantero(pMenu);
+        }
+        pEquipo.setDelanteroSustituto(delanteroSustituto);
+        pEquipo.agregarJugador(delanteroSustituto);
+
+        //proceso comprar medio campista sustituto
+        System.out.println("Ahora debes comprar a tu medio campista sustituto");
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
+        JugadorFantasia medioSustituto = pParticipante. comprarMedio(pMenu);
+        while (medioSustituto == null) {
+            System.out.println("Ahora debes comprar a tu medio campista sustituto");
+            medioSustituto = pParticipante.comprarMedio(pMenu);
+        }
+        pEquipo.setMedioSustituto(medioSustituto);
+        pEquipo.agregarJugador(medioSustituto);
+
+        //proceso compra defensa sustituto
+        System.out.println("Ahora debes comprar a tu defensa sustituto");
+        JugadorFantasiaDefensivo defensaSustituto = pParticipante.comprarDefensa(pMenu);
+        while (defensaSustituto == null) {
+            System.out.println("Ahora debes comprar a tu defensa sustituto");
+            defensaSustituto = pParticipante.comprarDefensa(pMenu);
+        }
+        pEquipo.setDefensaSustituto(defensaSustituto);
+        pEquipo.agregarJugador(defensaSustituto);
 
         Persistencia.guardarParticipante(pParticipante);
+        pParticipante.getEquipoAsociado().verEquipoFantasia();
+        System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
     }
 }
