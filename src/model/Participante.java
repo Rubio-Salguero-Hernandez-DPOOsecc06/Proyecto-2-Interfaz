@@ -1,8 +1,6 @@
 package model;
 
 import controller.Menu;
-import controller.Persistencia;
-
 public class Participante extends Usuario{
     private EquipoFantasia equipoAsociado = null;
     private Double presupuestoDisponible = 20000.00;
