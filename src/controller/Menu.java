@@ -8,6 +8,7 @@ public class Menu{
     public final static CreadorObjetos CREADOR = new CreadorObjetos();
     public final static LectorArchivos LECTOR = new LectorArchivos();
     private App aplicacion;
+    
     /**
      * Constructor
      */
@@ -63,6 +64,7 @@ public class Menu{
                         break;
                     default:
                         System.out.println("Ingresa una opcion valida");
+                        preguntarPosicion();
                         break;
                 }
         return posicion;

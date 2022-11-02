@@ -5,6 +5,13 @@ public class JugadorFantasia extends Jugador {
     private int minutosJugados, golesAnotados, penaltisAnotados,
     autogoles, asistencias, penaltisErrados, tarjetasAmarillas, tarjetasRojas;
 
+    /**
+     * Constructor
+     * @param pNombre
+     * @param pPosicion
+     * @param pPrecioCompra
+     * @param pEquipoJugador
+     */
     public JugadorFantasia(String pNombre, Posicion pPosicion, double pPrecioCompra, Equipo pEquipoJugador){
         super(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
     }

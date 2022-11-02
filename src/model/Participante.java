@@ -257,7 +257,7 @@ public class Participante extends Usuario{
             }
             pEquipo.getJugadores().remove(medioRetirar);
             pEquipo.getJugadores().add(medioComprado);
-            pEquipo.setMedioSustituto(pMedio);
+            pEquipo.setMedioSustituto(medioComprado);
         }else{
             for(JugadorFantasia medio: pEquipo.getMediosTitulares()){
                 if(medio.getNombre().equals(nombreMedioVendido)){
@@ -300,7 +300,7 @@ public class Participante extends Usuario{
             }
             pEquipo.getJugadores().remove(defensaRetirar);
             pEquipo.getJugadores().add(defensaComprado);
-            pEquipo.setDefensaSustituto(pDefensa);
+            pEquipo.setDefensaSustituto(defensaComprado);
         } else {
             for(JugadorFantasia defensa: pEquipo.getDefensasTitulares()){
                 if(defensa.getNombre().equals(nombreDefensaVendido)){

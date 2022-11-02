@@ -10,6 +10,9 @@ import model.*;
 
 public class LectorArchivos {
 
+    /**
+     * Constructor
+     */
     public LectorArchivos(){
 
     }

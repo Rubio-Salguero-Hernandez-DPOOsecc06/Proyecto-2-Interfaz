@@ -4,6 +4,9 @@ import model.*;
 
 public class CreadorObjetos {
 
+    /**
+     * Constructor
+     */
     public CreadorObjetos(){
     }
 

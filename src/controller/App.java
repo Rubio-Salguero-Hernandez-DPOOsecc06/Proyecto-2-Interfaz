@@ -54,6 +54,12 @@ public class App {
     public static void main(String[] args) throws Exception {
         App aplicacion = new App();
         Persistencia.recuperarTemporadaReal(aplicacion);
+        if(aplicacion.getTemporadas().size() == 0){
+            System.out.println("\nNo existen temporadas credas aun\n");
+        }
+        else{
+            System.out.println("Existen " +aplicacion.getTemporadas().size()+ " temporadas creadas");
+        }
         Menu menuApp = new Menu(aplicacion);
         menuApp.mostrarMenuPrincipal();
     }

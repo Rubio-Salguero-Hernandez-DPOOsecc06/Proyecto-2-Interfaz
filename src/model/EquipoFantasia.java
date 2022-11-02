@@ -12,6 +12,10 @@ public class EquipoFantasia extends Equipo{
     JugadorFantasia delanteroSustituto, medioSustituto;
     ArrayList<JugadorFantasia> jugadores = new ArrayList<>();
     
+    /**
+     * Constructor
+     * @param pNombreEquipo
+     */
     public EquipoFantasia(String pNombreEquipo){
         super(pNombreEquipo);
     }
@@ -278,6 +282,7 @@ public class EquipoFantasia extends Equipo{
             System.out.println((i+1) + ". " + jugadores.get(i).getNombre());
         }
         System.out.println("\nQue jugador deseas reemplzar?");
+        System.out.print("\n-> ");
         int opcion = Integer.parseInt(pEntrada.nextLine());
         jugadorBuscado = jugadores.get((opcion-1));
         return jugadorBuscado;

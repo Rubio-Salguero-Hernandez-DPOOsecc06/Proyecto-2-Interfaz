@@ -10,7 +10,9 @@ import model.Participante;
 import model.TemporadaReal;
 
 public class Persistencia {
-    
+    /**
+     * Constructor
+     */
     public Persistencia(){
     }
     /**
@@ -60,7 +62,6 @@ public class Persistencia {
             }else{
             System.out.println("\nEste nombre de usuario no esta disponible\n");
             }
-
         } catch(Exception e){
         }
     }
@@ -92,7 +93,6 @@ public class Persistencia {
                 System.out.println("\nEste participante no existe, intenta registrarte primero\n");
             }
         } catch (Exception e){
-
         }
         return participanteConfirmado;
     }
@@ -122,6 +122,10 @@ public class Persistencia {
         }
     }
 
+    /**
+     * Recupera las temporadas guardadas
+     * @param pAplicacion
+     */
     public static void recuperarTemporadaReal(App pAplicacion){
         try{
             String rutaTemporadas = "persistencia/temporadas reales";
@@ -141,7 +145,6 @@ public class Persistencia {
                 }  
             }
         }catch(Exception e){
-
         }
     }
 }
