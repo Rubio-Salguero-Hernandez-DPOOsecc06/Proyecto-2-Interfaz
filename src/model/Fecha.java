@@ -21,11 +21,27 @@ public class Fecha implements Serializable{
     public int getNumeroFecha() {
         return numeroFecha;
     }
+    public ArrayList<PartidoReal> getCronogramaPartidosFecha() {
+        return cronogramaPartidosFecha;
+    }
     /**
      * Agrega un nuevo partido al cronograma de la fecha
      * @param pNuevoPartido
      */
     public void agregarPartido(PartidoReal pNuevoPartido){
         this.cronogramaPartidosFecha.add(pNuevoPartido);
+    }
+
+    public void mostrarCronogramaFecha(){
+        for(PartidoReal partido: this.getCronogramaPartidosFecha()){
+            String nombreLocal = partido.getEquipoLocal().getNombreEquipo();
+            String nombreVisitante = partido.getEquipoVisitante().getNombreEquipo();
+            String diaPartido = partido.getDia();
+            String horaPartido = partido.getHora();
+            System.out.println(nombreLocal + " vs " + nombreVisitante);
+            System.out.println("Local: " + nombreLocal + " Visitante: " + nombreVisitante);
+            System.out.println("Hora: " + horaPartido + " Dia: " + diaPartido);
+            System.out.println("--------------------------------------------------------------------");
+        }
     }
 }

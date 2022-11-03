@@ -161,6 +161,7 @@ public class Menu{
         System.out.println("\nBIENVENID@: " + pParticipanteActivo.getNombreUsuario());
         System.out.println("\nQue deseas hacer?\n");
         System.out.println("1. Crear tu equipo de fantasia");
+        System.out.println("2. ver menu de fechas");
         System.out.println("2. Salir de la aplicacion");
         int opcion = preguntarOpcion();
         switch (opcion) {
@@ -173,6 +174,9 @@ public class Menu{
                 mostrarMenuParticipante(pParticipanteActivo, pParticipanteActivo.getEquipoAsociado());
                 break;
             case 2:
+                mostrarMenuFechas(pParticipanteActivo);
+                break;
+            case 3:
                 System.exit(0);
                 break;
             default:
@@ -237,6 +241,7 @@ public class Menu{
         System.out.println("\nBIENVENID@: " + pParticipanteActivo.getNombreUsuario());
         System.out.println("\nQue deseas hacer?\n");
         System.out.println("1. Ver menu de tu equipo de fantasia");
+        System.out.println("3. Ver menu de fechas");
         System.out.println("2. Salir de la aplicacion");
         int opcion = preguntarOpcion();
         switch (opcion) {
@@ -245,6 +250,10 @@ public class Menu{
                 mostrarMenuEquipoFantasia(pParticipanteActivo, pEquipoAsociado);
                 break;
             case 2:
+                System.out.println("\nHas elegido ver el menu de fechas");
+                mostrarMenuFechas(pParticipanteActivo);
+                break;
+            case 3:
                 System.exit(0);
                 break;
             default:
@@ -341,6 +350,61 @@ public class Menu{
                 mostrarMenuEquipoFantasia(pParticipante, pEquipoAsociado);
                 break;
         }
+    }
+
+    public void mostrarMenuFechas(Participante pParticipante){
+        TemporadaReal temporadaActiva = this.aplicacion.temporadaActiva();
+        EquipoFantasia equipoParticipante = pParticipante.getEquipoAsociado();
+        System.out.println("\nQue deseas hacer?\n");
+        System.out.println("1. Ver el cronograma de toda la temporada");
+        System.out.println("2. Ver cronograma de una fecha");
+        System.out.println("3. Consultar estadisticas de la temporada");
+        System.out.println("4. consultar estadisticas de una fecha");
+        System.out.println("5. Volver atras");
+        System.out.println("6. Salir de la aplicacion");
+        int opcion = preguntarOpcion();
+        switch (opcion) {
+            case 1:
+                System.out.println("\nHas elegido ver el cronograma de toda la temporada\n");
+                temporadaActiva.mostrarCronogramaTemporada();
+                mostrarMenuFechas(pParticipante);
+                break;
+            case 2:
+                System.out.println("\nHas elegido ver el cronograma de una fecha\n");
+                System.out.println("Hay " + temporadaActiva.getFechasTemporada().size() + " fechas en la temporada");
+                int numeroTemporada = preguntarOpcion();
+                if(numeroTemporada <= temporadaActiva.getFechasTemporada().size()){
+                    Fecha fechaEscogida = temporadaActiva.getFechasTemporada().get((numeroTemporada-1));
+                    System.out.println("\nEl cronograma para la fecha " + fechaEscogida.getNumeroFecha() + " es:\n");
+                    fechaEscogida.mostrarCronogramaFecha();
+                }
+                else{
+                    System.out.println("Ingresaste un numero invalido");
+                }
+                mostrarMenuFechas(pParticipante);
+                break;
+            case 3:
+                System.out.println("\nHas elegido consultar las estadisticas de la temporada\n");
+                break;
+            case 4:
+                System.out.println("\nHas elegido consultar las estadisticas de una fecha\n");
+                break;
+            case 5:
+                System.out.println("\nHas elegido volver atras\n");
+                if(equipoParticipante == null){
+                    mostrarMenuParticipante(pParticipante);
+                }
+                else if(equipoParticipante != null){
+                    mostrarMenuParticipante(pParticipante, equipoParticipante);
+                }
+                break;
+            case 6:
+                System.exit(0);
+                break;                       
+            default:
+                break;
+        }
+
     }
 
     /**

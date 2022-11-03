@@ -18,6 +18,9 @@ public class TemporadaReal implements Serializable, Temporada {
     public int getNumeroTemporada() {
         return numeroTemporada;
     }
+    public ArrayList<Fecha> getFechasTemporada() {
+        return fechasTemporada;
+    }
 
     @Override
     public void setNumeroTemporada(int pNumeroTemporada) {
@@ -72,6 +75,15 @@ public class TemporadaReal implements Serializable, Temporada {
      */
     public ArrayList<EquipoReal> getEquiposDeTemporada() {
         return equiposDeTemporada;
+    }
+
+    public void mostrarCronogramaTemporada(){
+        for(Fecha fecha: this.fechasTemporada){
+            System.out.println("\n=====================================================================");
+            System.out.println("Para la fecha " + fecha.getNumeroFecha() + " El cronograma es el siguiente:");
+            System.out.println("=====================================================================\n");
+            fecha.mostrarCronogramaFecha();
+        }
     }
 }
 
