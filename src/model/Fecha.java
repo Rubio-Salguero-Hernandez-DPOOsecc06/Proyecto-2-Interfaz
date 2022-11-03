@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Fecha implements Serializable{
+    
     int numeroFecha;
     ArrayList<PartidoReal> cronogramaPartidosFecha = new ArrayList<>();
 
@@ -14,6 +15,7 @@ public class Fecha implements Serializable{
     public Fecha(int pNumeroFecha){
         this.numeroFecha = pNumeroFecha;
     }
+
     /**
      * retorna el numero de la fecha
      * @return
@@ -21,9 +23,15 @@ public class Fecha implements Serializable{
     public int getNumeroFecha() {
         return numeroFecha;
     }
+
+    /**
+     * Retorna la lista de partido en la fecha
+     * @return
+     */
     public ArrayList<PartidoReal> getCronogramaPartidosFecha() {
         return cronogramaPartidosFecha;
     }
+
     /**
      * Agrega un nuevo partido al cronograma de la fecha
      * @param pNuevoPartido
@@ -32,6 +40,9 @@ public class Fecha implements Serializable{
         this.cronogramaPartidosFecha.add(pNuevoPartido);
     }
 
+    /**
+     * Muestra cada partido de la fecha con sus equipos, dia y hora
+     */
     public void mostrarCronogramaFecha(){
         for(PartidoReal partido: this.getCronogramaPartidosFecha()){
             String nombreLocal = partido.getEquipoLocal().getNombreEquipo();

@@ -18,14 +18,20 @@ public class TemporadaReal implements Serializable, Temporada {
     public int getNumeroTemporada() {
         return numeroTemporada;
     }
-    public ArrayList<Fecha> getFechasTemporada() {
-        return fechasTemporada;
-    }
 
     @Override
     public void setNumeroTemporada(int pNumeroTemporada) {
         this.numeroTemporada = pNumeroTemporada;
     }
+
+    /**
+     * Retorna las fechas de la temporada
+     * @return
+     */
+    public ArrayList<Fecha> getFechasTemporada() {
+        return fechasTemporada;
+    }
+
     /**
      * Agrega un nuevo equipo real a la temporada
      * @param pNuevoEquipo
@@ -54,6 +60,7 @@ public class TemporadaReal implements Serializable, Temporada {
     public void agregarFecha(Fecha pNuevaFecha){
         this.fechasTemporada.add(pNuevaFecha);
     }
+    
     /**
      * Busca si existe una fecha dentro de la temporada
      * @param pNumeroFecha
@@ -77,6 +84,9 @@ public class TemporadaReal implements Serializable, Temporada {
         return equiposDeTemporada;
     }
 
+    /**
+     * Muestra el cronograma de cada una de las fechas en la temporada
+     */
     public void mostrarCronogramaTemporada(){
         for(Fecha fecha: this.fechasTemporada){
             System.out.println("\n=====================================================================");

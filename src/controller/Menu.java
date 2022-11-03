@@ -351,7 +351,10 @@ public class Menu{
                 break;
         }
     }
-
+    /**
+     * Permite al participante ver informacion relevante relacionada con la informacion real
+     * @param pParticipante
+     */
     public void mostrarMenuFechas(Participante pParticipante){
         TemporadaReal temporadaActiva = this.aplicacion.temporadaActiva();
         EquipoFantasia equipoParticipante = pParticipante.getEquipoAsociado();
@@ -404,7 +407,6 @@ public class Menu{
             default:
                 break;
         }
-
     }
 
     /**
