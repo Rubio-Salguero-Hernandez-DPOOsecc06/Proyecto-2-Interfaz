@@ -1,9 +1,8 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TemporadaReal implements Serializable, Temporada {
+public class TemporadaReal extends Temporada{
     private int numeroTemporada;
     private ArrayList<EquipoReal> equiposDeTemporada = new ArrayList<>(); 
     private ArrayList<Fecha> fechasTemporada = new ArrayList<>();
@@ -14,14 +13,12 @@ public class TemporadaReal implements Serializable, Temporada {
     public TemporadaReal(){
     }
 
-    @Override
     public int getNumeroTemporada() {
         return numeroTemporada;
     }
 
-    @Override
-    public void setNumeroTemporada(int pNumeroTemporada) {
-        this.numeroTemporada = pNumeroTemporada;
+    public void setNumeroTemporada(int numeroTemporada) {
+        this.numeroTemporada = numeroTemporada;
     }
 
     /**

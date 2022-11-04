@@ -7,6 +7,7 @@ import model.*;
 public class App {
     private static Administrador administrador = new Administrador("admin", "admin");
     private ArrayList<TemporadaReal> temporadas = new ArrayList<>();
+    private ArrayList<TemporadaFantasia> temporadasFantasia = new ArrayList<>();
 
     /**
      * Crea una instancia de aplicacion
@@ -30,11 +31,22 @@ public class App {
         this.temporadas.add(pTemporada);
     }
     /**
+     * Agrega una temporada a la lista de temporadas de fantasia
+     * @param pTemporada
+     */
+    public void agregarTemporadaFantasia(TemporadaFantasia pTemporada){
+        this.temporadasFantasia.add(pTemporada);
+    }
+    /**
      * Retorna la lista de temporadas
      * @return
      */
     public ArrayList<TemporadaReal> getTemporadas() {
         return temporadas;
+    }
+
+    public ArrayList<TemporadaFantasia> getTemporadasFantasia() {
+        return temporadasFantasia;
     }
 
     /**
@@ -50,10 +62,21 @@ public class App {
         }
         return temporadaActiva;
     }
+
+    public TemporadaFantasia temporadaFantasiaActiva(){
+        TemporadaFantasia temporadaActiva = null;
+        for(TemporadaFantasia temporada: getTemporadasFantasia()){
+            if(temporada.getNumeroTemporada() == (getTemporadas().size())){
+                temporadaActiva = temporada;
+            }
+        }
+        return temporadaActiva;
+    }
     
     public static void main(String[] args) throws Exception {
         App aplicacion = new App();
         Persistencia.recuperarTemporadaReal(aplicacion);
+        Persistencia.recuperarTemporadaFantasia(aplicacion);
         if(aplicacion.getTemporadas().size() == 0){
             System.out.println("\nNo existen temporadas credas aun\n");
         }

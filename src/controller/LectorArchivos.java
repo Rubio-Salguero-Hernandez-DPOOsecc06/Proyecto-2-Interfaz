@@ -128,4 +128,22 @@ public class LectorArchivos {
             }
         }
     }
+
+    public void leerResultadoPartido(String pNombreArchivo, TemporadaReal pTemporada, CreadorObjetos pCreador){
+        File rutaResultados = Persistencia.crearArchivo("data/"+pNombreArchivo);
+        if(rutaResultados.exists()){
+            try {
+                BufferedReader lector = new BufferedReader(new FileReader(rutaResultados));
+                String linea;
+                linea = lector.readLine();
+                linea = lector.readLine();
+                while(linea != null){
+                    String[] datosPartido = linea.split(";");
+                    //TODO: terminar esta funcion
+                }
+                lector.close();
+            } catch (Exception e) {
+            }
+        }
+    }
 }

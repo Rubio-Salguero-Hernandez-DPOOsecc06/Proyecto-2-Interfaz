@@ -162,7 +162,7 @@ public class Menu{
         System.out.println("\nQue deseas hacer?\n");
         System.out.println("1. Crear tu equipo de fantasia");
         System.out.println("2. ver menu de fechas");
-        System.out.println("2. Salir de la aplicacion");
+        System.out.println("3. Salir de la aplicacion");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 1:
@@ -198,6 +198,9 @@ public class Menu{
         switch (opcion) {
             case 1:
                 TemporadaReal nuevaTemporadaReal = CREADOR.crearTemporadaReal();
+                TemporadaFantasia nuevaTemporadaFantasia = CREADOR.crearTemporadaFantasia();
+                Persistencia.guardarTemporadaFantasia(nuevaTemporadaFantasia);
+                aplicacion.agregarTemporadaFantasia(nuevaTemporadaFantasia);
                 System.out.println("\nAhora debes ingresar el archivo de los equipos que jugaran esta temporada");
                 String nombreArchivoEquipos = preguntarPalabra();
                 LECTOR.leerArchivoEquiposReales(nombreArchivoEquipos, nuevaTemporadaReal, CREADOR);
@@ -241,8 +244,8 @@ public class Menu{
         System.out.println("\nBIENVENID@: " + pParticipanteActivo.getNombreUsuario());
         System.out.println("\nQue deseas hacer?\n");
         System.out.println("1. Ver menu de tu equipo de fantasia");
-        System.out.println("3. Ver menu de fechas");
-        System.out.println("2. Salir de la aplicacion");
+        System.out.println("2. Ver menu de fechas");
+        System.out.println("3. Salir de la aplicacion");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 1:
@@ -746,6 +749,11 @@ public class Menu{
         }
         pEquipo.setDefensaSustituto(defensaSustituto);
         pEquipo.agregarJugador(defensaSustituto);
+
+        pEquipo.setCapitan(arqueroTitutlar);
+
+        TemporadaFantasia temporadaActiva = aplicacion.temporadaFantasiaActiva();
+        temporadaActiva.getEquiposTemporada().add(pEquipo);
 
         Persistencia.guardarParticipante(pParticipante);
         pParticipante.getEquipoAsociado().verEquipoFantasia();

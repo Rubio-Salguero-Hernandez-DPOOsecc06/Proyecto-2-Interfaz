@@ -32,6 +32,15 @@ public class CreadorObjetos {
     }
 
     /**
+     * Crea una temporada de fantasia
+     * @return
+     */
+    public TemporadaFantasia crearTemporadaFantasia(){
+        TemporadaFantasia nuevaTemporadaFantasia = new TemporadaFantasia();
+        return nuevaTemporadaFantasia;
+    }
+
+    /**
      * Crea un equipo real
      * @param pNombreEquipo
      * @return

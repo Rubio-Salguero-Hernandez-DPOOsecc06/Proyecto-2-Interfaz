@@ -7,6 +7,7 @@ public abstract class Jugador implements Serializable {
     Posicion posicionJugador;
     Equipo equipoJugador;
     Double precioCompra, precioVenta;
+    
     /**
      * Crea una instancia de un jugador
      * @param pNombre

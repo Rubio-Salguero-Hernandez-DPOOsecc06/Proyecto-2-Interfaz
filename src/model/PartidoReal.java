@@ -6,6 +6,7 @@ public class PartidoReal implements Serializable {
 
     private EquipoReal EquipoLocal, EquipoVisitante;
     private String dia, hora;
+
     /**
      * Constructor
      * @param pLocal

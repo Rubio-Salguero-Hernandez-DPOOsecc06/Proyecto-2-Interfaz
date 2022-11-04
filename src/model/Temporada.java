@@ -1,7 +1,15 @@
 package model;
 
-public interface Temporada{
+import java.io.Serializable;
 
-    public int getNumeroTemporada();
-    public void setNumeroTemporada(int pNumeroTemporada);
+public abstract class Temporada implements Serializable{
+
+    int numeroTemporada;
+
+    public int getNumeroTemporada(){
+        return numeroTemporada;
+    }
+    public void setNumeroTemporada(int pNumeroTemporada){
+        setNumeroTemporada(pNumeroTemporada);
+    }
 }

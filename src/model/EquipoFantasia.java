@@ -11,6 +11,7 @@ public class EquipoFantasia extends Equipo{
     JugadorFantasiaDefensivo defensaSustituto;
     JugadorFantasia delanteroSustituto, medioSustituto;
     ArrayList<JugadorFantasia> jugadores = new ArrayList<>();
+    JugadorFantasia capitan;
     
     /**
      * Constructor
@@ -153,6 +154,14 @@ public class EquipoFantasia extends Equipo{
         this.delanteroSustituto = pDelanteroSustituto;
     }
     
+    public JugadorFantasia getCapitan() {
+        return capitan;
+    }
+
+    public void setCapitan(JugadorFantasia pCapitan) {
+        this.capitan = pCapitan;
+    }
+
     /**
      * Verifica si el jugador ingresado por parametro ya existe en el equipo
      * @param pJugador

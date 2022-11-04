@@ -35,6 +35,21 @@ public class EquipoReal extends Equipo{
         return jugadores;
     }
 
+    /**
+     * Mira si existe un jugador en el equipo
+     * @param pNombreJugador
+     * @return
+     */
+    public JugadorReal buscarJugador(String pNombreJugador){
+        JugadorReal jugadorBuscado = null;
+        for(JugadorReal jugador: this.jugadoresEquipo){
+            if(jugador.getNombre().equals(pNombreJugador)){
+                jugadorBuscado = jugador;
+            }
+        }
+        return jugadorBuscado;
+    }
+
     @Override
     public String getNombreEquipo() {
         return super.getNombreEquipo();

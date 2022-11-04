@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import model.Participante;
+import model.TemporadaFantasia;
 import model.TemporadaReal;
 
 public class Persistencia {
@@ -122,6 +123,27 @@ public class Persistencia {
         }
     }
 
+    public static void guardarTemporadaFantasia(TemporadaFantasia pTemporada){
+        try{
+            String rutaTemporadas = "persistencia/temporadas fantasia";
+            File ficheroTemporadas = crearFichero(rutaTemporadas);
+            String[]temporadas = ficheroTemporadas.list();
+            int cantidadTemporadas = temporadas.length;
+            pTemporada.setNumeroTemporada((cantidadTemporadas+1));
+            String nombreTxt = ficheroTemporadas+"/"+pTemporada.getNumeroTemporada()+ ".obj";
+            File nuevoArchivo = crearArchivo(nombreTxt);
+            if(!nuevoArchivo.exists()){
+                ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
+                System.out.println("\nSe guardo la temporada\n");
+                escritor.writeObject(pTemporada);
+                escritor.close();
+            } else{
+            System.out.println("\nLa temporada ya existe\n");
+            }
+        } catch(Exception e){
+        }
+    }
+
     /**
      * Recupera las temporadas guardadas
      * @param pAplicacion
@@ -129,6 +151,28 @@ public class Persistencia {
     public static void recuperarTemporadaReal(App pAplicacion){
         try{
             String rutaTemporadas = "persistencia/temporadas reales";
+            File ficheroTemporadas = crearFichero(rutaTemporadas);
+            String[]temporadas = ficheroTemporadas.list();
+            if(temporadas.length >  0){
+                for(String temporada: temporadas){
+                    String rutaTemporada = rutaTemporadas+"/"+temporada;
+                    File nuevoArchivo = crearArchivo(rutaTemporada);
+                    if(nuevoArchivo.exists()){
+                        ObjectInputStream lector = new ObjectInputStream(new FileInputStream(rutaTemporada));
+                        TemporadaReal temporadaRecuperada = (TemporadaReal) lector.readObject();
+                        pAplicacion.agregarTemporada(temporadaRecuperada);
+                        System.out.println(temporadaRecuperada.getNumeroTemporada());
+                        lector.close();                   
+                    }                    
+                }  
+            }
+        }catch(Exception e){
+        }
+    }
+
+    public static void recuperarTemporadaFantasia(App pAplicacion){
+        try{
+            String rutaTemporadas = "persistencia/temporadas fantasia";
             File ficheroTemporadas = crearFichero(rutaTemporadas);
             String[]temporadas = ficheroTemporadas.list();
             if(temporadas.length >  0){
