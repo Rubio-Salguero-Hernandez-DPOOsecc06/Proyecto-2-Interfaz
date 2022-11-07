@@ -29,7 +29,9 @@ public class FirstPanel extends JPanel implements ActionListener{
 	JButton button1;
 	JButton button2;
 	JButton button3;
+	
 	JPanel LogInPanels;
+	JPanel PlayerRegisterPanel;
 	
 	
 	FirstPanel(){
@@ -154,11 +156,21 @@ public class FirstPanel extends JPanel implements ActionListener{
 			this.revalidate();
 			
 		}
+		
+		else if(e.getSource()==button2) {
+			this.PlayerRegisterPanel = new PlayerRegisterPanel();
+			JPanel panelName = this.PlayerRegisterPanel;
+			
+			this.removeAll();
+			this.add(panelName);
+			this.repaint();
+			this.revalidate();
+			
+		}
 		else if(e.getSource()==button3) {
 			
 			System.exit(0);
 		}
 		
 	}
-
 }

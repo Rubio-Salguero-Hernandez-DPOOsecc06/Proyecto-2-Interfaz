@@ -1,11 +1,11 @@
 package view;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,15 +18,16 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
-public class AdminLogInPanel extends JPanel implements ActionListener{
+@SuppressWarnings("serial")
+
+public class PlayerRegisterPanel extends JPanel implements ActionListener{
+	
 	//Class parameters
 	JButton button1;
 	JButton button2;
@@ -35,11 +36,9 @@ public class AdminLogInPanel extends JPanel implements ActionListener{
 	JTextField textUsername;
 	JPasswordField textPassword;
 	
-	LogInPanels LogInPanels;
-	AdminAppFrame AdminApp;
-	FirstFrame FirstFrame;
+	FirstPanel FirstPanel;
 	
-	public AdminLogInPanel(){
+	public PlayerRegisterPanel(){
 		
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.white);
@@ -55,7 +54,7 @@ public class AdminLogInPanel extends JPanel implements ActionListener{
 		
 		//TITLE 1
 		JLabel title = new JLabel();
-		title.setText("Inicio de sesión como Administrador");
+		title.setText("Registro como Participante del Juego");
 		title.setFont(new Font("MV Boli",Font.BOLD,25));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setPreferredSize(new Dimension(600, 80));
@@ -65,13 +64,13 @@ public class AdminLogInPanel extends JPanel implements ActionListener{
 		//WELCOME IMAGE 1
 		BufferedImage backImage = null;
 		try {
-			backImage = ImageIO.read(new File("InterfaceFiles/Admin.jpg"));
+			backImage = ImageIO.read(new File("InterfaceFiles/Participante.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		
-		Image dimg = backImage.getScaledInstance(600, 350,
+		Image dimg = backImage.getScaledInstance(600, 360,
 		        Image.SCALE_SMOOTH);
 		
 		ImageIcon dimgRe = new ImageIcon(dimg);
@@ -81,7 +80,7 @@ public class AdminLogInPanel extends JPanel implements ActionListener{
 		//SELECT AN OPTION LABEL
 		
 		JLabel selectText = new JLabel();
-		selectText.setText("Por favor ingresa tus credenciales de inicio:");
+		selectText.setText("Por favor ingresa los siguientes datos:");
 		selectText.setFont(new Font("MV Boli",Font.PLAIN,25));
 		selectText.setPreferredSize(new Dimension(600, 80));
 		selectText.setHorizontalAlignment(SwingConstants.CENTER);
@@ -141,7 +140,7 @@ public class AdminLogInPanel extends JPanel implements ActionListener{
 		button3.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		//Set text
-		button1.setText("Iniciar sesión");
+		button1.setText("Registrarse");
 		button2.setText("Retroceder");
 		button3.setText("Salir de la aplicación");
 		
@@ -198,25 +197,16 @@ public class AdminLogInPanel extends JPanel implements ActionListener{
 			
 			System.out.println(username+"-"+password); // We already have the username and password typed stored in these variables.
 			
-			//VALIDATE CREDENTIALS AND GUARANTEE ACCESS TO ADMINISTRATOR APP INTERFACE.
 			
-			
-			////Validation missing
-			
-			
-			AdminApp = new AdminAppFrame();
-			JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
-			topFrame.dispose(); //Closes that frame to leave only the new one for the Admin App.
-			
-			
+			//VALIDATE CREDENTIALS AND GUARANTEE ACCESS TO PARTICIPANT APP INTERFACE.
 			
 		}
 		
 		else if(e.getSource()==button2) {
 			
 			//instance of Login Panels
-			this.LogInPanels = new LogInPanels();
-			JPanel panelName = this.LogInPanels;
+			this.FirstPanel = new FirstPanel();
+			JPanel panelName = this.FirstPanel;
 			
 			this.removeAll();
 			this.add(panelName);
@@ -233,4 +223,5 @@ public class AdminLogInPanel extends JPanel implements ActionListener{
 		}
 		
 	}
+
 }

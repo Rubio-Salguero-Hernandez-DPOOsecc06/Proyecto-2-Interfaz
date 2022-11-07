@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
@@ -12,7 +13,6 @@ import javax.swing.JPanel;
 public class FirstFrame extends JFrame{
 	
 	//Class atributes
-	
 	
 	public FirstFrame(){
 		

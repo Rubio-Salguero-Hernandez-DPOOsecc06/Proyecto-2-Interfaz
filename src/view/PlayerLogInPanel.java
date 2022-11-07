@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -30,6 +31,10 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 	JButton button2;
 	JButton button3;
 	JButton button4;
+	JTextField textUsername;
+	JPasswordField textPassword;
+	
+	LogInPanels LogInPanels;
 	
 	public PlayerLogInPanel(){
 		
@@ -57,13 +62,13 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 		//WELCOME IMAGE 1
 		BufferedImage backImage = null;
 		try {
-			backImage = ImageIO.read(new File("InterfaceFiles/SoccerBall.jpg"));
+			backImage = ImageIO.read(new File("InterfaceFiles/Participante.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		
-		Image dimg = backImage.getScaledInstance(600, 350,
+		Image dimg = backImage.getScaledInstance(600, 360,
 		        Image.SCALE_SMOOTH);
 		
 		ImageIcon dimgRe = new ImageIcon(dimg);
@@ -112,10 +117,12 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 		username.setText("Usuario:   ");
 		password.setText("Clave:   ");
 		
-		JTextField textUsername = new JTextField();
+		textUsername = new JTextField();
 		textUsername.setMaximumSize(new Dimension(200,35));
 		textUsername.setPreferredSize(new Dimension(200,35));
-		JTextField textPassword = new JTextField();
+		
+		textPassword = new JPasswordField();
+		textPassword.setEchoChar('*');
 		textPassword.setPreferredSize(new Dimension(200,35));
 		textPassword.setMaximumSize(new Dimension(200,35));
 		
@@ -181,7 +188,35 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==button1) {
 			
+			String username = textUsername.getText();
+			char[] encripted = textPassword.getPassword();
+			String password = String.valueOf(encripted);
 			
+			
+			System.out.println(username+"-"+password); // We already have the username and password typed stored in these variables.
+			
+			
+			//VALIDATE CREDENTIALS AND GUARANTEE ACCESS TO PARTICIPANT APP INTERFACE.
+			
+		}
+		
+		else if(e.getSource()==button2) {
+			
+			//instance of Login Panels
+			this.LogInPanels = new LogInPanels();
+			JPanel panelName = this.LogInPanels;
+			
+			this.removeAll();
+			this.add(panelName);
+			this.repaint();
+			this.revalidate();
+			
+		}
+		
+		else if(e.getSource()==button3) {
+			
+			//Close
+			System.exit(0);
 			
 		}
 		
