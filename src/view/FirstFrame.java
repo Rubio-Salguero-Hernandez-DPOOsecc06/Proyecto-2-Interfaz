@@ -5,10 +5,17 @@ import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
 
 public class FirstFrame extends JFrame{
 	
-	FirstFrame(){
+	//Class atributes
+	
+	
+	public FirstFrame(){
+		
 		this.setTitle("Ultimate Soccer Fantasy"); //set title
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false); 
@@ -28,6 +35,10 @@ public class FirstFrame extends JFrame{
 		
 		
 		this.setVisible(true); //Set visibility
-		
 	}
+	
+	
+	//metodos
+	
+	
 }
