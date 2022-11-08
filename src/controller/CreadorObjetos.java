@@ -133,4 +133,17 @@ public class CreadorObjetos {
         JugadorFantasia nuevoJugador = new JugadorFantasia(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
         return nuevoJugador;
     }
+
+    public RendimientoJugador crearRendimientoJugador(int pMinutosJugados, int pMinutoEntrada, int pMinutoSalida,
+    int pGolesAnotados, int pPenaltisAnotados, int pAutogoles, int pAsistencias, int pPenaltisErrados, int pGolesrecibidos, int pPenaltisDetenidos,
+    int pTarjetasAmarillas, int pTarjetasRojas, JugadorReal pJugador){
+        RendimientoJugador nuevoRendimientoJugador = new RendimientoJugador(pMinutosJugados, pMinutoEntrada, pMinutoSalida, pGolesAnotados, pPenaltisAnotados, pAutogoles, pAsistencias, pPenaltisErrados, pGolesrecibidos, pPenaltisDetenidos, pTarjetasAmarillas, pTarjetasRojas, pJugador);
+        return nuevoRendimientoJugador;
+    }
+
+
+    public MarcadorPartidoReal crearMarcadorPartidoReal(){
+        MarcadorPartidoReal marcador = new MarcadorPartidoReal();
+        return marcador;
+    }
 }

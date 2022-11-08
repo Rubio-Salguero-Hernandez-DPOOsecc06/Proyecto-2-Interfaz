@@ -162,7 +162,8 @@ public class Menu{
         System.out.println("\nQue deseas hacer?\n");
         System.out.println("1. Crear tu equipo de fantasia");
         System.out.println("2. ver menu de fechas");
-        System.out.println("3. Salir de la aplicacion");
+        System.out.println("3. ver rendimientos de un partido");
+        System.out.println("4. Salir de la aplicacion");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 1:
@@ -177,6 +178,18 @@ public class Menu{
                 mostrarMenuFechas(pParticipanteActivo);
                 break;
             case 3:
+                System.out.println("\nDe que fecha es el partido que deseas ver");
+                int numFecha = preguntarOpcion();
+                Fecha fecha = this.aplicacion.temporadaActiva().buscarFecha(numFecha);
+                System.out.println("Cual fue el equipo local");
+                EquipoReal equipoLocal = imprimirEquiposTemporada();
+                System.out.println("Cual fue el equipo visitante");
+                EquipoReal equipoVisitante = imprimirEquiposTemporada();
+                PartidoReal partido = fecha.buscarPartido(equipoLocal, equipoVisitante);
+                partido.getMarcador().imprimirRendimientosLocal();
+                partido.getMarcador().imprimirRendimientosVisitante();
+                break;
+            case 4:
                 System.exit(0);
                 break;
             default:
@@ -193,7 +206,8 @@ public class Menu{
         System.out.println("\nBienvenido");
         System.out.println("\nQue deseas hacer?\n");
         System.out.println("1. crear una nueva temporada");
-        System.out.println("2. salir de la aplicacion");
+        System.out.println("2. cargar nuevo resultado");
+        System.out.println("3. salir de la aplicacion");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 1:
@@ -210,9 +224,23 @@ public class Menu{
                 System.out.println("\nAhora debes ingresar el archivo de las fechas de esta temporada");
                 String nombreArchivoFechas = preguntarPalabra();
                 LECTOR.leerArchivoFechasReales(nombreArchivoFechas, nuevaTemporadaReal, CREADOR);
-                mostrarMenuAdministrador(pAdministrador);
+                System.out.println("Por favor cierra la aplicación y vuelve a iniciarla para confirmar tus cambios");
                 break;
             case 2:
+                TemporadaReal temporadaActiva = aplicacion.temporadaActiva();
+                System.out.println("\nIngresa el nombre del archivo");
+                String nombreArchivo = preguntarPalabra();
+                System.out.println("A que fecha pertenece este resultado?");
+                int numeroFecha = preguntarOpcion();
+                Fecha fecha = temporadaActiva.buscarFecha(numeroFecha);
+                System.out.println("Cual es el equipo local?");
+                EquipoReal equipoLocal = imprimirEquiposTemporada();
+                System.out.println("Cual es el equipo visitante?");
+                EquipoReal equipoVisitante = imprimirEquiposTemporada();
+                PartidoReal partido = fecha.buscarPartido(equipoLocal, equipoVisitante);
+                LECTOR.leerResultadoPartido(nombreArchivo, temporadaActiva, partido, CREADOR);
+                break;
+            case 3:
                 System.exit(0);
                 break;
         

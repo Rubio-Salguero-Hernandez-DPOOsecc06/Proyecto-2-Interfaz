@@ -25,4 +25,5 @@ public class TemporadaFantasia extends Temporada{
     public void agregarEquipo(EquipoFantasia pEquipo){
         this.equiposTemporada.add(pEquipo);
     }
+    
 }

@@ -129,19 +129,67 @@ public class LectorArchivos {
         }
     }
 
-    public void leerResultadoPartido(String pNombreArchivo, TemporadaReal pTemporada, CreadorObjetos pCreador){
+    public void leerResultadoPartido(String pNombreArchivo, TemporadaReal pTemporada, PartidoReal pPartido ,CreadorObjetos pCreador){
         File rutaResultados = Persistencia.crearArchivo("data/"+pNombreArchivo);
         if(rutaResultados.exists()){
-            try {
+            try {  
+                String nombreLocal = pPartido.getEquipoLocal().getNombreEquipo();
+                String nombreVisitante = pPartido.getEquipoVisitante().getNombreEquipo();
+                MarcadorPartidoReal marcador = pCreador.crearMarcadorPartidoReal();
                 BufferedReader lector = new BufferedReader(new FileReader(rutaResultados));
                 String linea;
                 linea = lector.readLine();
                 linea = lector.readLine();
                 while(linea != null){
-                    String[] datosPartido = linea.split(";");
-                    //TODO: terminar esta funcion
+                    String[] datos = linea.split(";");
+                    String nombreJugador = datos[0];
+                    String equipo = datos[1];
+                    int minutosJugados = Integer.parseInt(datos[3]);
+                    int minutoEntrada = Integer.parseInt(datos[4]);
+                    int minutoSalida = Integer.parseInt(datos[5]);
+                    int golesAnotados = Integer.parseInt(datos[6]);
+                    int penaltisAnotados = Integer.parseInt(datos[7]);
+                    int autogoles = Integer.parseInt(datos[8]);
+                    int asistencias = Integer.parseInt(datos[9]);
+                    int penaltisErrados = Integer.parseInt(datos[10]);
+                    int golesRecibidos = Integer.parseInt(datos[11]);
+                    int penaltisDetenidos = Integer.parseInt(datos[12]);
+                    int amarillas = Integer.parseInt(datos[13]);
+                    int rojas = Integer.parseInt(datos[14]);
+                    RendimientoJugador nuevoRendimiento = null;
+                    
+                    JugadorReal jugador = null;
+                    if(nombreLocal.equals(equipo)){
+                        jugador = pPartido.getEquipoLocal().buscarJugador(nombreJugador);
+                    }
+                    else if(nombreVisitante.equals(equipo)){
+                        jugador = pPartido.getEquipoVisitante().buscarJugador(nombreJugador);
+                    }
+                    nuevoRendimiento = pCreador.crearRendimientoJugador(minutosJugados, minutoEntrada, minutoSalida, golesAnotados, penaltisAnotados, autogoles, asistencias, penaltisErrados, golesRecibidos, penaltisDetenidos, amarillas, rojas, jugador);
+                    if(equipo.equals(nombreLocal)){
+                        marcador.agregarGolLocal(golesAnotados);
+                        marcador.agregarGolLocal(penaltisAnotados);
+                        marcador.agregarRendimientoLocal(nuevoRendimiento);
+                        pPartido.getEquipoLocal().buscarJugador(nombreJugador).agregarRendimiento(nuevoRendimiento);
+                        System.out.println("local");
+                    }
+                    else if(equipo.equals(nombreVisitante)){
+                        marcador.agregarGolVisitante(golesAnotados);
+                        marcador.agregarGolVisitante(penaltisAnotados);
+                        marcador.agregarRendimientoVisitante(nuevoRendimiento);
+                        pPartido.getEquipoVisitante().buscarJugador(nombreJugador).agregarRendimiento(nuevoRendimiento);
+                        System.out.println("visitante");
+                    }
+
+                    linea = lector.readLine();
                 }
+                System.out.println(marcador.getGolesLocal());
+                System.out.println("vs");
+                System.out.println(marcador.getGolesVisitante());
+                pPartido.setMarcador(marcador);
+                Persistencia.guardarTemporadaReal(pTemporada);
                 lector.close();
+                
             } catch (Exception e) {
             }
         }

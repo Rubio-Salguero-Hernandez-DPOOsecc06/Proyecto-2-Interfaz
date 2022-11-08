@@ -1,6 +1,6 @@
 package model;
 
-public class JugadorFantasia extends Jugador {
+public class JugadorFantasia extends JugadorReal {
 
     private int minutosJugados, golesAnotados, penaltisAnotados,
     autogoles, asistencias, penaltisErrados, tarjetasAmarillas, tarjetasRojas;

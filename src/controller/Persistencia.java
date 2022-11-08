@@ -108,16 +108,26 @@ public class Persistencia {
             File ficheroTemporadas = crearFichero(rutaTemporadas);
             String[]temporadas = ficheroTemporadas.list();
             int cantidadTemporadas = temporadas.length;
-            pTemporada.setNumeroTemporada((cantidadTemporadas+1));
-            String nombreTxt = ficheroTemporadas+"/"+pTemporada.getNumeroTemporada()+ ".obj";
-            File nuevoArchivo = crearArchivo(nombreTxt);
-            if(!nuevoArchivo.exists()){
+
+            if(pTemporada.getNumeroTemporada() == cantidadTemporadas){
+                String nombreTxt = ficheroTemporadas+"/"+pTemporada.getNumeroTemporada()+ ".obj";
+                File nuevoArchivo = crearArchivo(nombreTxt);
+                if(nuevoArchivo.exists()){
                 ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
                 System.out.println("\nSe guardo la temporada\n");
                 escritor.writeObject(pTemporada);
                 escritor.close();
-            } else{
-            System.out.println("\nLa temporada ya existe\n");
+                }
+            }else{
+                pTemporada.setNumeroTemporada((cantidadTemporadas+1));
+                String nombreTxt = ficheroTemporadas+"/"+pTemporada.getNumeroTemporada()+ ".obj";
+                File nuevoArchivo = crearArchivo(nombreTxt);
+                if(!nuevoArchivo.exists()){
+                    ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
+                    System.out.println("\nSe guardo la temporada\n");
+                    escritor.writeObject(pTemporada);
+                    escritor.close();
+            }
             }
         } catch(Exception e){
         }
@@ -129,20 +139,30 @@ public class Persistencia {
             File ficheroTemporadas = crearFichero(rutaTemporadas);
             String[]temporadas = ficheroTemporadas.list();
             int cantidadTemporadas = temporadas.length;
-            pTemporada.setNumeroTemporada((cantidadTemporadas+1));
-            String nombreTxt = ficheroTemporadas+"/"+pTemporada.getNumeroTemporada()+ ".obj";
-            File nuevoArchivo = crearArchivo(nombreTxt);
-            if(!nuevoArchivo.exists()){
+            if(pTemporada.getNumeroTemporada() == cantidadTemporadas){
+                String nombreTxt = ficheroTemporadas+"/"+pTemporada.getNumeroTemporada()+ ".obj";
+                File nuevoArchivo = crearArchivo(nombreTxt);
+                if(!nuevoArchivo.exists()){
                 ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
                 System.out.println("\nSe guardo la temporada\n");
                 escritor.writeObject(pTemporada);
                 escritor.close();
-            } else{
-            System.out.println("\nLa temporada ya existe\n");
+                }
+            }else{
+                pTemporada.setNumeroTemporada((cantidadTemporadas+1));
+                String nombreTxt = ficheroTemporadas+"/"+pTemporada.getNumeroTemporada()+ ".obj";
+                File nuevoArchivo = crearArchivo(nombreTxt);
+                if(!nuevoArchivo.exists()){
+                    ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
+                    System.out.println("\nSe guardo la temporada\n");
+                    escritor.writeObject(pTemporada);
+                    escritor.close();
+            }
             }
         } catch(Exception e){
         }
     }
+
 
     /**
      * Recupera las temporadas guardadas

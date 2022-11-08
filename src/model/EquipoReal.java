@@ -54,4 +54,6 @@ public class EquipoReal extends Equipo{
     public String getNombreEquipo() {
         return super.getNombreEquipo();
     }
+
+
 }

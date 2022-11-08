@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class RendimientoJugador implements Serializable {
     private int minutosJugados, minutoEntrada, minutoSalida, golesAnotados, 
-    penaltisAnotados, autogoles, asistencias, penaltisErrados, golesRecibidos, 
-    penaltisDetenidos, tarjetasAmarillas, tarjetasRojas;
+    penaltisAnotados, autogoles, asistencias, penaltisErrados, golesRecibidos, penaltisDetenidos, tarjetasAmarillas, tarjetasRojas;
+    private JugadorReal jugador;
 
     public RendimientoJugador(int pMinutosJugados, int pMinutoEntrada, int pMinutoSalida,
     int pGolesAnotados, int pPenaltisAnotados, int pAutogoles, int pAsistencias, int pPenaltisErrados,
-    int pGolesRecibidos, int pPenaltisDetenidos, int pTarjetasAmarillas, int pTarjetasRojas){
+    int pTarjetasAmarillas, int pTarjetasRojas, int pGolesRecibidos,int pPenaltisDetenidos, JugadorReal pJugador){
         this.minutosJugados = pMinutosJugados;
         this.minutoEntrada = pMinutoEntrada;
         this.minutoSalida = pMinutoSalida;
@@ -22,6 +22,7 @@ public class RendimientoJugador implements Serializable {
         this.penaltisDetenidos = pPenaltisDetenidos;
         this.tarjetasAmarillas = pTarjetasAmarillas;
         this.tarjetasRojas = pTarjetasRojas;
+        this.jugador = pJugador;
     }
 
     public int getAsistencias() {
@@ -34,10 +35,6 @@ public class RendimientoJugador implements Serializable {
 
     public int getGolesAnotados() {
         return golesAnotados;
-    }
-
-    public int getGolesRecibidos() {
-        return golesRecibidos;
     }
 
     public int getMinutoEntrada() {
@@ -56,10 +53,6 @@ public class RendimientoJugador implements Serializable {
         return penaltisAnotados;
     }
 
-    public int getPenaltisDetenidos() {
-        return penaltisDetenidos;
-    }
-
     public int getPenaltisErrados() {
         return penaltisErrados;
     }
@@ -70,5 +63,17 @@ public class RendimientoJugador implements Serializable {
 
     public int getTarjetasRojas() {
         return tarjetasRojas;
+    }
+
+    public int getGolesRecibidos() {
+        return golesRecibidos;
+    }
+
+    public int getPenaltisDetenidos() {
+        return penaltisDetenidos;
+    }
+
+    public JugadorReal getJugador() {
+        return jugador;
     }
 }

@@ -6,6 +6,7 @@ public class PartidoReal implements Serializable {
 
     private EquipoReal EquipoLocal, EquipoVisitante;
     private String dia, hora;
+    private MarcadorPartidoReal marcador;
 
     /**
      * Constructor
@@ -47,6 +48,14 @@ public class PartidoReal implements Serializable {
      */
     public EquipoReal getEquipoVisitante() {
         return EquipoVisitante;
+    }
+
+    public MarcadorPartidoReal getMarcador() {
+        return marcador;
+    }
+
+    public void setMarcador(MarcadorPartidoReal pMarcador) {
+        this.marcador = pMarcador;
     }
 }   
 
