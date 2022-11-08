@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 public class AdminAppFrame extends JFrame{
 	
 	//Class atributes
+	AdminAppPanel AdminAppPanel;
+	
 	
 	public AdminAppFrame() {
 		
@@ -26,7 +28,8 @@ public class AdminAppFrame extends JFrame{
 		
 		//addition of Admin App Panel Class
 		
-		
+		this.AdminAppPanel = new AdminAppPanel();
+		this.add(AdminAppPanel, BorderLayout.NORTH);
 		
 		
 		
