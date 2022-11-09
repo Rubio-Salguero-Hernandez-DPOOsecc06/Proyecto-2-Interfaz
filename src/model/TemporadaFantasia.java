@@ -17,7 +17,7 @@ public class TemporadaFantasia extends Temporada{
     public void setNumeroTemporada(int pNumeroTemporada) {
         this.numeroTemporada = pNumeroTemporada;
     }
-
+    
     public ArrayList<EquipoFantasia> getEquiposTemporada() {
         return equiposTemporada;
     }
@@ -25,5 +25,4 @@ public class TemporadaFantasia extends Temporada{
     public void agregarEquipo(EquipoFantasia pEquipo){
         this.equiposTemporada.add(pEquipo);
     }
-    
 }

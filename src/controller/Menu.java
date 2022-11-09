@@ -273,7 +273,8 @@ public class Menu{
         System.out.println("\nQue deseas hacer?\n");
         System.out.println("1. Ver menu de tu equipo de fantasia");
         System.out.println("2. Ver menu de fechas");
-        System.out.println("3. Salir de la aplicacion");
+        System.out.println("3. Ver rendimientos de un partido");
+        System.out.println("4. Salir de la aplicacion");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 1:
@@ -285,6 +286,18 @@ public class Menu{
                 mostrarMenuFechas(pParticipanteActivo);
                 break;
             case 3:
+                System.out.println("\nDe que fecha es el partido que deseas ver");
+                int numFecha = preguntarOpcion();
+                Fecha fecha = this.aplicacion.temporadaActiva().buscarFecha(numFecha);
+                System.out.println("Cual fue el equipo local");
+                EquipoReal equipoLocal = imprimirEquiposTemporada();
+                System.out.println("Cual fue el equipo visitante");
+                EquipoReal equipoVisitante = imprimirEquiposTemporada();
+                PartidoReal partido = fecha.buscarPartido(equipoLocal, equipoVisitante);
+                partido.getMarcador().imprimirRendimientosLocal();
+                partido.getMarcador().imprimirRendimientosVisitante();
+                break;
+            case 4:
                 System.exit(0);
                 break;
             default:
