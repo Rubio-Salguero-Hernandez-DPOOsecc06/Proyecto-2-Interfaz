@@ -18,11 +18,13 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 public class PlayerLogInPanel extends JPanel implements ActionListener{
 	
@@ -34,6 +36,7 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 	JTextField textUsername;
 	JPasswordField textPassword;
 	
+	PlayerAppFrame PlayerApp;
 	LogInPanels LogInPanels;
 	
 	public PlayerLogInPanel(){
@@ -112,7 +115,6 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 		//TEXT BOXES
 		JLabel username = new JLabel();
 		JLabel password = new JLabel();
-		JLabel space = new JLabel();
 		
 		username.setText("Usuario:   ");
 		password.setText("Clave:   ");
@@ -138,9 +140,9 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 		button3.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		//Set text
-		button1.setText("Iniciar sesión");
+		button1.setText("Iniciar sesion");
 		button2.setText("Retroceder");
-		button3.setText("Salir de la aplicación");
+		button3.setText("Salir de la aplicacion");
 		
 		//Set size
 		button1.setMaximumSize(new Dimension(200,30));
@@ -197,6 +199,13 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 			
 			
 			//VALIDATE CREDENTIALS AND GUARANTEE ACCESS TO PARTICIPANT APP INTERFACE.
+			
+			////Validation missing
+			
+			
+			PlayerApp = new PlayerAppFrame();
+			JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
+			topFrame.dispose(); //Closes that frame to leave only the new one for the Admin App.
 			
 		}
 		

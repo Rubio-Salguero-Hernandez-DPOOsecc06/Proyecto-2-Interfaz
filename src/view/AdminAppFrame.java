@@ -8,10 +8,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
+
 public class AdminAppFrame extends JFrame{
 	
 	//Class atributes
-	AdminAppPanel AdminAppPanel;
+	PlayerAppPanel PlayerAppPanel;
 	
 	
 	public AdminAppFrame() {
@@ -28,8 +30,8 @@ public class AdminAppFrame extends JFrame{
 		
 		//addition of Admin App Panel Class
 		
-		this.AdminAppPanel = new AdminAppPanel();
-		this.add(AdminAppPanel, BorderLayout.NORTH);
+		this.PlayerAppPanel = new PlayerAppPanel();
+		this.add(PlayerAppPanel, BorderLayout.NORTH);
 		
 		
 		
