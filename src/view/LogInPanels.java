@@ -78,7 +78,7 @@ public class LogInPanels extends JPanel implements ActionListener{
 		//SELECT AN OPTION LABEL
 		
 		JLabel selectText = new JLabel();
-		selectText.setText("Selecciona una opción:");
+		selectText.setText("Selecciona una opcion:");
 		selectText.setFont(new Font("MV Boli",Font.PLAIN,25));
 		selectText.setPreferredSize(new Dimension(600, 80));
 		selectText.setHorizontalAlignment(SwingConstants.CENTER);
@@ -107,10 +107,10 @@ public class LogInPanels extends JPanel implements ActionListener{
 		button4.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		//Set text
-		button1.setText("Como participante");
+		button1.setText("Como Participante");
 		button2.setText("Como Administrador");
 		button3.setText("Retroceder");
-		button4.setText("Salir de la aplicación");
+		button4.setText("Salir de la aplicacion");
 		
 		//Set size
 		button1.setMaximumSize(new Dimension(200,50));

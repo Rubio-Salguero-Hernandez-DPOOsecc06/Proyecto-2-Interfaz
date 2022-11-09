@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,18 +14,29 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 @SuppressWarnings("serial")
 
 public class AdminAppPanel extends JPanel implements ActionListener{
+	
+	//Atributes
+	JButton button1;
+	JButton button2;
+	JButton button3;
+	JButton button4;
+	FirstFrame FirstFrame;
 	
 	//Panel Definition
 	
@@ -78,9 +90,71 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	this.add(rightPanel, constraints);
 	
 	
+	//Option buttons for admin
+	JPanel buttonPanel = new JPanel();
+	buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+	constraints.gridx = 4;
+	constraints.gridy = 2;
+	constraints.gridwidth = 1;
+	constraints.gridheight = 1;
+	
+	button1 = new JButton();
+	button1.setText("Crear nueva temporda");
+	
+	button2 = new JButton();
+	button2.setText("Subir un resultado real");
+	
+	button3 = new JButton();
+	button3.setText("Volver al menu principal");
+	
+	button4 = new JButton();
+	button4.setText("Salir de la aplicacion");
+	
+		//Action listeners
+	button1.addActionListener(this);
+	button2.addActionListener(this);
+	button3.addActionListener(this);
+	button4.addActionListener(this);
+	
+		//Set size
+	button1.setMaximumSize(new Dimension(200,50));
+	button2.setMaximumSize(new Dimension(200,50));
+	button3.setMaximumSize(new Dimension(200,50));
+	button4.setMaximumSize(new Dimension(200,50));
+	
+	button1.setPreferredSize(new Dimension(100, 40));
+	button2.setPreferredSize(new Dimension(200, 40));
+	button3.setPreferredSize(new Dimension(100, 40));
+	button4.setPreferredSize(new Dimension(200, 40));
+	
+		//JLabel for options
+	
+	JLabel optionsLabel = new JLabel();
+	optionsLabel.setText("Menu de Administrador");
+	optionsLabel.setFont(new Font("MV Boli",Font.PLAIN,20));
+	optionsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+		//addition to BoxLayout
+	buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
+	buttonPanel.add(optionsLabel);
+	buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
+	buttonPanel.add(button1);
+	buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
+	buttonPanel.add(button2);
+	buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
+	buttonPanel.add(button3);
+	buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
+	buttonPanel.add(button4);
+	buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
+	
+		//addition of constraints
+	
+	this.add(buttonPanel, constraints);
+	
+	
 	//Addition of Title for menu
 	JLabel title = new JLabel();
-	title.setText("Bienvenido a Ultimate Soccer Fantasy, vamos a jugar!");
+	title.setText("Bienvenido/a a Ultimate Soccer Fantasy, ¡vamos a jugar!");
 	title.setFont(new Font("MV Boli",Font.BOLD,30));
 	
 	constraints.gridx = 0;
@@ -92,10 +166,12 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	
 	
 	// Addition of left console panel
-	JTextArea textArea = new JTextArea(23,70);
+	JTextArea textArea = new JTextArea(18,50);
 	textArea.setLineWrap(true);
-	textArea.setFont(new Font("MV Boli",Font.PLAIN,14));
-	textArea.setText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	textArea.setFont(new Font("MV Boli",Font.PLAIN,16));
+	textArea.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nunc nisl, tristique et felis ut, consequat volutpat libero. Pellentesque venenatis feugiat feugiat. Donec cursus ligula sed ipsum venenatis, ac bibendum ex convallis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras vehicula tellus et aliquet mattis. Praesent non mauris vehicula, semper lectus at, fermentum nunc. Aliquam erat volutpat. Donec non velit leo.\r\n"
+			+ "\r\n"
+			+ "Etiam accumsan condimentum nunc, in condimentum justo posuere eget. In congue justo eros, ac sodales ex pretium eget. Proin pulvinar pretium consequat. Duis rutrum urna ut arcu feugiat, non rutrum urna venenatis. Nunc at.");
 	textArea.setEditable(false);
 	JScrollPane scrollPane = new JScrollPane(textArea);
 	
@@ -114,7 +190,7 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	//Escribe aqui JLabel
 	
 	JLabel writeHere = new JLabel();
-	writeHere.setText("Escribe aquí:");
+	writeHere.setText("Escribe aqui:");
 	writeHere.setFont(new Font("MV Boli",Font.BOLD,15));
 	writeHere.setHorizontalAlignment(SwingConstants.CENTER);
 	
@@ -153,8 +229,32 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+		if(e.getSource()==button1) {
+			
+			//Complete
 
-}
+		}
+		
+		else if(e.getSource()==button2) {
+			
+			//Complete
+
+		}
+		
+		else if(e.getSource()==button3) {
+			
+			FirstFrame = new FirstFrame();
+			JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
+			topFrame.dispose(); //Closes that frame to leave only the new one for the Admin App.
+			
+		}
+		
+		else if(e.getSource()==button4) {
+			
+			System.exit(0);
+
+		}
+		
+	} //cerrar action performed
+
+} //cerrar clase

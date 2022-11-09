@@ -76,7 +76,7 @@ public class FirstPanel extends JPanel implements ActionListener{
 		//SELECT AN OPTION LABEL
 		
 		JLabel selectText = new JLabel();
-		selectText.setText("Selecciona una opción del siguiente menú:");
+		selectText.setText("Selecciona una opcion del siguiente menu:");
 		selectText.setFont(new Font("MV Boli",Font.PLAIN,25));
 		selectText.setPreferredSize(new Dimension(600, 100));
 		selectText.setHorizontalAlignment(SwingConstants.CENTER);
@@ -101,9 +101,9 @@ public class FirstPanel extends JPanel implements ActionListener{
 		button3.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		//Set text
-		button1.setText("Iniciar sesión");
+		button1.setText("Iniciar sesion");
 		button2.setText("Registrarse en la plataforma");
-		button3.setText("Salir de la aplicación");
+		button3.setText("Salir de la aplicacion");
 		
 		//Set size
 		button1.setMaximumSize(new Dimension(200,50));
@@ -125,7 +125,7 @@ public class FirstPanel extends JPanel implements ActionListener{
 		
 		//Credits label
 		JLabel credits = new JLabel();
-		credits.setText("Aplicación construida por el Grupo 5 del curso de DPOO. Semestre 2022-20");
+		credits.setText("Aplicacion construida por el Grupo 5 del curso de DPOO. Semestre 2022-20");
 		credits.setHorizontalAlignment(SwingConstants.CENTER);
 		credits.setFont(new Font("MV Boli",Font.PLAIN,15));
 		
