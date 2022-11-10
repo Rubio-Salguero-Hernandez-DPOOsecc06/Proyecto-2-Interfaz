@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 public class AdminAppFrame extends JFrame{
 	
 	//Class atributes
-	PlayerAppPanel PlayerAppPanel;
+	AdminAppPanel AdminAppPanel;
 	
 	
 	public AdminAppFrame() {
@@ -30,8 +30,8 @@ public class AdminAppFrame extends JFrame{
 		
 		//addition of Admin App Panel Class
 		
-		this.PlayerAppPanel = new PlayerAppPanel();
-		this.add(PlayerAppPanel, BorderLayout.NORTH);
+		this.AdminAppPanel = new AdminAppPanel();
+		this.add(AdminAppPanel, BorderLayout.NORTH);
 		
 		
 		

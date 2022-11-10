@@ -36,6 +36,7 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	JButton button3;
 	JButton button4;
 	FirstFrame FirstFrame;
+	GamePanel GamePanel;
 	
 	//Panel Definition
 	
@@ -63,7 +64,7 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 		//Addition of image to rightPanel
 	BufferedImage backImage = null;
 	try {
-		backImage = ImageIO.read(new File("InterfaceFiles/Admin.jpg"));
+		backImage = ImageIO.read(new File("InterfaceFiles/Participante.jpg"));
 	} catch (IOException e) {
 		e.printStackTrace();
 	}
@@ -81,7 +82,7 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 		//Addition of text to rightPanel
 	
 	JLabel userLabel = new JLabel();
-	userLabel.setText("Tipo de Usuario: PARTICIPANTE");
+	userLabel.setText("   Tipo de Usuario: PARTICIPANTE");
 	userLabel.setFont(new Font("MV Boli",Font.BOLD,18));
 	userLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	rightPanel.add(userLabel);
@@ -98,10 +99,10 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	constraints.gridheight = 1;
 	
 	button1 = new JButton();
-	button1.setText("Crear nueva temporda");
+	button1.setText("Juega con tu equipo");
 	
 	button2 = new JButton();
-	button2.setText("Subir un resultado real");
+	button2.setText("Crea tu equipo de fantasia");
 	
 	button3 = new JButton();
 	button3.setText("Volver al menu principal");
@@ -129,7 +130,7 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 		//JLabel for options
 	
 	JLabel optionsLabel = new JLabel();
-	optionsLabel.setText("Menu de Administrador");
+	optionsLabel.setText("Menu de Participante");
 	optionsLabel.setFont(new Font("MV Boli",Font.PLAIN,20));
 	optionsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -153,8 +154,8 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	
 	//Addition of Title for menu
 	JLabel title = new JLabel();
-	title.setText("Bienvenido/a a Ultimate Soccer Fantasy, ¡vamos a jugar!");
-	title.setFont(new Font("MV Boli",Font.BOLD,30));
+	title.setText("Bienvenido/a a Ultimate Soccer Fantasy, vamos a jugar!");
+	title.setFont(new Font("MV Boli",Font.BOLD,26));
 	
 	constraints.gridx = 0;
 	constraints.gridy = 0;
@@ -167,7 +168,7 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	// Addition of left console panel
 	JTextArea textArea = new JTextArea(18,50);
 	textArea.setLineWrap(true);
-	textArea.setFont(new Font("MV Boli",Font.PLAIN,16));
+	textArea.setFont(new Font("MV Boli",Font.PLAIN,18));
 	textArea.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nunc nisl, tristique et felis ut, consequat volutpat libero. Pellentesque venenatis feugiat feugiat. Donec cursus ligula sed ipsum venenatis, ac bibendum ex convallis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras vehicula tellus et aliquet mattis. Praesent non mauris vehicula, semper lectus at, fermentum nunc. Aliquam erat volutpat. Donec non velit leo.\r\n"
 			+ "\r\n"
 			+ "Etiam accumsan condimentum nunc, in condimentum justo posuere eget. In congue justo eros, ac sodales ex pretium eget. Proin pulvinar pretium consequat. Duis rutrum urna ut arcu feugiat, non rutrum urna venenatis. Nunc at.");
@@ -230,13 +231,22 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==button1) {
 			
-			//Complete
+			//Juega con tu equipo de fantasia
+			
+			//creacion de una instancia de una nueva clase panel para mostrar los botones de juego
+			this.GamePanel = new GamePanel();
+			JPanel panelName = this.GamePanel;
+			
+			this.removeAll();
+			this.add(panelName);
+			this.repaint();
+			this.revalidate();
 
 		}
 		
 		else if(e.getSource()==button2) {
 			
-			//Complete
+			//Crea tu equipo de fantasia
 
 		}
 		
