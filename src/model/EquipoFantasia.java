@@ -321,6 +321,51 @@ public class EquipoFantasia extends Equipo{
         return jugadoresPosicion;
     }
 
+    public void actualizarPuntosJugador(RendimientoJugador pRendimiento, Posicion pPosicionJugador){
+        actualizarMinutosJugados(pRendimiento.getMinutosJugados());
+        actualizarGolesAnotados(pPosicionJugador, pRendimiento.getGolesAnotados());
+        actualizarAsistencias(pRendimiento.getAsistencias());
+        actualizarPenaltisErrados(pRendimiento.getPenaltisErrados());
+        actualizarGolesAnotados(pPosicionJugador, pRendimiento.getPenaltisAnotados());
+        actualizarAmarillas(pRendimiento.getTarjetasAmarillas());
+        actualizarRojas(pRendimiento.getTarjetasRojas());
+        actualizarAutogol(pRendimiento.getAutogoles());
+    }
+
+
+
+    public void actualizarPuntosEquipoPorJugador(JugadorReal pJugador, RendimientoJugador pRendimiento, MarcadorPartidoReal pMarcador){
+        Posicion posicionJugador = pJugador.getPosicionJugador();
+        //String ganador = pMarcador.getGanador().getNombreEquipo();
+        //JugadorFantasia capitanEquipo = getCapitan();
+
+        if(posicionJugador.equals(Posicion.ARQUERO)){
+            JugadorFantasia arqueroTitular = this.arqueroTitular;
+            if(pJugador.getNombre().equals(arqueroTitular.getNombre())){
+                actualizarPuntosJugador(pRendimiento, posicionJugador);
+                actualizarPenaltisDetenidos(pRendimiento.getPenaltisDetenidos());
+            }
+        }else if(posicionJugador.equals(Posicion.DELANTERO)){
+            for(JugadorFantasia delantero: this.delanterosTitulares){
+                if(pJugador.getNombre().equals(delantero.getNombre())){
+                    actualizarPuntosJugador(pRendimiento, posicionJugador);
+                }
+            }
+        }else if(posicionJugador.equals(Posicion.MEDIO)){
+            for(JugadorFantasia medio: this.mediosTitulares){
+                if(pJugador.getNombre().equals(medio.getNombre())){
+                    actualizarPuntosJugador(pRendimiento, posicionJugador);
+                }
+            }
+        }else if(posicionJugador.equals(Posicion.DEFENSA)){
+            for(JugadorFantasiaDefensivo defensa: this.defensasTitulares){
+                if(pJugador.getNombre().equals(defensa.getNombre())){
+                    actualizarPuntosJugador(pRendimiento, posicionJugador);
+                }
+            }
+        }
+    }
+
     /**
      * Actualiza los puntos por minutos jugados
      * @param pMinutosJugados
@@ -445,5 +490,9 @@ public class EquipoFantasia extends Equipo{
         System.out.println("\nDelantero Sustituto: " + getDelanteroSustituto().getNombre());
         System.out.println("\nMedio Campista Sustituto: " + getMedioSustituto().getNombre());
         System.out.println("\nDefensa Sustituto: " + getDefensaSustituto().getNombre() + "\n");
+        System.out.println("============================================");
+        System.out.println("Capitan: " + getCapitan().getNombre());
+        System.out.println("\nPuntos acumulados: " + getPuntosAcumulados());
+        System.out.println("============================================");
     }
 }

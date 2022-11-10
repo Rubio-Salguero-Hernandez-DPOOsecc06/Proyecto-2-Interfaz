@@ -116,8 +116,12 @@ public class Menu{
                 System.out.println("\ningresa tu clave");
                 String clave = preguntarPalabra();
                 Participante participanteRecuperado = Persistencia.iniciarSesion(nombreUsuario, clave);
-
                 if(participanteRecuperado != null && participanteRecuperado.getEquipoAsociado() != null){
+                    for(EquipoFantasia equipo: aplicacion.temporadaFantasiaActiva().getEquiposTemporada()){
+                        if(equipo.getNombreEquipo().equals(participanteRecuperado.getEquipoAsociado().getNombreEquipo())){
+                            participanteRecuperado.setEquipoAsociado(equipo);
+                        }
+                    }
                     mostrarMenuParticipante(participanteRecuperado, participanteRecuperado.getEquipoAsociado());
                 }
                 else if(participanteRecuperado != null && participanteRecuperado.getEquipoAsociado() == null){
@@ -172,6 +176,7 @@ public class Menu{
                 String nombreEquipo = preguntarPalabra();
                 EquipoFantasia equipoAsociado = CREADOR.crearEquipoFantasia(nombreEquipo);
                 crearEquipofantasia(this, pParticipanteActivo, equipoAsociado);
+                Persistencia.guardarTemporadaFantasia(aplicacion.temporadaFantasiaActiva());
                 mostrarMenuParticipante(pParticipanteActivo, pParticipanteActivo.getEquipoAsociado());
                 break;
             case 2:
@@ -240,7 +245,6 @@ public class Menu{
                 EquipoReal equipoVisitante = imprimirEquiposTemporada();
                 PartidoReal partido = fecha.buscarPartido(equipoLocal, equipoVisitante);
                 LECTOR.leerResultadoPartido(nombreArchivo, temporadaActiva, partido, temporadaFantasiaActiva, CREADOR);
-                //actualizar equipos fantasia
                 break;
             case 3:
                 System.exit(0);
@@ -320,11 +324,13 @@ public class Menu{
         System.out.println("1. Ver tu equipo de fantasia");
         System.out.println("2. Reemplazar un jugador titular por un sustituto");
         System.out.println("3. vender/comprar jugador <- (Siempre debes vender antes de poder comprar)");
-        System.out.println("4. Volver atras");
+        System.out.println("4. Asignar capitan");
+        System.out.println("5. Volver atras");
         int opcion = preguntarOpcion();
         switch (opcion) {
             case 1:
                 pEquipoAsociado.verEquipoFantasia();
+                System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
                 mostrarMenuEquipoFantasia(pParticipante, pEquipoAsociado);
                 break;
             case 2:
@@ -351,6 +357,7 @@ public class Menu{
             case 3:
                 System.out.println("\nHas escogido vender un jugador\n");
                 pEquipoAsociado.verEquipoFantasia();
+                System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible());
                 Posicion posicionBuscada = preguntarPosicion();
                 if(posicionBuscada.equals(Posicion.ARQUERO)){
                     JugadorFantasia jugadorVendido = pEquipoAsociado.elegirJugadorPosicion(posicionBuscada, ENTRADA);               
@@ -388,6 +395,13 @@ public class Menu{
                 mostrarMenuEquipoFantasia(pParticipante, pEquipoAsociado);
                 break;
             case 4:
+                pEquipoAsociado.verEquipoFantasia();
+                Posicion posicionCapitan = preguntarPosicion();
+                JugadorFantasia jugadorCambiadoCapitan = pEquipoAsociado.elegirJugadorPosicion(posicionCapitan, ENTRADA);
+                pEquipoAsociado.setCapitan(jugadorCambiadoCapitan);
+                mostrarMenuEquipoFantasia(pParticipante, pEquipoAsociado);
+                break;
+            case 5:
                 Persistencia.guardarParticipante(pParticipante);
                 mostrarMenuParticipante(pParticipante, pEquipoAsociado);
                 break;

@@ -180,14 +180,17 @@ public class LectorArchivos {
                         pPartido.getEquipoVisitante().buscarJugador(nombreJugador).agregarRendimiento(nuevoRendimiento);
                         System.out.println("visitante");
                     }
-                    pTemporadaFantasia.actualizarPuntosPorJugador(jugador, nuevoRendimiento, marcador);
+                    
+                    pTemporadaFantasia.actualizarPuntosPorJugador(jugador, nuevoRendimiento, marcador, pTemporadaFantasia);
                     linea = lector.readLine();
                 }
+
                 if(marcador.getGolesLocal() > marcador.getGolesVisitante()){
                     marcador.setGanador(pPartido.getEquipoLocal());
                 } else if(marcador.getGolesLocal() > marcador.getGolesVisitante()){
                     marcador.setGanador(pPartido.getEquipoVisitante());
                 }
+
                 pPartido.setMarcador(marcador);
                 Persistencia.guardarTemporadaReal(pTemporada);
                 lector.close();

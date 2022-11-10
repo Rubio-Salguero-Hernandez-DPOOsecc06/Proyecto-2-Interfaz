@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import controller.Persistencia;
+
 public class TemporadaFantasia extends Temporada{
     ArrayList<EquipoFantasia> equiposTemporada = new ArrayList<>();
 
@@ -26,9 +28,10 @@ public class TemporadaFantasia extends Temporada{
         this.equiposTemporada.add(pEquipo);
     }
 
-    public void actualizarPuntosPorJugador(JugadorReal pJugador, RendimientoJugador pRendimiento, MarcadorPartidoReal pMarcador){
-        for(EquipoFantasia equipo: this.equiposTemporada){
-            
+    public void actualizarPuntosPorJugador(JugadorReal pJugador, RendimientoJugador pRendimiento, MarcadorPartidoReal pMarcador, TemporadaFantasia pTemporadaF){
+        for(EquipoFantasia equipo: pTemporadaF.getEquiposTemporada()){
+            equipo.actualizarPuntosEquipoPorJugador(pJugador, pRendimiento, pMarcador);
         }
+        Persistencia.guardarTemporadaFantasia(pTemporadaF);
     }
 }
