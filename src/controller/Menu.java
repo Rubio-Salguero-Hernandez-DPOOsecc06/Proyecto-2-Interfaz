@@ -228,6 +228,7 @@ public class Menu{
                 break;
             case 2:
                 TemporadaReal temporadaActiva = aplicacion.temporadaActiva();
+                TemporadaFantasia temporadaFantasiaActiva = aplicacion.temporadaFantasiaActiva();
                 System.out.println("\nIngresa el nombre del archivo");
                 String nombreArchivo = preguntarPalabra();
                 System.out.println("A que fecha pertenece este resultado?");
@@ -238,7 +239,8 @@ public class Menu{
                 System.out.println("Cual es el equipo visitante?");
                 EquipoReal equipoVisitante = imprimirEquiposTemporada();
                 PartidoReal partido = fecha.buscarPartido(equipoLocal, equipoVisitante);
-                LECTOR.leerResultadoPartido(nombreArchivo, temporadaActiva, partido, CREADOR);
+                LECTOR.leerResultadoPartido(nombreArchivo, temporadaActiva, partido, temporadaFantasiaActiva, CREADOR);
+                //actualizar equipos fantasia
                 break;
             case 3:
                 System.exit(0);

@@ -5,12 +5,21 @@ import java.util.ArrayList;
 
 
 public class MarcadorPartidoReal implements Serializable {
-    int golesLocal, golesVisitante;
-    ArrayList<RendimientoJugador> rendimientoLocal = new ArrayList<>(), 
+    private int golesLocal, golesVisitante;
+    private ArrayList<RendimientoJugador> rendimientoLocal = new ArrayList<>(), 
                                   rendimientoVisitante = new ArrayList<>();
+    private EquipoReal ganador = null;
 
 
     public MarcadorPartidoReal(){
+    }
+
+    public void setGanador(EquipoReal pGanador) {
+        this.ganador = pGanador;
+    }
+
+    public EquipoReal getGanador() {
+        return ganador;
     }
 
     public int getGolesLocal() {

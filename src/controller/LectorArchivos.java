@@ -129,7 +129,7 @@ public class LectorArchivos {
         }
     }
 
-    public void leerResultadoPartido(String pNombreArchivo, TemporadaReal pTemporada, PartidoReal pPartido ,CreadorObjetos pCreador){
+    public void leerResultadoPartido(String pNombreArchivo, TemporadaReal pTemporada, PartidoReal pPartido , TemporadaFantasia pTemporadaFantasia,CreadorObjetos pCreador){
         File rutaResultados = Persistencia.crearArchivo("data/"+pNombreArchivo);
         if(rutaResultados.exists()){
             try {  
@@ -180,12 +180,14 @@ public class LectorArchivos {
                         pPartido.getEquipoVisitante().buscarJugador(nombreJugador).agregarRendimiento(nuevoRendimiento);
                         System.out.println("visitante");
                     }
-
+                    pTemporadaFantasia.actualizarPuntosPorJugador(jugador, nuevoRendimiento, marcador);
                     linea = lector.readLine();
                 }
-                System.out.println(marcador.getGolesLocal());
-                System.out.println("vs");
-                System.out.println(marcador.getGolesVisitante());
+                if(marcador.getGolesLocal() > marcador.getGolesVisitante()){
+                    marcador.setGanador(pPartido.getEquipoLocal());
+                } else if(marcador.getGolesLocal() > marcador.getGolesVisitante()){
+                    marcador.setGanador(pPartido.getEquipoVisitante());
+                }
                 pPartido.setMarcador(marcador);
                 Persistencia.guardarTemporadaReal(pTemporada);
                 lector.close();

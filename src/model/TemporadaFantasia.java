@@ -25,4 +25,10 @@ public class TemporadaFantasia extends Temporada{
     public void agregarEquipo(EquipoFantasia pEquipo){
         this.equiposTemporada.add(pEquipo);
     }
+
+    public void actualizarPuntosPorJugador(JugadorReal pJugador, RendimientoJugador pRendimiento, MarcadorPartidoReal pMarcador){
+        for(EquipoFantasia equipo: this.equiposTemporada){
+            
+        }
+    }
 }
