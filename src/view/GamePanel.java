@@ -35,6 +35,9 @@ public class GamePanel extends JPanel implements ActionListener{
 	JButton button2;
 	JButton button3;
 	JButton button4;
+	JButton button5;
+	JButton button6;
+	
 	FirstFrame FirstFrame;
 	
 	//Panel Definition
@@ -69,7 +72,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	}
 	
 	
-	Image dimg = backImage.getScaledInstance(420, 230,
+	Image dimg = backImage.getScaledInstance(350, 120,
 	        Image.SCALE_SMOOTH);
 	
 	ImageIcon dimgRe = new ImageIcon(dimg);
@@ -98,33 +101,49 @@ public class GamePanel extends JPanel implements ActionListener{
 	constraints.gridheight = 1;
 	
 	button1 = new JButton();
-	button1.setText("Juega con tu equipo");
+	button1.setText("Ver cronograma");
 	
 	button2 = new JButton();
-	button2.setText("Crea tu equipo de fantasia");
+	button2.setText("Ver cronograma de fecha");
 	
 	button3 = new JButton();
-	button3.setText("Volver al menu principal");
+	button3.setText("Ver estadisticas temporada");
 	
 	button4 = new JButton();
-	button4.setText("Salir de la aplicacion");
+	button4.setText("Ver estadisticas fecha");
+	
+	button5 = new JButton();
+	button5.setText("Volver al menu principal");
+	
+	button6 = new JButton();
+	button6.setText("Salir de la aplicacion");
+	
+	
 	
 		//Action listeners
 	button1.addActionListener(this);
 	button2.addActionListener(this);
 	button3.addActionListener(this);
 	button4.addActionListener(this);
+	button5.addActionListener(this);
+	button6.addActionListener(this);
+	
 	
 		//Set size
 	button1.setMaximumSize(new Dimension(200,50));
 	button2.setMaximumSize(new Dimension(200,50));
 	button3.setMaximumSize(new Dimension(200,50));
 	button4.setMaximumSize(new Dimension(200,50));
+	button5.setMaximumSize(new Dimension(200,50));
+	button6.setMaximumSize(new Dimension(200,50));
 	
 	button1.setPreferredSize(new Dimension(100, 40));
 	button2.setPreferredSize(new Dimension(200, 40));
 	button3.setPreferredSize(new Dimension(100, 40));
 	button4.setPreferredSize(new Dimension(200, 40));
+	button5.setPreferredSize(new Dimension(200, 40));
+	button6.setPreferredSize(new Dimension(200, 40));
+	
 	
 		//JLabel for options
 	
@@ -144,6 +163,10 @@ public class GamePanel extends JPanel implements ActionListener{
 	buttonPanel.add(button3);
 	buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
 	buttonPanel.add(button4);
+	buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
+	buttonPanel.add(button5);
+	buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
+	buttonPanel.add(button6);
 	buttonPanel.add(Box.createRigidArea(new Dimension(0,10)));
 	
 		//addition of constraints
@@ -244,17 +267,29 @@ public class GamePanel extends JPanel implements ActionListener{
 		
 		else if(e.getSource()==button3) {
 			
+
+		}
+		
+		else if(e.getSource()==button4) {
+			
+
+			
+		}
+		
+		else if(e.getSource()==button5) {
+			
 			FirstFrame = new FirstFrame();
 			JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
 			topFrame.dispose(); //Closes that frame to leave only the new one for the Admin App.
 			
 		}
 		
-		else if(e.getSource()==button4) {
+		else if(e.getSource()==button6) {
 			
 			System.exit(0);
 
 		}
+		
 		
 	} //cerrar action performed
 	

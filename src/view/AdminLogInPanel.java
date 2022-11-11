@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -38,6 +39,10 @@ public class AdminLogInPanel extends JPanel implements ActionListener{
 	LogInPanels LogInPanels;
 	AdminAppFrame AdminApp;
 	FirstFrame FirstFrame;
+	
+	//Admin set credentials
+	String adminUsername = "admin";
+	String adminPassword = "admin";
 	
 	public AdminLogInPanel(){
 		
@@ -203,11 +208,21 @@ public class AdminLogInPanel extends JPanel implements ActionListener{
 			
 			////Validation missing
 			
-			
-			AdminApp = new AdminAppFrame();
-			JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
-			topFrame.dispose(); //Closes that frame to leave only the new one for the Admin App.
-			
+			if(username.equals(this.adminUsername) && password.equals(this.adminPassword)) {
+				
+				AdminApp = new AdminAppFrame();
+				JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
+				topFrame.dispose(); //Closes that frame to leave only the new one for the Admin App.
+				
+			}
+			else {
+				
+				String errorMessage = "Las credenciales no son las de administrador";
+				
+				JOptionPane.showMessageDialog(null, errorMessage, "Acceso denegado", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+				
 			
 			
 		}
