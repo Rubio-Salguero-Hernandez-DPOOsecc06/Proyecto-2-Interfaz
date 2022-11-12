@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import controller.Conection;
+
 
 @SuppressWarnings("serial")
 
@@ -33,8 +35,18 @@ public class FirstPanel extends JPanel implements ActionListener{
 	JPanel LogInPanels;
 	JPanel PlayerRegisterPanel;
 	
+	Main mainClass;
+	Conection conection;
+	
+	//getter for conection instance
+	public Conection getConection() {
+		return this.conection;
+	}
+	
 	
 	FirstPanel(){
+		this.mainClass = new Main();
+		this.conection = mainClass.conection;
 		
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.white);
@@ -146,7 +158,7 @@ public class FirstPanel extends JPanel implements ActionListener{
 	//Actions performed in this Panel
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==button1) {
+		if(e.getSource()==button1) {					//INICIAR SESION
 			this.LogInPanels = new LogInPanels();
 			JPanel panelName = this.LogInPanels;
 			
@@ -154,6 +166,8 @@ public class FirstPanel extends JPanel implements ActionListener{
 			this.add(panelName);
 			this.repaint();
 			this.revalidate();
+			
+			this.conection.prueba();
 			
 		}
 		

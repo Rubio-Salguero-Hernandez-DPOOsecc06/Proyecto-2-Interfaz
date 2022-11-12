@@ -20,11 +20,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+
+import controller.Conection;
 
 public class PlayerLogInPanel extends JPanel implements ActionListener{
 	
@@ -38,8 +41,12 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 	
 	PlayerAppFrame PlayerApp;
 	LogInPanels LogInPanels;
+	Conection conection;
+	Main mainClass;
 	
 	public PlayerLogInPanel(){
+		
+		this.mainClass = new Main();
 		
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.white);
@@ -202,10 +209,38 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 			
 			////Validation missing
 			
+			this.conection = mainClass.conection;
+			int exists = conection.inicioSesionParticipante(username, password);
+			System.out.println("Resultado:"+exists);
 			
-			PlayerApp = new PlayerAppFrame();
-			JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
-			topFrame.dispose(); //Closes that frame to leave only the new one for the Admin App.
+			if (exists==1) {
+			
+				PlayerApp = new PlayerAppFrame();
+				JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
+				topFrame.dispose(); //Closes that frame to leave only the new one for the Admin App.
+				
+				String Message = "Bienvenido/a a Ultimate Soccer Fantasy, crea tu equipo de Fantasia";  //hay que mostrar un menu de opciones distinto
+				
+				JOptionPane.showMessageDialog(null, Message, "Atencion", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			else if (exists==2) {
+				
+				PlayerApp = new PlayerAppFrame();
+				JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
+				topFrame.dispose(); //Closes that frame to leave only the new one for the Admin App.
+				
+				String Message = "Bienvenido/a a Ultimate Soccer Fantasy";
+				
+				JOptionPane.showMessageDialog(null, Message, "Atencion", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+			
+			else if (exists==0) {
+				String errorMessage = "El usuario no existe, intenta registrandote primero.";
+				
+				JOptionPane.showMessageDialog(null, errorMessage, "Atencion", JOptionPane.INFORMATION_MESSAGE);
+			}
 			
 		}
 		
