@@ -40,6 +40,21 @@ public class Fecha implements Serializable{
         this.cronogramaPartidosFecha.add(pNuevoPartido);
     }
 
+    public PartidoReal buscarPartido(EquipoReal pLocal, EquipoReal pVisitante){
+        PartidoReal partidoBuscado = null;
+        String nombreLocal = pLocal.getNombreEquipo();
+        String nombreVisitante = pVisitante.getNombreEquipo();
+        for(PartidoReal partido: this.cronogramaPartidosFecha){
+            String local = partido.getEquipoLocal().getNombreEquipo();
+            String visitante = partido.getEquipoVisitante().getNombreEquipo();
+            if(nombreLocal.equals(local) && nombreVisitante.equals(visitante)){
+                partidoBuscado = partido;
+                break;
+            }
+        }
+        return partidoBuscado;
+    }
+
     /**
      * Muestra cada partido de la fecha con sus equipos, dia y hora
      */

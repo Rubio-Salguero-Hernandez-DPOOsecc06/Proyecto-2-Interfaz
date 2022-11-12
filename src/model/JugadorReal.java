@@ -32,6 +32,7 @@ public class JugadorReal extends Jugador {
         return super.getPrecioVenta();
     }
 
+    
 
     
 }

@@ -1,12 +1,14 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public abstract class Jugador implements Serializable {
     String nombre;
     Posicion posicionJugador;
     Equipo equipoJugador;
     Double precioCompra, precioVenta;
+    ArrayList<RendimientoJugador> rendimientos = new ArrayList<>();
     
     /**
      * Crea una instancia de un jugador
@@ -54,5 +56,13 @@ public abstract class Jugador implements Serializable {
      */
     public Double getPrecioVenta() {
         return precioVenta;
+    }
+
+    public ArrayList<RendimientoJugador> getRendimientos() {
+        return rendimientos;
+    }
+
+    public void agregarRendimiento(RendimientoJugador pRendimiento){
+        rendimientos.add(pRendimiento);
     }
 }

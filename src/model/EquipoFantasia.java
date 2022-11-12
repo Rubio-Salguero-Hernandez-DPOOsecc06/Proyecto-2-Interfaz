@@ -5,13 +5,15 @@ import java.util.Scanner;
 
 public class EquipoFantasia extends Equipo{
 
-    JugadorFantasiaArquero arqueroTitular, arqueroSustituto;
-    ArrayList<JugadorFantasiaDefensivo> defensasTitulares = new ArrayList<>();
-    ArrayList<JugadorFantasia> delanterosTitulares = new ArrayList<>(), mediosTitulares = new ArrayList<>();
-    JugadorFantasiaDefensivo defensaSustituto;
-    JugadorFantasia delanteroSustituto, medioSustituto;
-    ArrayList<JugadorFantasia> jugadores = new ArrayList<>();
-    JugadorFantasia capitan;
+    private JugadorFantasiaArquero arqueroTitular, arqueroSustituto;
+    private ArrayList<JugadorFantasiaDefensivo> defensasTitulares = new ArrayList<>();
+    private ArrayList<JugadorFantasia> delanterosTitulares = new ArrayList<>(), mediosTitulares = new ArrayList<>();
+    private JugadorFantasiaDefensivo defensaSustituto;
+    private JugadorFantasia delanteroSustituto, medioSustituto;
+    private ArrayList<JugadorFantasia> jugadores = new ArrayList<>();
+    private JugadorFantasia capitan;
+    private int puntosAcumulados = 0;
+    
     
     /**
      * Constructor
@@ -19,6 +21,13 @@ public class EquipoFantasia extends Equipo{
      */
     public EquipoFantasia(String pNombreEquipo){
         super(pNombreEquipo);
+    }
+
+    public void sumarPuntos(int pPuntos){
+        this.puntosAcumulados += pPuntos;
+    }
+    public int getPuntosAcumulados() {
+        return puntosAcumulados;
     }
 
     @Override
@@ -295,8 +304,13 @@ public class EquipoFantasia extends Equipo{
         int opcion = Integer.parseInt(pEntrada.nextLine());
         jugadorBuscado = jugadores.get((opcion-1));
         return jugadorBuscado;
-        }
-
+    }
+    
+    /**
+     * Crea una lista con los jugadores de una posición dada
+     * @param pPosicion
+     * @return
+     */
     public ArrayList<JugadorFantasia> buscarJugador(Posicion pPosicion){
         ArrayList<JugadorFantasia> jugadoresPosicion = new ArrayList<>();
         for(JugadorFantasia jugador: this.jugadores){
@@ -306,7 +320,155 @@ public class EquipoFantasia extends Equipo{
         }
         return jugadoresPosicion;
     }
-    
+
+    public void actualizarPuntosJugador(RendimientoJugador pRendimiento, Posicion pPosicionJugador){
+        actualizarMinutosJugados(pRendimiento.getMinutosJugados());
+        actualizarGolesAnotados(pPosicionJugador, pRendimiento.getGolesAnotados());
+        actualizarAsistencias(pRendimiento.getAsistencias());
+        actualizarPenaltisErrados(pRendimiento.getPenaltisErrados());
+        actualizarGolesAnotados(pPosicionJugador, pRendimiento.getPenaltisAnotados());
+        actualizarAmarillas(pRendimiento.getTarjetasAmarillas());
+        actualizarRojas(pRendimiento.getTarjetasRojas());
+        actualizarAutogol(pRendimiento.getAutogoles());
+    }
+
+
+
+    public void actualizarPuntosEquipoPorJugador(JugadorReal pJugador, RendimientoJugador pRendimiento, MarcadorPartidoReal pMarcador){
+        Posicion posicionJugador = pJugador.getPosicionJugador();
+        //String ganador = pMarcador.getGanador().getNombreEquipo();
+        //JugadorFantasia capitanEquipo = getCapitan();
+
+        if(posicionJugador.equals(Posicion.ARQUERO)){
+            JugadorFantasia arqueroTitular = this.arqueroTitular;
+            if(pJugador.getNombre().equals(arqueroTitular.getNombre())){
+                actualizarPuntosJugador(pRendimiento, posicionJugador);
+                actualizarPenaltisDetenidos(pRendimiento.getPenaltisDetenidos());
+            }
+        }else if(posicionJugador.equals(Posicion.DELANTERO)){
+            for(JugadorFantasia delantero: this.delanterosTitulares){
+                if(pJugador.getNombre().equals(delantero.getNombre())){
+                    actualizarPuntosJugador(pRendimiento, posicionJugador);
+                }
+            }
+        }else if(posicionJugador.equals(Posicion.MEDIO)){
+            for(JugadorFantasia medio: this.mediosTitulares){
+                if(pJugador.getNombre().equals(medio.getNombre())){
+                    actualizarPuntosJugador(pRendimiento, posicionJugador);
+                }
+            }
+        }else if(posicionJugador.equals(Posicion.DEFENSA)){
+            for(JugadorFantasiaDefensivo defensa: this.defensasTitulares){
+                if(pJugador.getNombre().equals(defensa.getNombre())){
+                    actualizarPuntosJugador(pRendimiento, posicionJugador);
+                }
+            }
+        }
+    }
+
+    /**
+     * Actualiza los puntos por minutos jugados
+     * @param pMinutosJugados
+     */
+    public void actualizarMinutosJugados(int pMinutosJugados){
+        if(pMinutosJugados == 60){
+            sumarPuntos(1);
+        } else if(pMinutosJugados > 60){
+            sumarPuntos(2);
+        }
+    }
+
+    /**
+     * Actualiza los puntos por goles anotados segun la posición
+     * @param pPosicion
+     * @param pGolesAnotados
+     */
+    public void actualizarGolesAnotados(Posicion pPosicion ,int pGolesAnotados){
+        if(pPosicion.equals(Posicion.ARQUERO) || pPosicion.equals(Posicion.DEFENSA)){
+            int puntos = 6 * pGolesAnotados;
+            sumarPuntos(puntos);
+        } else if(pPosicion.equals(Posicion.DELANTERO)){
+            int puntos = 4 * pGolesAnotados;
+            sumarPuntos(puntos);
+        } else if(pPosicion.equals(Posicion.MEDIO)){
+            int puntos = 5 * pGolesAnotados;
+            sumarPuntos(puntos);
+        }
+    }
+    /**
+     * Actualiza los puntos por asistencias
+     * @param pAsistencias
+     */
+    public void actualizarAsistencias(int pAsistencias){
+        int puntos = 3 * pAsistencias;
+        sumarPuntos(puntos);
+    }
+
+    /**
+     * Actualiza los puntos por penaltis detenidos
+     * @param pPenaltisDetenidos
+     */
+    public void actualizarPenaltisDetenidos(int pPenaltisDetenidos){
+        int puntos = 5 * pPenaltisDetenidos;
+        sumarPuntos(puntos);
+    }
+
+    /**
+     * Actualiza los puntos por ganador que no recibio goles
+     * @param pIntacto
+     */
+    public void actualizarPuntosIntactos(boolean pIntacto){
+        if(pIntacto == true){
+            sumarPuntos(4);
+        }
+    }
+
+    /**
+     * Actualiza los puntos por capitan que gano partido
+     * @param pGanador
+     */
+    public void actualizarCapitanGanador(boolean pGanador){
+        if(pGanador == true){
+            sumarPuntos(5);
+        }
+    }
+
+    /**
+     * Actualiza los puntos por penaltis errados
+     * @param pPenaltisErrados
+     */
+    public void actualizarPenaltisErrados(int pPenaltisErrados){
+        int puntos = -2 * pPenaltisErrados;
+        sumarPuntos(puntos);
+    }
+
+    /**
+     * Actualiza los puntos por tarjetas amarillas
+     * @param pAmarillas
+     */
+    public void actualizarAmarillas(int pAmarillas){
+        int puntos = -1 * pAmarillas;
+        sumarPuntos(puntos);
+    }
+
+    /**
+     * Actualiza los puntos por tarjetas rojas
+     * @param pRojas
+     */
+    public void actualizarRojas(int pRojas){
+        int puntos = -3 * pRojas;
+        sumarPuntos(puntos);
+    }
+
+    /**
+     * Actualiza los puntos por autogol
+     * @param pAutogol
+     */
+    public void actualizarAutogol(int pAutogol){
+        int puntos = -2 * pAutogol;
+        sumarPuntos(puntos);
+    }
+
     /**
      * Imprime como se ve la alineacion actual del equipo
      */
@@ -328,5 +490,9 @@ public class EquipoFantasia extends Equipo{
         System.out.println("\nDelantero Sustituto: " + getDelanteroSustituto().getNombre());
         System.out.println("\nMedio Campista Sustituto: " + getMedioSustituto().getNombre());
         System.out.println("\nDefensa Sustituto: " + getDefensaSustituto().getNombre() + "\n");
+        System.out.println("============================================");
+        System.out.println("Capitan: " + getCapitan().getNombre());
+        System.out.println("\nPuntos acumulados: " + getPuntosAcumulados());
+        System.out.println("============================================");
     }
 }
