@@ -169,9 +169,7 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	JTextArea textArea = new JTextArea(18,50);
 	textArea.setLineWrap(true);
 	textArea.setFont(new Font("MV Boli",Font.PLAIN,18));
-	textArea.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nunc nisl, tristique et felis ut, consequat volutpat libero. Pellentesque venenatis feugiat feugiat. Donec cursus ligula sed ipsum venenatis, ac bibendum ex convallis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras vehicula tellus et aliquet mattis. Praesent non mauris vehicula, semper lectus at, fermentum nunc. Aliquam erat volutpat. Donec non velit leo.\r\n"
-			+ "\r\n"
-			+ "Etiam accumsan condimentum nunc, in condimentum justo posuere eget. In congue justo eros, ac sodales ex pretium eget. Proin pulvinar pretium consequat. Duis rutrum urna ut arcu feugiat, non rutrum urna venenatis. Nunc at.");
+	textArea.setText("Bienvenido/a, aun no has creado un equipo de Fantasia! Selecciona una opcion del menu para comenzar.\n");
 	textArea.setEditable(false);
 	JScrollPane scrollPane = new JScrollPane(textArea);
 	

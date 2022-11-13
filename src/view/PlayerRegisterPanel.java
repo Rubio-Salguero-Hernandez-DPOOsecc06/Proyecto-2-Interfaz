@@ -19,10 +19,13 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import controller.Conection;
 
 @SuppressWarnings("serial")
 
@@ -37,8 +40,12 @@ public class PlayerRegisterPanel extends JPanel implements ActionListener{
 	JPasswordField textPassword;
 	
 	FirstPanel FirstPanel;
+	Main mainClass;
+	Conection conection;
 	
 	public PlayerRegisterPanel(){
+		
+		mainClass = new Main();
 		
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.white);
@@ -199,6 +206,41 @@ public class PlayerRegisterPanel extends JPanel implements ActionListener{
 			
 			
 			//VALIDATE CREDENTIALS AND GUARANTEE ACCESS TO PARTICIPANT APP INTERFACE.
+			this.conection = Main.conection;
+			int possible = conection.registroParticipante(username, password);
+			System.out.println("Resultado:"+possible);
+			
+			if(possible==0) {
+				
+				String Message = "Ya existe un usuario con esas credenciales, inicia sesion.";
+				
+				JOptionPane.showMessageDialog(null, Message, "Atencion", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			else if(possible==1) {
+				
+				String Message = "El registro fue exitoso.";
+				
+				JOptionPane.showMessageDialog(null, Message, "Atencion", JOptionPane.INFORMATION_MESSAGE);
+				
+				//mostrarMenuParticipante(nuevoParticipante);
+				
+				
+				
+				
+				
+				
+				
+				
+			}
+			
+			else if(possible==2) { //vacios
+			
+				String Message = "Credenciales no validas.";
+				
+				JOptionPane.showMessageDialog(null, Message, "Atencion", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
 			
 		}
 		

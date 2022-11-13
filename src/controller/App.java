@@ -8,11 +8,23 @@ public class App {
     private static Administrador administrador = new Administrador("admin", "admin");
     private ArrayList<TemporadaReal> temporadas = new ArrayList<>();
     private ArrayList<TemporadaFantasia> temporadasFantasia = new ArrayList<>();
-
+    public Menu menuApp;
+    
     /**
      * Crea una instancia de aplicacion
      */
     public App(){
+    	
+        Persistencia.recuperarTemporadaReal(this);
+        Persistencia.recuperarTemporadaFantasia(this);
+        if(this.getTemporadas().size() == 0){
+            System.out.println("\nNo existen temporadas credas aun\n");
+        }
+        else{
+            System.out.println("Existen " +this.getTemporadas().size()+ " temporadas creadas");
+        }
+        this.menuApp = new Menu(this);
+        //menuApp.mostrarMenuPrincipal();
     }
 
     /**

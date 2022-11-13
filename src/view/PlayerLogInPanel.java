@@ -40,6 +40,7 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 	JPasswordField textPassword;
 	
 	PlayerAppFrame PlayerApp;
+	PlayerTeamAppFrame PlayerTeamAppFrame;
 	LogInPanels LogInPanels;
 	Conection conection;
 	Main mainClass;
@@ -213,7 +214,7 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 			int exists = conection.inicioSesionParticipante(username, password);
 			System.out.println("Resultado:"+exists);
 			
-			if (exists==1) {
+			if (exists==2) {
 			
 				PlayerApp = new PlayerAppFrame();
 				JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
@@ -224,13 +225,13 @@ public class PlayerLogInPanel extends JPanel implements ActionListener{
 				JOptionPane.showMessageDialog(null, Message, "Atencion", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
-			else if (exists==2) {
+			else if (exists==1) {
 				
-				PlayerApp = new PlayerAppFrame();
+				PlayerTeamAppFrame = new PlayerTeamAppFrame();
 				JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this); //Returns the Frame where the Panel is located
 				topFrame.dispose(); //Closes that frame to leave only the new one for the Admin App.
 				
-				String Message = "Bienvenido/a a Ultimate Soccer Fantasy";
+				String Message = "Bienvenido/a a Ultimate Soccer Fantasy, ya tienes un equipo creado";
 				
 				JOptionPane.showMessageDialog(null, Message, "Atencion", JOptionPane.INFORMATION_MESSAGE);
 				

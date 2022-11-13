@@ -1,9 +1,7 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -28,35 +26,21 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import controller.Conection;
-import controller.CreadorObjetos;
-import controller.LectorArchivos;
-import controller.Menu;
-import controller.Persistencia;
-import model.TemporadaFantasia;
-import model.TemporadaReal;
-
 @SuppressWarnings("serial")
 
-public class AdminAppPanel extends JPanel implements ActionListener{
-	
+public class PlayerTeamAppPanel extends JPanel implements ActionListener{
+
 	//Atributes
 	JButton button1;
 	JButton button2;
 	JButton button3;
 	JButton button4;
-	JButton inputButton;
 	FirstFrame FirstFrame;
-	
-	JTextField inputField;
-	JTextArea textArea;
-	Conection conection;
-	Main mainClass;
-	Menu menu;
+	GamePanel GamePanel;
 	
 	//Panel Definition
 	
-	public AdminAppPanel() {
+	public PlayerTeamAppPanel() {
 	
 	//Layout
 	this.setLayout(new GridBagLayout());
@@ -80,7 +64,7 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 		//Addition of image to rightPanel
 	BufferedImage backImage = null;
 	try {
-		backImage = ImageIO.read(new File("InterfaceFiles/Admin.jpg"));
+		backImage = ImageIO.read(new File("InterfaceFiles/Participante.jpg"));
 	} catch (IOException e) {
 		e.printStackTrace();
 	}
@@ -98,7 +82,7 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 		//Addition of text to rightPanel
 	
 	JLabel userLabel = new JLabel();
-	userLabel.setText("Tipo de Usuario: ADMINISTRADOR");
+	userLabel.setText("   Tipo de Usuario: PARTICIPANTE");
 	userLabel.setFont(new Font("MV Boli",Font.BOLD,18));
 	userLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	rightPanel.add(userLabel);
@@ -115,10 +99,10 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	constraints.gridheight = 1;
 	
 	button1 = new JButton();
-	button1.setText("Crear nueva temporda");
+	button1.setText("Juega con tu equipo");
 	
 	button2 = new JButton();
-	button2.setText("Subir un resultado real");
+	button2.setText("");
 	
 	button3 = new JButton();
 	button3.setText("Volver al menu principal");
@@ -146,7 +130,7 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 		//JLabel for options
 	
 	JLabel optionsLabel = new JLabel();
-	optionsLabel.setText("Menu de Administrador");
+	optionsLabel.setText("Menu de Participante");
 	optionsLabel.setFont(new Font("MV Boli",Font.PLAIN,20));
 	optionsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -170,8 +154,8 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	
 	//Addition of Title for menu
 	JLabel title = new JLabel();
-	title.setText("Bienvenido/a a Ultimate Soccer Fantasy, ¡vamos a jugar!");
-	title.setFont(new Font("MV Boli",Font.BOLD,30));
+	title.setText("Bienvenido/a a Ultimate Soccer Fantasy, vamos a jugar!");
+	title.setFont(new Font("MV Boli",Font.BOLD,26));
 	
 	constraints.gridx = 0;
 	constraints.gridy = 0;
@@ -182,10 +166,10 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	
 	
 	// Addition of left console panel
-	this.textArea = new JTextArea(18,50);
+	JTextArea textArea = new JTextArea(18,50);
 	textArea.setLineWrap(true);
-	textArea.setFont(new Font("MV Boli",Font.PLAIN,16));
-	textArea.setText("Bienvenido/a Administrador, selecciona una opción del menú para comenzar.\n");
+	textArea.setFont(new Font("MV Boli",Font.PLAIN,18));
+	textArea.setText("Bienvenido/a, ya tienes un equipo de Fantasia creado! Selecciona una opcion del menu para comenzar.\n");
 	textArea.setEditable(false);
 	JScrollPane scrollPane = new JScrollPane(textArea);
 	
@@ -217,8 +201,11 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	
 	
 	//Text field where user input goes
-	JPanel inputZone = new JPanel();
-	inputZone.setLayout(new FlowLayout());
+	JTextField inputField = new JTextField();
+	inputField.setPreferredSize(new Dimension(600, 40));
+	inputField.setFont(new Font("MV Boli",Font.PLAIN,25));
+	inputField.setBackground(Color.white);
+	inputField.setForeground(Color.black);
 	
 	constraints.gridx = 0;
 	constraints.gridy = 4;
@@ -226,42 +213,10 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	constraints.gridheight = 2;
 	constraints.weightx = 1.0;
 	
-	this.inputField = new JTextField();
-	inputField.setPreferredSize(new Dimension(600, 40));
-	inputField.setFont(new Font("MV Boli",Font.PLAIN,25));
-	inputField.setBackground(Color.white);
-	inputField.setForeground(Color.black);
-	
-	this.inputButton = new JButton();
-	inputButton.setText("Enviar");
-	inputButton.addActionListener(this);
-	
-	inputZone.add(inputField);
-	inputZone.add(inputButton);
-	
-	this.add(inputZone, constraints);
+	this.add(inputField, constraints);
 	
 	constraints.weightx = 0;
 	
-	}
-	
-	
-	
-	
-	//Metodo para leer inputs
-	
-	String actualString;
-	
-	public void pedirInputs() {
-		
-		this.textArea.append("*Escribe en el recuadro de abajo y oprime enviar*\n");
-		
-	}
-	
-	public String returnInputs() {
-		
-		return actualString;
-		
 	}
 	
 	
@@ -274,65 +229,22 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==button1) {
 			
-			this.conection = mainClass.conection;
-			this.menu = conection.getMenu();
-			JTextField inputField = this.inputField;
+			//Juega con tu equipo de fantasia
 			
-			//Complete
-			this.textArea.append("Se quiere crear una nueva temporada de juego\n");
+			//creacion de una instancia de una nueva clase panel para mostrar los botones de juego
+			this.GamePanel = new GamePanel();
+			JPanel panelName = this.GamePanel;
 			
-			LectorArchivos LECTOR = menu.LECTOR;
-			CreadorObjetos CREADOR = menu.CREADOR;
-			
-            TemporadaReal nuevaTemporadaReal = CREADOR.crearTemporadaReal();
-            TemporadaFantasia nuevaTemporadaFantasia = CREADOR.crearTemporadaFantasia();
+			this.removeAll();
+			this.add(panelName);
+			this.repaint();
+			this.revalidate();
 
-            //Llamado a metodo de Conection
-            conection.crearNuevaTemporada(nuevaTemporadaFantasia);
-            //
-
-			textArea.append("\nAhora debes ingresar el archivo de los equipos que jugaran esta temporada\n");
-			
-			pedirInputs();
-			
-			
-			actionPerformed(ActionEvent a);
-			if(e.getSource()==inputButton) {
-			
-			
-				this.actualString = inputField.getText();
-				
-				String palabras = returnInputs();	
-				
-				textArea.append(palabras);
-				
-				String nombreArchivoEquipos = palabras;
-				
-				textArea.append(nombreArchivoEquipos);
-            
-				LECTOR.leerArchivoEquiposReales(nombreArchivoEquipos, nuevaTemporadaReal, CREADOR);
-            
-	            System.out.println("\nAhora debes ingresar el archivo de los jugadores de los equipos");
-	            
-	            //String nombreArchivoJugadores = preguntarPalabra();
-	            
-	            //LECTOR.leerArchivoJugadoresReales(nombreArchivoJugadores, nuevaTemporadaReal, CREADOR);
-	            
-	            System.out.println("\nAhora debes ingresar el archivo de las fechas de esta temporada");
-	            
-	            //String nombreArchivoFechas = preguntarPalabra();
-	            
-	            //LECTOR.leerArchivoFechasReales(nombreArchivoFechas, nuevaTemporadaReal, CREADOR);
-	            
-	            System.out.println("Por favor cierra la aplicación y vuelve a iniciarla para confirmar tus cambios");
-				
-			}
 		}
-		
 		
 		else if(e.getSource()==button2) {
 			
-			//Complete
+			//Crea tu equipo de fantasia
 
 		}
 		
@@ -351,5 +263,5 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 		}
 		
 	} //cerrar action performed
-
-} //cerrar clase
+	
+}
