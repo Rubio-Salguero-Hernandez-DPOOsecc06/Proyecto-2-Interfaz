@@ -229,7 +229,8 @@ public class Menu{
                 System.out.println("\nAhora debes ingresar el archivo de las fechas de esta temporada");
                 String nombreArchivoFechas = preguntarPalabra();
                 LECTOR.leerArchivoFechasReales(nombreArchivoFechas, nuevaTemporadaReal, CREADOR);
-                System.out.println("Por favor cierra la aplicación y vuelve a iniciarla para confirmar tus cambios");
+                Persistencia.recuperarTemporadaReal(aplicacion);
+                Persistencia.recuperarTemporadaFantasia(aplicacion);
                 break;
             case 2:
                 TemporadaReal temporadaActiva = aplicacion.temporadaActiva();
