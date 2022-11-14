@@ -133,7 +133,23 @@ public class CreadorObjetos {
         JugadorFantasia nuevoJugador = new JugadorFantasia(pNombre, pPosicion, pPrecioCompra, pEquipoJugador);
         return nuevoJugador;
     }
-
+    /**
+     * Crea una instancia de rendimiento de jugador
+     * @param pMinutosJugados
+     * @param pMinutoEntrada
+     * @param pMinutoSalida
+     * @param pGolesAnotados
+     * @param pPenaltisAnotados
+     * @param pAutogoles
+     * @param pAsistencias
+     * @param pPenaltisErrados
+     * @param pGolesrecibidos
+     * @param pPenaltisDetenidos
+     * @param pTarjetasAmarillas
+     * @param pTarjetasRojas
+     * @param pJugador
+     * @return
+     */
     public RendimientoJugador crearRendimientoJugador(int pMinutosJugados, int pMinutoEntrada, int pMinutoSalida,
     int pGolesAnotados, int pPenaltisAnotados, int pAutogoles, int pAsistencias, int pPenaltisErrados, int pGolesrecibidos, int pPenaltisDetenidos,
     int pTarjetasAmarillas, int pTarjetasRojas, JugadorReal pJugador){
@@ -141,7 +157,10 @@ public class CreadorObjetos {
         return nuevoRendimientoJugador;
     }
 
-
+    /**
+     * Crea una instancia de marcador de partido real
+     * @return
+     */
     public MarcadorPartidoReal crearMarcadorPartidoReal(){
         MarcadorPartidoReal marcador = new MarcadorPartidoReal();
         return marcador;

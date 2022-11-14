@@ -40,7 +40,10 @@ public class Menu{
         String cadena = ENTRADA.nextLine();
         return cadena;
     }
-
+    /**
+     * Permite al usuario escoger la posicion de un jugador
+     * @return
+     */
     public Posicion preguntarPosicion(){
         Posicion posicion = Posicion.ARQUERO;
         System.out.println("\nQue posicion deseas?\n");

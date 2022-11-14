@@ -12,11 +12,15 @@ public class TemporadaReal extends Temporada{
      */
     public TemporadaReal(){
     }
-
+    /**
+     * Retorna el numero de la temporada
+     */
     public int getNumeroTemporada() {
         return numeroTemporada;
     }
-
+    /**
+     * Establece el numero de la temporada
+     */
     public void setNumeroTemporada(int numeroTemporada) {
         this.numeroTemporada = numeroTemporada;
     }

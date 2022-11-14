@@ -99,7 +99,7 @@ public class Persistencia {
     }
 
     /**
-     * Guarda una temporada en el archivo
+     * Guarda o actualiza una temporada en el archivo
      * @param pTemporada
      */
     public static void guardarTemporadaReal(TemporadaReal pTemporada){
@@ -132,7 +132,10 @@ public class Persistencia {
         } catch(Exception e){
         }
     }
-
+    /**
+     * Guarda o actualiza una temporada de fantasia
+     * @param pTemporada
+     */
     public static void guardarTemporadaFantasia(TemporadaFantasia pTemporada){
         try{
             String rutaTemporadas = "persistencia/temporadas fantasia";
@@ -189,7 +192,10 @@ public class Persistencia {
         }catch(Exception e){
         }
     }
-
+    /**
+     * Recupera las temporadas de fantasia
+     * @param pAplicacion
+     */
     public static void recuperarTemporadaFantasia(App pAplicacion){
         try{
             String rutaTemporadas = "persistencia/temporadas fantasia";

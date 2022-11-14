@@ -128,7 +128,14 @@ public class LectorArchivos {
             }
         }
     }
-
+    /**
+     * Lee y carga el archivo del resultado de un partido
+     * @param pNombreArchivo
+     * @param pTemporada
+     * @param pPartido
+     * @param pTemporadaFantasia
+     * @param pCreador
+     */
     public void leerResultadoPartido(String pNombreArchivo, TemporadaReal pTemporada, PartidoReal pPartido , TemporadaFantasia pTemporadaFantasia,CreadorObjetos pCreador){
         File rutaResultados = Persistencia.crearArchivo("data/"+pNombreArchivo);
         if(rutaResultados.exists()){

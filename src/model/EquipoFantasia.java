@@ -23,9 +23,18 @@ public class EquipoFantasia extends Equipo{
         super(pNombreEquipo);
     }
 
+    /**
+     * Suma los puntos ingresados a los puntos acumulados del equipo
+     * @param pPuntos
+     */
     public void sumarPuntos(int pPuntos){
         this.puntosAcumulados += pPuntos;
     }
+
+    /**
+     * Retorna los puntos acumulados del equipo
+     * @return
+     */
     public int getPuntosAcumulados() {
         return puntosAcumulados;
     }
@@ -163,10 +172,18 @@ public class EquipoFantasia extends Equipo{
         this.delanteroSustituto = pDelanteroSustituto;
     }
     
+    /**
+     * Retorna el capitan del equipo
+     * @return
+     */
     public JugadorFantasia getCapitan() {
         return capitan;
     }
 
+    /**
+     * Asigna un capitan al equipo
+     * @param pCapitan
+     */
     public void setCapitan(JugadorFantasia pCapitan) {
         this.capitan = pCapitan;
     }
@@ -321,6 +338,11 @@ public class EquipoFantasia extends Equipo{
         return jugadoresPosicion;
     }
 
+    /**
+     * Se encarga de llamar a las funciones de suma de puntos para el equipo
+     * @param pRendimiento
+     * @param pPosicionJugador
+     */
     public void actualizarPuntosJugador(RendimientoJugador pRendimiento, Posicion pPosicionJugador){
         actualizarMinutosJugados(pRendimiento.getMinutosJugados());
         actualizarGolesAnotados(pPosicionJugador, pRendimiento.getGolesAnotados());
@@ -332,8 +354,12 @@ public class EquipoFantasia extends Equipo{
         actualizarAutogol(pRendimiento.getAutogoles());
     }
 
-
-
+    /**
+     * actualiza los puntos que se asignan dependiendo de la posicion del jugador
+     * @param pJugador
+     * @param pRendimiento
+     * @param pMarcador
+     */
     public void actualizarPuntosEquipoPorJugador(JugadorReal pJugador, RendimientoJugador pRendimiento, MarcadorPartidoReal pMarcador){
         Posicion posicionJugador = pJugador.getPosicionJugador();
         //String ganador = pMarcador.getGanador().getNombreEquipo();

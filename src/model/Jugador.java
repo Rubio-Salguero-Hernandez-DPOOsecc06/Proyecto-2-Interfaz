@@ -58,10 +58,18 @@ public abstract class Jugador implements Serializable {
         return precioVenta;
     }
 
+    /**
+     * Retorna la lista con los rendimientos del jugador
+     * @return
+     */
     public ArrayList<RendimientoJugador> getRendimientos() {
         return rendimientos;
     }
 
+    /**
+     * Agrega un rendimiento a la lista de rendimientos del jugador
+     * @param pRendimiento
+     */
     public void agregarRendimiento(RendimientoJugador pRendimiento){
         rendimientos.add(pRendimiento);
     }

@@ -49,11 +49,17 @@ public class PartidoReal implements Serializable {
     public EquipoReal getEquipoVisitante() {
         return EquipoVisitante;
     }
-
+    /**
+     * retorna el marcador del partido 
+     * @return
+     */
     public MarcadorPartidoReal getMarcador() {
         return marcador;
     }
-
+    /**
+     * Establece el marcador para el partido
+     * @param pMarcador
+     */
     public void setMarcador(MarcadorPartidoReal pMarcador) {
         this.marcador = pMarcador;
     }
