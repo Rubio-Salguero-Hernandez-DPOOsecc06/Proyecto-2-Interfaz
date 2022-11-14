@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -12,6 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.OutputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -53,6 +58,13 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	Conection conection;
 	Main mainClass;
 	Menu menu;
+	
+	LectorArchivos LECTOR;
+	CreadorObjetos CREADOR;
+	TemporadaReal nuevaTemporadaReal;
+	TemporadaFantasia nuevaTemporadaFantasia;
+	
+	Integer paso = 0; //Numero de paso en el que el programa se encuentra, usado para que funcionen las acciones de los botones.
 	
 	//Panel Definition
 	
@@ -266,6 +278,9 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	
 	
 	
+
+
+	
 	
 	
 	
@@ -281,11 +296,11 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 			//Complete
 			this.textArea.append("Se quiere crear una nueva temporada de juego\n");
 			
-			LectorArchivos LECTOR = menu.LECTOR;
-			CreadorObjetos CREADOR = menu.CREADOR;
+			this.LECTOR = menu.LECTOR;
+			this.CREADOR = menu.CREADOR;
 			
-            TemporadaReal nuevaTemporadaReal = CREADOR.crearTemporadaReal();
-            TemporadaFantasia nuevaTemporadaFantasia = CREADOR.crearTemporadaFantasia();
+            this.nuevaTemporadaReal = CREADOR.crearTemporadaReal();
+            this.nuevaTemporadaFantasia = CREADOR.crearTemporadaFantasia();
 
             //Llamado a metodo de Conection
             conection.crearNuevaTemporada(nuevaTemporadaFantasia);
@@ -295,44 +310,96 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 			
 			pedirInputs();
 			
+		
+		
+		}
+		
+		if(e.getSource()==inputButton) {
 			
-			actionPerformed(ActionEvent a);
-			if(e.getSource()==inputButton) {
 			
+			//Paso 0
+			if(this.paso.equals(0)) {
 			
-				this.actualString = inputField.getText();
+			String nombreArchivoEquipos = inputField.getText();
+        
+			int resu = LECTOR.leerArchivoEquiposReales(nombreArchivoEquipos, nuevaTemporadaReal, CREADOR);
+			
+			if(resu == 0) {
 				
-				String palabras = returnInputs();	
-				
-				textArea.append(palabras);
-				
-				String nombreArchivoEquipos = palabras;
-				
-				textArea.append(nombreArchivoEquipos);
+			textArea.append("No se encontro el archivo, vuelve a crear una temporada.\n");
+			this.paso = 0;
+			
+				}
+			
+			else if(resu == 1) {
+        
+			textArea.append("\nAhora debes ingresar el archivo de los jugadores de los equipos\n");
+			pedirInputs();
             
-				LECTOR.leerArchivoEquiposReales(nombreArchivoEquipos, nuevaTemporadaReal, CREADOR);
+            this.paso = 1;
             
-	            System.out.println("\nAhora debes ingresar el archivo de los jugadores de los equipos");
-	            
-	            //String nombreArchivoJugadores = preguntarPalabra();
-	            
-	            //LECTOR.leerArchivoJugadoresReales(nombreArchivoJugadores, nuevaTemporadaReal, CREADOR);
-	            
-	            System.out.println("\nAhora debes ingresar el archivo de las fechas de esta temporada");
-	            
-	            //String nombreArchivoFechas = preguntarPalabra();
-	            
-	            //LECTOR.leerArchivoFechasReales(nombreArchivoFechas, nuevaTemporadaReal, CREADOR);
-	            
-	            System.out.println("Por favor cierra la aplicación y vuelve a iniciarla para confirmar tus cambios");
+				}
+            
+			}
+			
+			
+			//Paso 1
+			else if(this.paso.equals(1)) {
+			
+			String nombreArchivoJugadores = inputField.getText();
+            
+            int resu = LECTOR.leerArchivoJugadoresReales(nombreArchivoJugadores, nuevaTemporadaReal, CREADOR);
+            
+			if(resu == 0) {
 				
+			textArea.append("\nNo se encontro el archivo, vuelve a crear una temporada.\n");
+			this.paso = 0;
+			
+				}
+			
+			else if(resu == 1) {
+      
+            
+            textArea.append("\nAhora debes ingresar el archivo de las fechas de esta temporada\n");
+            pedirInputs();
+            
+            this.paso = 2;
+            
+				}
+            
+			}
+			
+			//Paso 2
+			
+			else if(this.paso.equals(2)) {
+            
+			String nombreArchivoFechas = inputField.getText();
+      
+            int resu = LECTOR.leerArchivoFechasReales(nombreArchivoFechas, nuevaTemporadaReal, CREADOR);
+            
+            
+			if(resu == 0) {
+				
+			textArea.append("\nNo se encontro el archivo, vuelve a crear una temporada.\n");
+			this.paso = 0;
+				}
+			
+			else if(resu == 1) {
+      
+            
+            textArea.append("\nPor favor cierra la aplicación y vuelve a iniciarla para confirmar tus cambios\n");
+            
+            this.paso = 0;
+			}
+			
 			}
 		}
 		
 		
-		else if(e.getSource()==button2) {
+		
+		else if(e.getSource()==button2) {  //Subir un resultado real
 			
-			//Complete
+			
 
 		}
 		
@@ -351,5 +418,6 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 		}
 		
 	} //cerrar action performed
+		
 
 } //cerrar clase

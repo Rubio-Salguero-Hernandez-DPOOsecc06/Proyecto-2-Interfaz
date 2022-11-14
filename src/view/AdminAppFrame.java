@@ -2,7 +2,11 @@ package view;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.Color;
+import java.io.PrintStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -32,8 +36,7 @@ public class AdminAppFrame extends JFrame{
 		
 		this.AdminAppPanel = new AdminAppPanel();
 		this.add(AdminAppPanel, BorderLayout.NORTH);
-		
-		
+			
 		
 		this.setVisible(true); //Set visibility
 		

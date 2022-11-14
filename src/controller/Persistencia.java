@@ -114,7 +114,7 @@ public class Persistencia {
                 File nuevoArchivo = crearArchivo(nombreTxt);
                 if(nuevoArchivo.exists()){
                 ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
-                System.out.println("\nSe guardo la temporada\n");
+                System.out.println("\nSe da inicio a la temporada\n");
                 escritor.writeObject(pTemporada);
                 escritor.close();
                 }
@@ -124,7 +124,7 @@ public class Persistencia {
                 File nuevoArchivo = crearArchivo(nombreTxt);
                 if(!nuevoArchivo.exists()){
                     ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
-                    System.out.println("\nSe guardo la temporada\n");
+                    System.out.println("\nSe da inicio a la temporada\n");
                     escritor.writeObject(pTemporada);
                     escritor.close();
             }
