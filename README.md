@@ -7,6 +7,9 @@ Esta es la entrega número 2 para el proyecto 2 del curso. En esta se logra impl
 En el repositorio, para acceder a todas las clases que componen la lógica del programa, organizadas según el modelo MVC, se debe acceder a la carpeta:
 - `src`
 
+Para acceder a los documentos relacionados con la justificación de decisiones y diagramas, dirigirse a la carpeta:
+- 'Documentos entrega'
+
 ## Ejecución y pruebas
 
 Una vez se clona el repositorio, para comenzar a probar la aplicación con la interfaz, se debe situarse en la clase Main de la carpeta "view" y ejecutar esta clase.
