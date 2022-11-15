@@ -14,6 +14,11 @@ Para acceder a la documentación de los contratos del proyecto, dirigirse a la c
 - 'doc'
 y abrir el archivo llamado "allclasses-index.html".
 
+La carpeta llamada:
+- 'persistencia'
+Es la encargada de guardar los archivos que permiten que la aplicación conserve datos a través del tiempo sin que se pierdan al reiniciar la aplicación.
+*Se recomienda borrar esta carpeta antes de probar el programa para iniciar desde 0 el juego y no experimentar algunos errores de lectura de archivos que en ocasiones pueden presentarse.
+
 ## Ejecución y pruebas
 
 Una vez se clona el repositorio, para comenzar a probar la aplicación con la interfaz, se debe situarse en la clase Main de la carpeta "view" y ejecutar esta clase.
