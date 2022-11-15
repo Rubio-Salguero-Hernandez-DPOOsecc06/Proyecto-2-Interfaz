@@ -1,18 +1,25 @@
-## Getting Started
+## Entrega 2 del Proyecto 2: Implementacion con interfaz.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Esta es la entrega número 2 para el proyecto 2 del curso. En esta se logra implementar una interfaz gráfica para que los usuarios interactuen con el programa.
 
-## Folder Structure
+## Instrucciones para el uso del programa
 
-The workspace contains two folders by default, where:
+En el repositorio, para acceder a todas las clases que componen la lógica del programa, organizadas según el modelo MVC, se debe acceder a la carpeta:
+- `src`
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Ejecución y pruebas
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+Una vez se clona el repositorio, para comenzar a probar la aplicación con la interfaz, se debe situarse en la clase Main de la carpeta "view" y ejecutar esta clase.
+Aquí va a aparecer la interfaz del programa.
+Para acceder al usuario de administrador, se debe proporcionar las credenciales: usuario: admin, clave: admin.
+Para acceder como usuario participante, se debe crear una cuenta desde el apartado de registro de la aplicación. No es posible registrarse como administrador, solo habrá 1 en toda la plataforma.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+El administrador puede acceder a la función de crear e iniciar una nueva temporada fantasía para el juego y subir resultados de partidos reales para cierta fecha para contribuir a la dinámica del juego.
 
-## Dependency Management
+Los participantes pueden construir sus equipos de fantasía y modificarlos para jugar los distintos partidos de las fechas y temporada en las que se encuentran. Tienen la opción de visualizarlos en la interfaz de su aplicación.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+*Nota importante: Siempre que se quiera dar un input, se debe escribir en el recuadro de la parte inferior de la interfaz y oprimir el botón enviar.
+
+## Notas importantes
+
+Se presentaron diversos problemas a la hora de vincular la interfaz con la lógica del modelo, por lo que no todas las funcionalidades sirven desde el apartado de "Escribe aquí" y es necesario escribir en la consola los inputs. Se debe trabajar en corregir este apartado.
