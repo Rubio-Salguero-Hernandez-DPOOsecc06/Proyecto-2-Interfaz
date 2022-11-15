@@ -12,10 +12,12 @@ Para acceder a los documentos relacionados con la justificación de decisiones y
 
 Para acceder a la documentación de los contratos del proyecto, dirigirse a la carpeta:
 - 'doc'
+
 y abrir el archivo llamado "allclasses-index.html".
 
 La carpeta llamada:
 - 'persistencia'
+
 Es la encargada de guardar los archivos que permiten que la aplicación conserve datos a través del tiempo sin que se pierdan al reiniciar la aplicación.
 *Se recomienda borrar esta carpeta antes de probar el programa para iniciar desde 0 el juego y no experimentar algunos errores de lectura de archivos que en ocasiones pueden presentarse.
 
