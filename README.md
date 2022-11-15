@@ -25,7 +25,10 @@ Es la encargada de guardar los archivos que permiten que la aplicación conserve
 
 Una vez se clona el repositorio, para comenzar a probar la aplicación con la interfaz, se debe situarse en la clase Main de la carpeta "view" y ejecutar esta clase.
 Aquí va a aparecer la interfaz del programa.
-Para acceder al usuario de administrador, se debe proporcionar las credenciales: usuario: admin, clave: admin.
+Para acceder al usuario de administrador, se debe proporcionar las credenciales:
+- usuario: admin
+-  clave: admin.
+
 Para acceder como usuario participante, se debe crear una cuenta desde el apartado de registro de la aplicación. No es posible registrarse como administrador, solo habrá 1 en toda la plataforma.
 
 El administrador puede acceder a la función de crear e iniciar una nueva temporada fantasía para el juego y subir resultados de partidos reales para cierta fecha para contribuir a la dinámica del juego.
