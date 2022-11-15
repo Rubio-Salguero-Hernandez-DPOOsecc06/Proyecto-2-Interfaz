@@ -200,14 +200,14 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	
 	
 	// Addition of left console panel
-	this.textArea = new JTextArea(18,50);
+	this.textArea = new JTextArea(25,80);
 	
 	PrintStream printStream = new PrintStream( new CustomOutputStream( textArea ));
 	System.setOut(printStream);
 	//System.setErr(printStream);
 	
 	textArea.setLineWrap(true);
-	textArea.setFont(new Font("MV Boli",Font.PLAIN,16));
+	textArea.setFont(new Font("MV Boli",Font.PLAIN,12));
 	textArea.setText("Bienvenido/a Administrador, selecciona una opción del menú para comenzar.\n");
 	textArea.setEditable(false);
 	JScrollPane scrollPane = new JScrollPane(textArea);
@@ -393,14 +393,14 @@ public class AdminAppPanel extends JPanel implements ActionListener{
             
 			if(resu == 0) {
 				
-			textArea.append("\nNo se encontro el archivo, vuelve a crear una temporada.\n");
+			System.out.println("\nNo se encontro el archivo, vuelve a crear una temporada.\n");
 			this.paso = 0;
 				}
 			
 			else if(resu == 1) {
       
             
-            textArea.append("\nPor favor cierra la aplicación y vuelve a iniciarla para confirmar tus cambios\n");
+			System.out.println("\nPor favor cierra la aplicación y vuelve a iniciarla para confirmar tus cambios\n");
             
             this.paso = 0;
 			}
@@ -413,7 +413,7 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 			else if(this.paso.equals(3)) {
 				
 				String nombreArchivo = inputField.getText();
-				textArea.append("\nA que fecha pertenece este resultado?\n");
+				System.out.println("\nA que fecha pertenece este resultado?\n");
 				pedirInputs();
 				this.paso = 4;
 		
@@ -430,20 +430,22 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 			
 			//Llamar a funcion que imprime los equipos locales
 			
-			textArea.append("\nCual es el equipo local?\n");
+			textArea.setText("");
+			conection.subirNuevoResultado2();
+			System.out.println("\nCual es el equipo local?\n");
 			pedirInputs();
 			this.paso = 5;
 			
 			} catch(Exception e1) {
 				
-				textArea.append("\nDebes pasar un numero, vuelve a subir el resultado.\n");
+				System.out.println("\nDebes pasar un numero, vuelve a subir el resultado.\n");
 			}
 				
 			}
 			
 			else if(this.paso.equals(5)) {
 				
-				conection.subirNuevoResultado2();
+				System.out.println("Ahi vamo");
 				
 			
 				System.out.println("Cual es el equipo visitante?");
