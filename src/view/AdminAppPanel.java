@@ -200,14 +200,14 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	
 	
 	// Addition of left console panel
-	this.textArea = new JTextArea(25,80);
+	this.textArea = new JTextArea(20,70);
 	
 	PrintStream printStream = new PrintStream( new CustomOutputStream( textArea ));
 	System.setOut(printStream);
 	//System.setErr(printStream);
 	
 	textArea.setLineWrap(true);
-	textArea.setFont(new Font("MV Boli",Font.PLAIN,12));
+	textArea.setFont(new Font("MV Boli",Font.PLAIN,14));
 	textArea.setText("Bienvenido/a Administrador, selecciona una opción del menú para comenzar.\n");
 	textArea.setEditable(false);
 	JScrollPane scrollPane = new JScrollPane(textArea);

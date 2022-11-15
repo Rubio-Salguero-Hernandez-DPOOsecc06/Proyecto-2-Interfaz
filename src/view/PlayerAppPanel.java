@@ -177,14 +177,14 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	
 	
 	// Addition of left console panel
-	JTextArea textArea = new JTextArea(18,50);
+	JTextArea textArea = new JTextArea(20,70);
 	
 	PrintStream printStream = new PrintStream( new CustomOutputStream( textArea ));
 	System.setOut(printStream);
 	//System.setErr(printStream);
 	
 	textArea.setLineWrap(true);
-	textArea.setFont(new Font("MV Boli",Font.PLAIN,18));
+	textArea.setFont(new Font("MV Boli",Font.PLAIN,14));
 	textArea.setText("Bienvenido/a, aun no has creado un equipo de Fantasia! Selecciona una opcion del menu para comenzar.\n");
 	textArea.setEditable(false);
 	JScrollPane scrollPane = new JScrollPane(textArea);
