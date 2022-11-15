@@ -133,6 +133,10 @@ public class Persistencia {
         }
     }
 
+    
+    /** 
+     * @param pTemporada
+     */
     public static void guardarTemporadaFantasia(TemporadaFantasia pTemporada){
         try{
             String rutaTemporadas = "/persistencia/temporadas fantasia";
@@ -190,6 +194,10 @@ public class Persistencia {
         }
     }
 
+    
+    /** 
+     * @param pAplicacion
+     */
     public static void recuperarTemporadaFantasia(App pAplicacion){
         try{
             String rutaTemporadas = "persistencia/temporadas fantasia";

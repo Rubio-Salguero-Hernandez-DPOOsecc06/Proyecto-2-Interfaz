@@ -12,6 +12,11 @@ public class CustomOutputStream extends OutputStream {
         this.textArea = textArea;
     }
 
+    
+    /** 
+     * @param b
+     * @throws IOException
+     */
     @Override
     public void write(int b) throws IOException {
         // redirects data to the text area

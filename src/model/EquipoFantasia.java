@@ -23,13 +23,25 @@ public class EquipoFantasia extends Equipo{
         super(pNombreEquipo);
     }
 
+    
+    /** 
+     * @param pPuntos
+     */
     public void sumarPuntos(int pPuntos){
         this.puntosAcumulados += pPuntos;
     }
+    
+    /** 
+     * @return int
+     */
     public int getPuntosAcumulados() {
         return puntosAcumulados;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String getNombreEquipo() {
         return super.getNombreEquipo();
@@ -163,10 +175,18 @@ public class EquipoFantasia extends Equipo{
         this.delanteroSustituto = pDelanteroSustituto;
     }
     
+    
+    /** 
+     * @return JugadorFantasia
+     */
     public JugadorFantasia getCapitan() {
         return capitan;
     }
 
+    
+    /** 
+     * @param pCapitan
+     */
     public void setCapitan(JugadorFantasia pCapitan) {
         this.capitan = pCapitan;
     }
@@ -321,6 +341,11 @@ public class EquipoFantasia extends Equipo{
         return jugadoresPosicion;
     }
 
+    
+    /** 
+     * @param pRendimiento
+     * @param pPosicionJugador
+     */
     public void actualizarPuntosJugador(RendimientoJugador pRendimiento, Posicion pPosicionJugador){
         actualizarMinutosJugados(pRendimiento.getMinutosJugados());
         actualizarGolesAnotados(pPosicionJugador, pRendimiento.getGolesAnotados());
@@ -334,6 +359,12 @@ public class EquipoFantasia extends Equipo{
 
 
 
+    
+    /** 
+     * @param pJugador
+     * @param pRendimiento
+     * @param pMarcador
+     */
     public void actualizarPuntosEquipoPorJugador(JugadorReal pJugador, RendimientoJugador pRendimiento, MarcadorPartidoReal pMarcador){
         Posicion posicionJugador = pJugador.getPosicionJugador();
         //String ganador = pMarcador.getGanador().getNombreEquipo();

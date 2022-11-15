@@ -281,6 +281,10 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 		
 	}
 	
+	
+	/** 
+	 * @return String
+	 */
 	public String returnInputs() {
 		
 		return actualString;
@@ -296,6 +300,10 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	
 	
 
+	
+	/** 
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==button1) {

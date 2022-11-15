@@ -38,6 +38,10 @@ public class FirstPanel extends JPanel implements ActionListener{
 	Main mainClass;
 	Conection conection;
 	
+	
+	/** 
+	 * @return Conection
+	 */
 	//getter for conection instance
 	public Conection getConection() {
 		return this.conection;
@@ -155,6 +159,10 @@ public class FirstPanel extends JPanel implements ActionListener{
 		this.setVisible(true);
 	}
 
+	
+	/** 
+	 * @param e
+	 */
 	//Actions performed in this Panel
 	@Override
 	public void actionPerformed(ActionEvent e) {

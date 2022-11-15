@@ -57,6 +57,10 @@ public class App {
         return temporadas;
     }
 
+    
+    /** 
+     * @return ArrayList<TemporadaFantasia>
+     */
     public ArrayList<TemporadaFantasia> getTemporadasFantasia() {
         return temporadasFantasia;
     }
@@ -75,6 +79,10 @@ public class App {
         return temporadaActiva;
     }
 
+    
+    /** 
+     * @return TemporadaFantasia
+     */
     public TemporadaFantasia temporadaFantasiaActiva(){
         TemporadaFantasia temporadaActiva = null;
         for(TemporadaFantasia temporada: getTemporadasFantasia()){
@@ -85,6 +93,11 @@ public class App {
         return temporadaActiva;
     }
     
+    
+    /** 
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         App aplicacion = new App();
         Persistencia.recuperarTemporadaReal(aplicacion);

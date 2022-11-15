@@ -15,27 +15,51 @@ public class Main {
 
 	}
 	
+	
+	/** 
+	 * @return Conection
+	 */
 	public static Conection createConection(){
 		Conection conection = new Conection();
 		return conection;
 	}
 	
+	
+	/** 
+	 * @param menu
+	 */
 	private void setMenu(Menu menu) {
 		this.menu = menu;
 	}
 	
+	
+	/** 
+	 * @param aplicacion
+	 */
 	private void setApp(App aplicacion) {
 		this.aplicacion = aplicacion;
 	}
 	
+	
+	/** 
+	 * @return App
+	 */
 	public App getApp() {
 		return this.aplicacion;
 	}
 	
+	
+	/** 
+	 * @return Menu
+	 */
 	public Menu getMenu() {
 		return this.menu;
 	}
 	
+	
+	/** 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		conection = createConection();
 		

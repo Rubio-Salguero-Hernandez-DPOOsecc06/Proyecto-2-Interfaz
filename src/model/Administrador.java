@@ -11,10 +11,18 @@ public class Administrador extends Usuario {
         super(pNombreUsuario, pClave);
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String getNombreUsuario() {
         return super.getNombreUsuario();
     }
+    
+    /** 
+     * @return String
+     */
     @Override
     public String getClave() {
         return super.getClave();

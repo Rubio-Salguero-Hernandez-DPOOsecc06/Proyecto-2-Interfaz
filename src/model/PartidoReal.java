@@ -50,10 +50,18 @@ public class PartidoReal implements Serializable {
         return EquipoVisitante;
     }
 
+    
+    /** 
+     * @return MarcadorPartidoReal
+     */
     public MarcadorPartidoReal getMarcador() {
         return marcador;
     }
 
+    
+    /** 
+     * @param pMarcador
+     */
     public void setMarcador(MarcadorPartidoReal pMarcador) {
         this.marcador = pMarcador;
     }

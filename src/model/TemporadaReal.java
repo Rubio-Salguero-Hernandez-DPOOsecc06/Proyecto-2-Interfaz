@@ -13,10 +13,18 @@ public class TemporadaReal extends Temporada{
     public TemporadaReal(){
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNumeroTemporada() {
         return numeroTemporada;
     }
 
+    
+    /** 
+     * @param numeroTemporada
+     */
     public void setNumeroTemporada(int numeroTemporada) {
         this.numeroTemporada = numeroTemporada;
     }

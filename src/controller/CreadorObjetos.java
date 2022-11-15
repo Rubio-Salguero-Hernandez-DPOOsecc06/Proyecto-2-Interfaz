@@ -134,6 +134,23 @@ public class CreadorObjetos {
         return nuevoJugador;
     }
 
+    
+    /** 
+     * @param pMinutosJugados
+     * @param pMinutoEntrada
+     * @param pMinutoSalida
+     * @param pGolesAnotados
+     * @param pPenaltisAnotados
+     * @param pAutogoles
+     * @param pAsistencias
+     * @param pPenaltisErrados
+     * @param pGolesrecibidos
+     * @param pPenaltisDetenidos
+     * @param pTarjetasAmarillas
+     * @param pTarjetasRojas
+     * @param pJugador
+     * @return RendimientoJugador
+     */
     public RendimientoJugador crearRendimientoJugador(int pMinutosJugados, int pMinutoEntrada, int pMinutoSalida,
     int pGolesAnotados, int pPenaltisAnotados, int pAutogoles, int pAsistencias, int pPenaltisErrados, int pGolesrecibidos, int pPenaltisDetenidos,
     int pTarjetasAmarillas, int pTarjetasRojas, JugadorReal pJugador){
@@ -142,6 +159,10 @@ public class CreadorObjetos {
     }
 
 
+    
+    /** 
+     * @return MarcadorPartidoReal
+     */
     public MarcadorPartidoReal crearMarcadorPartidoReal(){
         MarcadorPartidoReal marcador = new MarcadorPartidoReal();
         return marcador;

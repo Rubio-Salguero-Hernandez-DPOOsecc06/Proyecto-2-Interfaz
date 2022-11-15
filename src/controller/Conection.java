@@ -36,6 +36,11 @@ public class Conection {
 
 	}
 	
+	
+	/** 
+	 * @param aplicacion
+	 * @param menu
+	 */
 	public void newAppMenu(App aplicacion, Menu menu) {
 		this.menu = menu;
 		this.aplicacion = aplicacion;
@@ -43,10 +48,18 @@ public class Conection {
 		this.temporadaFantasiaActiva = aplicacion.temporadaFantasiaActiva();
 	}
 	
+	
+	/** 
+	 * @return App
+	 */
 	public App getApp() {
 		return this.aplicacion;
 	}
 	
+	
+	/** 
+	 * @return Menu
+	 */
 	public Menu getMenu() {
 		return this.menu;
 	}
@@ -151,7 +164,11 @@ public class Conection {
               **/
     	  }
     	  
-    	  public void subirNuevoResultado1(int numeroFecha) {
+    	  
+		  /** 
+		   * @param numeroFecha
+		   */
+		  public void subirNuevoResultado1(int numeroFecha) {
     		  
     		  this.fecha = this.temporadaActiva.buscarFecha(numeroFecha);  //busca fecha
     		  
@@ -175,7 +192,11 @@ public class Conection {
     	  
     	  
     	  
-    	  //PREGUNTAR OPCION
+    	  
+		  /** 
+		   * @param crearEquipoFantasia(
+		   */
+		  //PREGUNTAR OPCION
     	  
     	  public void preguntarOpcion0() { //Preguntar opcion a un participante sin equipo
     		  
@@ -183,7 +204,12 @@ public class Conection {
     		  
     	  }
     	  
-    	  public String preguntarOpcion1(String respuesta) { //Preguntar opcion a un participante sin equipo
+    	  
+		  /** 
+		   * @param crearEquipoFantasia(
+		   * @return String
+		   */
+		  public String preguntarOpcion1(String respuesta) { //Preguntar opcion a un participante sin equipo
     		  
     		  menu.getRespuesta(respuesta);
     		  
@@ -220,7 +246,11 @@ public class Conection {
     	  **/
     	  }
     	  
-    	  public void crearEquipoFantasia1(String nombreEquipo) {
+    	  
+		  /** 
+		   * @param nombreEquipo
+		   */
+		  public void crearEquipoFantasia1(String nombreEquipo) {
     		  
     		  CreadorObjetos CREADOR = menu.CREADOR;
     		  

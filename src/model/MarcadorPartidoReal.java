@@ -14,34 +14,66 @@ public class MarcadorPartidoReal implements Serializable {
     public MarcadorPartidoReal(){
     }
 
+    
+    /** 
+     * @param pGanador
+     */
     public void setGanador(EquipoReal pGanador) {
         this.ganador = pGanador;
     }
 
+    
+    /** 
+     * @return EquipoReal
+     */
     public EquipoReal getGanador() {
         return ganador;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getGolesLocal() {
         return golesLocal;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getGolesVisitante() {
         return golesVisitante;
     }
 
+    
+    /** 
+     * @param pGol
+     */
     public void agregarGolLocal(int pGol){
         this.golesLocal += pGol;
     }
 
+    
+    /** 
+     * @param pGol
+     */
     public void agregarGolVisitante(int pGol){
         this.golesVisitante += pGol;
     }
 
+    
+    /** 
+     * @param pRendimiento
+     */
     public void agregarRendimientoLocal(RendimientoJugador pRendimiento){
         this.rendimientoLocal.add(pRendimiento);
     }
 
+    
+    /** 
+     * @param pRendimiento
+     */
     public void agregarRendimientoVisitante(RendimientoJugador pRendimiento){
         this.rendimientoVisitante.add(pRendimiento);
     }

@@ -24,6 +24,10 @@ public class Menu{
     }
     
     
+    
+    /** 
+     * @return App
+     */
     public App getApp() {
     	return this.aplicacion;
     
@@ -69,6 +73,10 @@ public class Menu{
         return cadena;
     }
 
+    
+    /** 
+     * @return Posicion
+     */
     public Posicion preguntarPosicion(){
         Posicion posicion = Posicion.ARQUERO;
         System.out.println("\nQue posicion deseas?\n");

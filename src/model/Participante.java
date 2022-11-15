@@ -14,11 +14,19 @@ public class Participante extends Usuario{
         super(pNombreUsuario, pClave);
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String getNombreUsuario() {
         return super.getNombreUsuario();
     }
     
+    
+    /** 
+     * @return String
+     */
     @Override
     public String getClave() {
         return super.getClave();
@@ -64,6 +72,11 @@ public class Participante extends Usuario{
         this.presupuestoDisponible += pCantidadRecibida;
     }
     
+    
+    /** 
+     * @param pJugador
+     * @return boolean
+     */
     public boolean verificarCompra(JugadorFantasia pJugador){
         Boolean verificado = false;
         if(this.presupuestoDisponible >= pJugador.getPrecioCompra()){

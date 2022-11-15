@@ -146,6 +146,10 @@ public class LogInPanels extends JPanel implements ActionListener{
 		this.setVisible(true);
 	}
 
+	
+	/** 
+	 * @param e
+	 */
 	//Actions performed in this Panel
 	@Override
 	public void actionPerformed(ActionEvent e) {

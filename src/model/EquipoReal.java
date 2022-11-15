@@ -50,6 +50,10 @@ public class EquipoReal extends Equipo{
         return jugadorBuscado;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String getNombreEquipo() {
         return super.getNombreEquipo();
