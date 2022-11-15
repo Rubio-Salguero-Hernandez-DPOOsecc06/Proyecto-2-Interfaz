@@ -10,6 +10,10 @@ En el repositorio, para acceder a todas las clases que componen la lógica del p
 Para acceder a los documentos relacionados con la justificación de decisiones y diagramas, dirigirse a la carpeta:
 - 'Documentos entrega'
 
+Para acceder a la documentación de los contratos del proyecto, dirigirse a la carpeta:
+- 'doc'
+y abrir el archivo llamado "allclasses-index.html".
+
 ## Ejecución y pruebas
 
 Una vez se clona el repositorio, para comenzar a probar la aplicación con la interfaz, se debe situarse en la clase Main de la carpeta "view" y ejecutar esta clase.
