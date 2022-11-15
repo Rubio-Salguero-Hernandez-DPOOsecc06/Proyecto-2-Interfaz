@@ -168,8 +168,11 @@ public class Conection {
     	  
     	  
     	  
-    	  
-    	  
+    	  public void preguntarOpcion() {
+    		
+    			System.out.println("\n***Escribe en el recuadro de abajo y oprime enviar***\n");
+    			
+    		}  
     	  
     	  
     	  
@@ -179,7 +182,7 @@ public class Conection {
     	  
     	  public void preguntarOpcion0() { //Preguntar opcion a un participante sin equipo
     		  
-    		 PlayerAppPanel.preguntarOpcion();
+    		 preguntarOpcion();
     		  
     	  }
     	  
@@ -192,6 +195,22 @@ public class Conection {
     	  }
     	  
     	  
+    	  
+    	  
+    	  //GAME PANEL
+    	  
+    	  public void verCronogramaTemp() {
+    		  
+              temporadaActiva.mostrarCronogramaTemporada();
+              menu.mostrarMenuFechas(participanteRecuperado);
+              
+    	  }
+    	  
+    	  public void verCronogramaFecha() {
+    		  
+              System.out.println("Hay " + temporadaActiva.getFechasTemporada().size() + " fechas en la temporada");
+              
+    	  }
     	  
     	  
     	  

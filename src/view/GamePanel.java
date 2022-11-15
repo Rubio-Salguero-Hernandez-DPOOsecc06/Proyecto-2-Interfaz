@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -26,6 +28,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import controller.Conection;
+import controller.Menu;
+
 @SuppressWarnings("serial")
 
 public class GamePanel extends JPanel implements ActionListener{
@@ -37,12 +42,18 @@ public class GamePanel extends JPanel implements ActionListener{
 	JButton button4;
 	JButton button5;
 	JButton button6;
+	JButton inputButton;
 	
 	FirstFrame FirstFrame;
+	Conection conection;
+	Main mainClass;
+	Menu menu;
 	
 	//Panel Definition
 	
 	public GamePanel() {
+		
+	this.conection = mainClass.conection;
 	
 	//Layout
 	this.setLayout(new GridBagLayout());
@@ -188,12 +199,13 @@ public class GamePanel extends JPanel implements ActionListener{
 	
 	
 	// Addition of left console panel
-	JTextArea textArea = new JTextArea(18,50);
+	JTextArea textArea = new JTextArea(20,70);
+	PrintStream printStream = new PrintStream( new CustomOutputStream( textArea ));
+	System.setOut(printStream);
+	
 	textArea.setLineWrap(true);
-	textArea.setFont(new Font("MV Boli",Font.PLAIN,18));
-	textArea.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nunc nisl, tristique et felis ut, consequat volutpat libero. Pellentesque venenatis feugiat feugiat. Donec cursus ligula sed ipsum venenatis, ac bibendum ex convallis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras vehicula tellus et aliquet mattis. Praesent non mauris vehicula, semper lectus at, fermentum nunc. Aliquam erat volutpat. Donec non velit leo.\r\n"
-			+ "\r\n"
-			+ "Etiam accumsan condimentum nunc, in condimentum justo posuere eget. In congue justo eros, ac sodales ex pretium eget. Proin pulvinar pretium consequat. Duis rutrum urna ut arcu feugiat, non rutrum urna venenatis. Nunc at.");
+	textArea.setFont(new Font("MV Boli",Font.PLAIN,14));
+	textArea.setText("Elije una opcion del menu:\n");
 	textArea.setEditable(false);
 	JScrollPane scrollPane = new JScrollPane(textArea);
 	
@@ -223,6 +235,8 @@ public class GamePanel extends JPanel implements ActionListener{
 
 	this.add(writeHere, constraints);
 	
+	JPanel inputZone = new JPanel();
+	inputZone.setLayout(new FlowLayout());
 	
 	//Text field where user input goes
 	JTextField inputField = new JTextField();
@@ -236,6 +250,13 @@ public class GamePanel extends JPanel implements ActionListener{
 	constraints.gridwidth = 1;
 	constraints.gridheight = 2;
 	constraints.weightx = 1.0;
+	
+	this.inputButton = new JButton();
+	inputButton.setText("Enviar");
+	inputButton.addActionListener(this);
+	
+	inputZone.add(inputField);
+	inputZone.add(inputButton);
 	
 	this.add(inputField, constraints);
 	
@@ -253,26 +274,29 @@ public class GamePanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==button1) {
 			
-			//Juega con tu equipo de fantasia
-			
-			//creacion de una instancia de una nueva clase panel para mostrar los botones de juego
+          System.out.println("\nHas elegido ver el cronograma de toda la temporada\n");
+          conection.verCronogramaTemp();
+
+		
 
 		}
 		
 		else if(e.getSource()==button2) {
 			
-			//Crea tu equipo de fantasia
+            System.out.println("\nHas elegido ver el cronograma de una fecha\n");
+            conection.verCronogramaFecha();
 
 		}
 		
 		else if(e.getSource()==button3) {
 			
-
+			System.out.println("\nHas elegido consultar las estadisticas de la temporada\n");
+			
 		}
 		
 		else if(e.getSource()==button4) {
 			
-
+			System.out.println("\nHas elegido consultar las estadisticas de una fecha\n");
 			
 		}
 		

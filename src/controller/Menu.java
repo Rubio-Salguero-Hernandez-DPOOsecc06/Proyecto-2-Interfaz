@@ -512,10 +512,7 @@ public class Menu{
         }
         System.out.println("\nQue arquero deseas escoger");
         System.out.println("\nPara regresar ingresa 0");
-        conection.preguntarOpcion0();
-        String opcionE = respuesta;
-        
-        int opcion = Integer.parseInt(opcionE);
+        int opcion = preguntarOpcion();
         
         switch (opcion) {
             case 0:

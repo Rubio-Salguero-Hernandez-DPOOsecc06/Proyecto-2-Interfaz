@@ -250,14 +250,6 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	}
 	
 	
-	public void preguntarOpcion() {
-		
-		this.paso = 1000;
-		System.out.println("\n***Escribe en el recuadro de abajo y oprime enviar***\n");
-		
-	}
-	
-	
 	
 	
 
@@ -271,6 +263,7 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 			if (this.paso == (1000)) {
 				
 				String respuesta = inputField.getText();
+				System.out.println(respuesta);
 				conection.preguntarOpcion1(respuesta);
 				
 				this.paso = 0;
@@ -282,6 +275,7 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 				
 				String nombreEquipo = inputField.getText();
 				conection.crearEquipoFantasia1(nombreEquipo);
+				this.paso = 1000;
 				
 			}
 			
