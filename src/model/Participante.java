@@ -63,11 +63,7 @@ public class Participante extends Usuario{
     public void sumarVenta(Double pCantidadRecibida){
         this.presupuestoDisponible += pCantidadRecibida;
     }
-    /**
-     * verifica que el presupuesto del jugador sea mayor o igual al precio de compra del jugador
-     * @param pJugador
-     * @return
-     */
+    
     public boolean verificarCompra(JugadorFantasia pJugador){
         Boolean verificado = false;
         if(this.presupuestoDisponible >= pJugador.getPrecioCompra()){

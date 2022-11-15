@@ -1,20 +1,48 @@
 package controller;
 import java.util.Scanner;
 import model.*;
+import view.Main;
 
 
 public class Menu{
     public final static Scanner ENTRADA = new Scanner(System.in);
     public final static CreadorObjetos CREADOR = new CreadorObjetos();
     public final static LectorArchivos LECTOR = new LectorArchivos();
-    private App aplicacion;
+    public App aplicacion;
+    Conection conection;
+    Main mainClass;
+    
+    
+    String respuesta;
     
     /**
      * Constructor
      */
     public Menu(App pAplicacion){
         this.aplicacion = pAplicacion;
+        this.conection = mainClass.conection;
     }
+    
+    
+    public App getApp() {
+    	return this.aplicacion;
+    
+    }
+    
+    /**
+     * 
+     * Da la respuesta de la clase conection
+     * @return
+     */
+    
+    public void getRespuesta(String respuesta) {
+    	
+    	this.respuesta = respuesta;
+    	
+    }
+    
+    
+    
 
     /**
      * permite ingresar al usuario un numero
@@ -40,10 +68,7 @@ public class Menu{
         String cadena = ENTRADA.nextLine();
         return cadena;
     }
-    /**
-     * Permite al usuario escoger la posicion de un jugador
-     * @return
-     */
+
     public Posicion preguntarPosicion(){
         Posicion posicion = Posicion.ARQUERO;
         System.out.println("\nQue posicion deseas?\n");
@@ -232,8 +257,7 @@ public class Menu{
                 System.out.println("\nAhora debes ingresar el archivo de las fechas de esta temporada");
                 String nombreArchivoFechas = preguntarPalabra();
                 LECTOR.leerArchivoFechasReales(nombreArchivoFechas, nuevaTemporadaReal, CREADOR);
-                Persistencia.recuperarTemporadaReal(aplicacion);
-                Persistencia.recuperarTemporadaFantasia(aplicacion);
+                System.out.println("Por favor cierra la aplicación y vuelve a iniciarla para confirmar tus cambios");
                 break;
             case 2:
                 TemporadaReal temporadaActiva = aplicacion.temporadaActiva();
@@ -488,7 +512,11 @@ public class Menu{
         }
         System.out.println("\nQue arquero deseas escoger");
         System.out.println("\nPara regresar ingresa 0");
-        int opcion = preguntarOpcion();
+        conection.preguntarOpcion0();
+        String opcionE = respuesta;
+        
+        int opcion = Integer.parseInt(opcionE);
+        
         switch (opcion) {
             case 0:
                 EquipoReal equipo = imprimirEquiposTemporada();
@@ -583,6 +611,7 @@ public class Menu{
      * @param pEquipo
      * @return
      */
+    
     public JugadorFantasia mostrarMenuCompraDelantero(EquipoReal pEquipo){
         JugadorFantasia nuevoDelantero = null;
         System.out.println("\n");
@@ -650,7 +679,9 @@ public class Menu{
         //proceso de compra del arquero titular
         System.out.println("Ahora debes escoger tu arquero titutlar");
         System.out.println("Presupuesto disponible: " + pParticipante.getPresupuestoDisponible()); 
+        
         JugadorFantasiaArquero arqueroTitutlar = pParticipante.comprarArquero(pMenu);
+        
         while(arqueroTitutlar == null){
             System.out.println("Ahora debes escoger tu arquero titutlar");
             arqueroTitutlar = pParticipante.comprarArquero(pMenu);

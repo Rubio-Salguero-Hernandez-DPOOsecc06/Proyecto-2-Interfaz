@@ -40,12 +40,6 @@ public class Fecha implements Serializable{
         this.cronogramaPartidosFecha.add(pNuevoPartido);
     }
 
-    /**
-     * Busca un partido dentro de la fecha
-     * @param pLocal
-     * @param pVisitante
-     * @return
-     */
     public PartidoReal buscarPartido(EquipoReal pLocal, EquipoReal pVisitante){
         PartidoReal partidoBuscado = null;
         String nombreLocal = pLocal.getNombreEquipo();

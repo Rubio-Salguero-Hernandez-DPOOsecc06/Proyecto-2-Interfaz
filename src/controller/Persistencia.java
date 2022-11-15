@@ -99,7 +99,7 @@ public class Persistencia {
     }
 
     /**
-     * Guarda o actualiza una temporada en el archivo
+     * Guarda una temporada en el archivo
      * @param pTemporada
      */
     public static void guardarTemporadaReal(TemporadaReal pTemporada){
@@ -114,7 +114,7 @@ public class Persistencia {
                 File nuevoArchivo = crearArchivo(nombreTxt);
                 if(nuevoArchivo.exists()){
                 ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
-                System.out.println("\nSe guardo la temporada\n");
+                System.out.println("\nSe da inicio a la temporada\n");
                 escritor.writeObject(pTemporada);
                 escritor.close();
                 }
@@ -124,7 +124,7 @@ public class Persistencia {
                 File nuevoArchivo = crearArchivo(nombreTxt);
                 if(!nuevoArchivo.exists()){
                     ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
-                    System.out.println("\nSe guardo la temporada\n");
+                    System.out.println("\nSe da inicio a la temporada\n");
                     escritor.writeObject(pTemporada);
                     escritor.close();
             }
@@ -132,13 +132,10 @@ public class Persistencia {
         } catch(Exception e){
         }
     }
-    /**
-     * Guarda o actualiza una temporada de fantasia
-     * @param pTemporada
-     */
+
     public static void guardarTemporadaFantasia(TemporadaFantasia pTemporada){
         try{
-            String rutaTemporadas = "persistencia/temporadas fantasia";
+            String rutaTemporadas = "/persistencia/temporadas fantasia";
             File ficheroTemporadas = crearFichero(rutaTemporadas);
             String[]temporadas = ficheroTemporadas.list();
             int cantidadTemporadas = temporadas.length;
@@ -147,7 +144,7 @@ public class Persistencia {
                 File nuevoArchivo = crearArchivo(nombreTxt);
                 if(nuevoArchivo.exists()){
                 ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
-                System.out.println("\nSe guardo la temporada\n");
+                System.out.println("\nSe inicia la creacion de una temporada\n");
                 escritor.writeObject(pTemporada);
                 escritor.close();
                 }
@@ -157,7 +154,7 @@ public class Persistencia {
                 File nuevoArchivo = crearArchivo(nombreTxt);
                 if(!nuevoArchivo.exists()){
                     ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
-                    System.out.println("\nSe guardo la temporada\n");
+                    System.out.println("\nSe inicia la creacion de una temporada\n");
                     escritor.writeObject(pTemporada);
                     escritor.close();
             }
@@ -192,10 +189,7 @@ public class Persistencia {
         }catch(Exception e){
         }
     }
-    /**
-     * Recupera las temporadas de fantasia
-     * @param pAplicacion
-     */
+
     public static void recuperarTemporadaFantasia(App pAplicacion){
         try{
             String rutaTemporadas = "persistencia/temporadas fantasia";

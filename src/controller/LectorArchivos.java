@@ -22,7 +22,7 @@ public class LectorArchivos {
      * @param pTemporada
      * @param pCreador
      */
-    public void leerArchivoEquiposReales(String pNombreArchivo, TemporadaReal pTemporada, CreadorObjetos pCreador){
+    public int leerArchivoEquiposReales(String pNombreArchivo, TemporadaReal pTemporada, CreadorObjetos pCreador){
         File rutaEquipos = Persistencia.crearArchivo("data/"+pNombreArchivo);
         if(rutaEquipos.exists()){
             try {
@@ -36,13 +36,16 @@ public class LectorArchivos {
                     linea = lector.readLine();
                 }
                 lector.close();
+                return 1;
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }else{
             System.out.println("No se encontro el archivo");
+            return 0;
         }
+		return 3;
     }
 
     /**
@@ -51,7 +54,7 @@ public class LectorArchivos {
      * @param pTemoprada
      * @param pCreador
      */
-    public void leerArchivoJugadoresReales(String pNombreArchivo, TemporadaReal pTemoprada, CreadorObjetos pCreador){
+    public int leerArchivoJugadoresReales(String pNombreArchivo, TemporadaReal pTemoprada, CreadorObjetos pCreador){
         File rutaJugadores = Persistencia.crearArchivo("data/"+pNombreArchivo);
         if(rutaJugadores.exists()){
             try {
@@ -87,9 +90,11 @@ public class LectorArchivos {
                     linea = lector.readLine();
                 }
                 lector.close();
+                return 1;
             } catch (Exception e) {
             }
         }
+		return 0;
     }
 
     /**
@@ -98,7 +103,7 @@ public class LectorArchivos {
      * @param pTemoprada
      * @param pCreador
      */
-    public void leerArchivoFechasReales(String pNombreArchivo, TemporadaReal pTemoprada, CreadorObjetos pCreador){
+    public int leerArchivoFechasReales(String pNombreArchivo, TemporadaReal pTemoprada, CreadorObjetos pCreador){
         File rutaFechas = Persistencia.crearArchivo("data/"+pNombreArchivo);
         if(rutaFechas.exists()){
             try {
@@ -124,18 +129,13 @@ public class LectorArchivos {
                 }
                 lector.close();
                 Persistencia.guardarTemporadaReal(pTemoprada);
+                return 1;
             } catch (Exception e) {
             }
         }
+		return 0;
     }
-    /**
-     * Lee y carga el archivo del resultado de un partido
-     * @param pNombreArchivo
-     * @param pTemporada
-     * @param pPartido
-     * @param pTemporadaFantasia
-     * @param pCreador
-     */
+
     public void leerResultadoPartido(String pNombreArchivo, TemporadaReal pTemporada, PartidoReal pPartido , TemporadaFantasia pTemporadaFantasia,CreadorObjetos pCreador){
         File rutaResultados = Persistencia.crearArchivo("data/"+pNombreArchivo);
         if(rutaResultados.exists()){

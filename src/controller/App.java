@@ -8,11 +8,23 @@ public class App {
     private static Administrador administrador = new Administrador("admin", "admin");
     private ArrayList<TemporadaReal> temporadas = new ArrayList<>();
     private ArrayList<TemporadaFantasia> temporadasFantasia = new ArrayList<>();
-
+    public Menu menuApp;
+    
     /**
      * Crea una instancia de aplicacion
      */
     public App(){
+    	
+        //menuApp.mostrarMenuPrincipal();
+    }
+    
+    /**
+     * retorna el Menu
+     * @return
+     */
+    
+    public Menu getMenu() {
+    	return this.menuApp;
     }
 
     /**
@@ -44,10 +56,7 @@ public class App {
     public ArrayList<TemporadaReal> getTemporadas() {
         return temporadas;
     }
-    /**
-     * Retorna la lista de las temporadas de fantasia
-     * @return
-     */
+
     public ArrayList<TemporadaFantasia> getTemporadasFantasia() {
         return temporadasFantasia;
     }
@@ -65,10 +74,7 @@ public class App {
         }
         return temporadaActiva;
     }
-    /**
-     * Retorna la ultima temporada de fantasia creada
-     * @return
-     */
+
     public TemporadaFantasia temporadaFantasiaActiva(){
         TemporadaFantasia temporadaActiva = null;
         for(TemporadaFantasia temporada: getTemporadasFantasia()){
@@ -78,11 +84,7 @@ public class App {
         }
         return temporadaActiva;
     }
-    /**
-     * Funcion main
-     * @param args
-     * @throws Exception
-     */
+    
     public static void main(String[] args) throws Exception {
         App aplicacion = new App();
         Persistencia.recuperarTemporadaReal(aplicacion);
