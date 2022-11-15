@@ -135,7 +135,7 @@ public class Persistencia {
 
     public static void guardarTemporadaFantasia(TemporadaFantasia pTemporada){
         try{
-            String rutaTemporadas = "persistencia/temporadas fantasia";
+            String rutaTemporadas = "/persistencia/temporadas fantasia";
             File ficheroTemporadas = crearFichero(rutaTemporadas);
             String[]temporadas = ficheroTemporadas.list();
             int cantidadTemporadas = temporadas.length;
@@ -144,7 +144,7 @@ public class Persistencia {
                 File nuevoArchivo = crearArchivo(nombreTxt);
                 if(nuevoArchivo.exists()){
                 ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
-                System.out.println("\nSe guardo la temporada\n");
+                System.out.println("\nSe inicia la creacion de una temporada\n");
                 escritor.writeObject(pTemporada);
                 escritor.close();
                 }
@@ -154,7 +154,7 @@ public class Persistencia {
                 File nuevoArchivo = crearArchivo(nombreTxt);
                 if(!nuevoArchivo.exists()){
                     ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(nombreTxt));
-                    System.out.println("\nSe guardo la temporada\n");
+                    System.out.println("\nSe inicia la creacion de una temporada\n");
                     escritor.writeObject(pTemporada);
                     escritor.close();
             }

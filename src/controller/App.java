@@ -15,16 +15,16 @@ public class App {
      */
     public App(){
     	
-        Persistencia.recuperarTemporadaReal(this);
-        Persistencia.recuperarTemporadaFantasia(this);
-        if(this.getTemporadas().size() == 0){
-            System.out.println("\nNo existen temporadas credas aun\n");
-        }
-        else{
-            System.out.println("Existen " +this.getTemporadas().size()+ " temporadas creadas");
-        }
-        this.menuApp = new Menu(this);
         //menuApp.mostrarMenuPrincipal();
+    }
+    
+    /**
+     * retorna el Menu
+     * @return
+     */
+    
+    public Menu getMenu() {
+    	return this.menuApp;
     }
 
     /**

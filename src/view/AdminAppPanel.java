@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -38,6 +39,9 @@ import controller.CreadorObjetos;
 import controller.LectorArchivos;
 import controller.Menu;
 import controller.Persistencia;
+import model.EquipoReal;
+import model.Fecha;
+import model.PartidoReal;
 import model.TemporadaFantasia;
 import model.TemporadaReal;
 
@@ -69,6 +73,8 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	//Panel Definition
 	
 	public AdminAppPanel() {
+		
+	this.conection = mainClass.conection;
 	
 	//Layout
 	this.setLayout(new GridBagLayout());
@@ -195,6 +201,11 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	
 	// Addition of left console panel
 	this.textArea = new JTextArea(18,50);
+	
+	PrintStream printStream = new PrintStream( new CustomOutputStream( textArea ));
+	System.setOut(printStream);
+	//System.setErr(printStream);
+	
 	textArea.setLineWrap(true);
 	textArea.setFont(new Font("MV Boli",Font.PLAIN,16));
 	textArea.setText("Bienvenido/a Administrador, selecciona una opción del menú para comenzar.\n");
@@ -266,7 +277,7 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	
 	public void pedirInputs() {
 		
-		this.textArea.append("*Escribe en el recuadro de abajo y oprime enviar*\n");
+		this.textArea.append("\n**Escribe en el recuadro de abajo y oprime enviar**\n");
 		
 	}
 	
@@ -289,12 +300,14 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==button1) {
 			
+			this.textArea.setText("");
+			
 			this.conection = mainClass.conection;
 			this.menu = conection.getMenu();
 			JTextField inputField = this.inputField;
 			
 			//Complete
-			this.textArea.append("Se quiere crear una nueva temporada de juego\n");
+			this.textArea.append("\n****Se quiere crear una nueva temporada de juego****\n");
 			
 			this.LECTOR = menu.LECTOR;
 			this.CREADOR = menu.CREADOR;
@@ -352,7 +365,7 @@ public class AdminAppPanel extends JPanel implements ActionListener{
             
 			if(resu == 0) {
 				
-			textArea.append("\nNo se encontro el archivo, vuelve a crear una temporada.\n");
+			textArea.append("\nVuelve a crear una temporada.\n");
 			this.paso = 0;
 			
 				}
@@ -393,15 +406,74 @@ public class AdminAppPanel extends JPanel implements ActionListener{
 			}
 			
 			}
+			
+			
+			//Pasos para funcion 2
+			
+			else if(this.paso.equals(3)) {
+				
+				String nombreArchivo = inputField.getText();
+				textArea.append("\nA que fecha pertenece este resultado?\n");
+				pedirInputs();
+				this.paso = 4;
+		
+			}
+			
+			else if(this.paso.equals(4)) {
+					
+			
+			try {
+				
+			int numeroFecha	= Integer.parseInt(inputField.getText());
+			//llamar al siguiente paso de la ejecucion en la clase conection y pasarle este numero de fecha
+			conection.subirNuevoResultado1(numeroFecha);
+			
+			//Llamar a funcion que imprime los equipos locales
+			
+			textArea.append("\nCual es el equipo local?\n");
+			pedirInputs();
+			this.paso = 5;
+			
+			} catch(Exception e1) {
+				
+				textArea.append("\nDebes pasar un numero, vuelve a subir el resultado.\n");
+			}
+				
+			}
+			
+			else if(this.paso.equals(5)) {
+				
+				conection.subirNuevoResultado2();
+				
+			
+				System.out.println("Cual es el equipo visitante?");
+			/**	
+            EquipoReal equipoLocal = imprimirEquiposTemporada();
+            System.out.println("Cual es el equipo visitante?");
+            EquipoReal equipoVisitante = imprimirEquiposTemporada();
+            PartidoReal partido = fecha.buscarPartido(equipoLocal, equipoVisitante);
+            LECTOR.leerResultadoPartido(nombreArchivo, temporadaActiva, partido, temporadaFantasiaActiva, CREADOR);
+			**/
+		}
+			
+			
 		}
 		
 		
 		
 		else if(e.getSource()==button2) {  //Subir un resultado real
+			this.textArea.setText("");
 			
+			this.paso = 3;
+			textArea.append("\nIngresa el nombre del archivo:\n");
+			pedirInputs();
 			
 
 		}
+			
+			
+			
+			
 		
 		else if(e.getSource()==button3) {
 			

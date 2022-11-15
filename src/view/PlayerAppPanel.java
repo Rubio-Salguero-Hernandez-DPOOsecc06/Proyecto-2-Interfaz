@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -26,6 +28,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import controller.Conection;
+
 @SuppressWarnings("serial")
 
 public class PlayerAppPanel extends JPanel implements ActionListener{
@@ -35,13 +39,20 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	JButton button2;
 	JButton button3;
 	JButton button4;
+	JButton inputButton;
 	FirstFrame FirstFrame;
 	GamePanel GamePanel;
+	Main mainClass;
+	int paso;
+	Conection conection;
+	JTextField inputField;
 	
 	//Panel Definition
 	
 	public PlayerAppPanel() {
 	
+	this.conection = mainClass.conection;	
+		
 	//Layout
 	this.setLayout(new GridBagLayout());
 	
@@ -167,6 +178,11 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	
 	// Addition of left console panel
 	JTextArea textArea = new JTextArea(18,50);
+	
+	PrintStream printStream = new PrintStream( new CustomOutputStream( textArea ));
+	System.setOut(printStream);
+	//System.setErr(printStream);
+	
 	textArea.setLineWrap(true);
 	textArea.setFont(new Font("MV Boli",Font.PLAIN,18));
 	textArea.setText("Bienvenido/a, aun no has creado un equipo de Fantasia! Selecciona una opcion del menu para comenzar.\n");
@@ -196,12 +212,19 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	constraints.gridy = 3;
 	constraints.gridwidth = 2;
 	constraints.gridheight = 1;
+	
 
 	this.add(writeHere, constraints);
 	
 	
+	
 	//Text field where user input goes
-	JTextField inputField = new JTextField();
+	
+	JPanel inputZone = new JPanel();
+	inputZone.setLayout(new FlowLayout());
+	
+	
+	this.inputField = new JTextField();
 	inputField.setPreferredSize(new Dimension(600, 40));
 	inputField.setFont(new Font("MV Boli",Font.PLAIN,25));
 	inputField.setBackground(Color.white);
@@ -213,13 +236,26 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 	constraints.gridheight = 2;
 	constraints.weightx = 1.0;
 	
-	this.add(inputField, constraints);
+	this.inputButton = new JButton();
+	inputButton.setText("Enviar");
+	inputButton.addActionListener(this);
+	
+	inputZone.add(inputField);
+	inputZone.add(inputButton);
+	
+	this.add(inputZone, constraints);
 	
 	constraints.weightx = 0;
 	
 	}
 	
 	
+	public void preguntarOpcion() {
+		
+		this.paso = 1000;
+		System.out.println("\n***Escribe en el recuadro de abajo y oprime enviar***\n");
+		
+	}
 	
 	
 	
@@ -227,6 +263,33 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		//INPUT BUTTON
+		
+		if(e.getSource()==inputButton) {
+			
+			if (this.paso == (1000)) {
+				
+				String respuesta = inputField.getText();
+				conection.preguntarOpcion1(respuesta);
+				
+				this.paso = 0;
+				
+			}
+			
+		
+			if(this.paso == (1)) {
+				
+				String nombreEquipo = inputField.getText();
+				conection.crearEquipoFantasia1(nombreEquipo);
+				
+			}
+			
+			
+		}
+		
+		
+		
 		if(e.getSource()==button1) {
 			
 			//Juega con tu equipo de fantasia
@@ -244,7 +307,22 @@ public class PlayerAppPanel extends JPanel implements ActionListener{
 		
 		else if(e.getSource()==button2) {
 			
-			//Crea tu equipo de fantasia
+	    	/**
+	          System.out.println("\nHas elegido crear tu equipo de fantasia...\n");
+	          System.out.println("\nIngresa el nombre de tu nuevo equipo...");
+	          String nombreEquipo = preguntarPalabra();
+	          EquipoFantasia equipoAsociado = CREADOR.crearEquipoFantasia(nombreEquipo);
+	          crearEquipofantasia(this, pParticipanteActivo, equipoAsociado);
+	          Persistencia.guardarTemporadaFantasia(aplicacion.temporadaFantasiaActiva());
+	          mostrarMenuParticipante(pParticipanteActivo, pParticipanteActivo.getEquipoAsociado());
+	    	  **/
+			
+			this.paso = 1;
+			
+	         System.out.println("\nHas elegido crear tu equipo de fantasia...\n");
+	         System.out.println("\nIngresa el nombre de tu nuevo equipo...\n");
+	         
+	    	  
 
 		}
 		
