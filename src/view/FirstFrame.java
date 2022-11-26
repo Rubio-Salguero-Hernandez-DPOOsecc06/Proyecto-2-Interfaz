@@ -29,16 +29,8 @@ public class FirstFrame extends JFrame{
 		
 		//addition of First Panel Class
 		FirstPanel firstPanel = new FirstPanel();
-		
 		this.add(firstPanel, BorderLayout.NORTH);
-		
-		
-		
 		this.setVisible(true); //Set visibility
 	}
-	
-	
 	//metodos
-	
-	
 }
